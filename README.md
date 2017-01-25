@@ -10,7 +10,7 @@
 
 **Team Members**
 ------------
-1. _
+1. **Robert Jory Alexander**, *Testing*,
 2. _
 3. **Michael Holtmann**, *Project Manager*, *Client liaison*
 4. **Bess Burnett**, *UX design*, *Architect* 
