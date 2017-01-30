@@ -11,6 +11,6 @@
 **Team Members**
 ------------
 1. **Robert Jory Alexander**, *Testing*,
-2. _
+2. **Jose Tenorio**, *Documentation Lead*
 3. **Michael Holtmann**, *Project Manager*, *Client liaison*
 4. **Bess Burnett**, *UX design*, *Architect* 
