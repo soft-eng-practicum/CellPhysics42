@@ -3,15 +3,15 @@ import exception.NotValidRuleException;
 
 public class rule1D
 {
-	byte state7;
-	byte state6;
-	byte state5;
-	byte state4;
-	byte state3;
-	byte state2;
-	byte state1;
-	byte state0;
-	int rule;
+	private byte state7;
+	private byte state6;
+	private byte state5;
+	private byte state4;
+	private byte state3;
+	private byte state2;
+	private byte state1;
+	private byte state0;
+	private int rule;
 	
 	public rule1D(int rule)
 	{
@@ -31,6 +31,12 @@ public class rule1D
 	public void setRule(int rule)
 	{
 		this.rule = rule;
+	}
+
+
+	public int getRule()
+	{
+		return rule;
 	}
 
 
