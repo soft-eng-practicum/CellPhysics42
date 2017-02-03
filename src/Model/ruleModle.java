@@ -6,8 +6,6 @@ public class ruleModle
 
 	public static void main(String[] args)
 	{
-
-
 		try
 		{
 			Rule1D rule = new Rule1D(90);
@@ -48,7 +46,6 @@ public class ruleModle
 				System.out.println("");
 			}
 			
-
 		} catch (NotValidRuleException e)
 		{
 			// TODO Auto-generated catch block
