@@ -1,7 +1,7 @@
 package Controller;
 
 public class ControlClass {
-	public byte[][] getNextLine(){
-
-	}
+//	public byte[][] getNextLine(){
+//
+//	}
 }
