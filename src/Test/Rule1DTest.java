@@ -1,11 +1,16 @@
 package Test;
+
 import org.junit.*;
+
+import Model.Rule1D;
+import exception.NotValidRuleException;
+
 public class Rule1DTest {
-	
+
 	@Test
-	public void test1()
-	{
+	public void isOnTest() throws NotValidRuleException {
 		
+
 	}
 
 }
