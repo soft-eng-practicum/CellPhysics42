@@ -237,6 +237,16 @@ public class Rule1D {
 				+ ", state3=" + state3 + ", state2=" + state2 + ", state1=" + state1 + ", state0=" + state0 + "]";
 	}
 
+	/** Creates a new blank array of given size
+	 *
+	 * @param length
+	 * @param width
+	 */
+	public void changeArraySize(int length, int width) {
+		filledArray = new byte[length][width];
+		stateArray = new byte[length][width];
+	}
+
 
 	/** converts the int rule to a binary string
 	 *
