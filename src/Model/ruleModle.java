@@ -23,19 +23,19 @@ public class ruleModle
 
 			for (int x = 0; x < rule.getLength(); x++)
 			{
-				byte[] fill  = rule.getNextFillLine(x);
-				byte[] state = rule.getNextStateLine(x);
+				byte[] fill  = rule.getFillLine(x);
+				byte[] state = rule.getStateLine(x);
 				for (int i = 0; i < fill.length; i ++)
 				{
 					System.out.print(fill[i]);
 				}
 				System.out.println("");
 			}
-			
+
 			for (int x = 0; x < rule.getLength(); x++)
 			{
-				byte[][] fill  = rule.getNextLine(x);
-				
+				byte[][] fill  = rule.getLine(x);
+
 				for (int i = 0; i < 2; i ++)
 				{
 					for (int j = 0; j < 40; j ++)
@@ -45,7 +45,7 @@ public class ruleModle
 				}
 				System.out.println("");
 			}
-			
+
 		} catch (NotValidRuleException e)
 		{
 			// TODO Auto-generated catch block
