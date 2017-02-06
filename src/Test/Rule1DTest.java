@@ -68,8 +68,8 @@ public class Rule1DTest {
 		Assert.assertEquals("Wrong output rule 10", zero, myRule.isOn(zero, zero, zero));
 		Assert.assertEquals("Wrong output rule 10", one, myRule.isOn(zero, zero, one));
 		Assert.assertEquals("Wrong output rule 10", zero, myRule.isOn(zero, one, zero));
-		Assert.assertEquals("Wrong output rule 10", zero, myRule.isOn(zero, one, one));
-		Assert.assertEquals("Wrong output rule 10", one, myRule.isOn(one, zero, zero));
+		Assert.assertEquals("Wrong output rule 10", one, myRule.isOn(zero, one, one));
+		Assert.assertEquals("Wrong output rule 10", zero, myRule.isOn(one, zero, zero));
 		Assert.assertEquals("Wrong output rule 10", zero, myRule.isOn(one, zero, one));
 		Assert.assertEquals("Wrong output rule 10", zero, myRule.isOn(one, one, zero));
 		Assert.assertEquals("Wrong output rule 10", zero, myRule.isOn(one, one, one));
@@ -254,8 +254,8 @@ public class Rule1DTest {
 		Assert.assertEquals("Wrong output rule 170", zero, myRule.isOn(zero, zero, zero));
 		Assert.assertEquals("Wrong output rule 170", one, myRule.isOn(zero, zero, one));
 		Assert.assertEquals("Wrong output rule 170", zero, myRule.isOn(zero, one, zero));
-		Assert.assertEquals("Wrong output rule 170", zero, myRule.isOn(zero, one, one));
-		Assert.assertEquals("Wrong output rule 170", one, myRule.isOn(one, zero, zero));
+		Assert.assertEquals("Wrong output rule 170", one, myRule.isOn(zero, one, one));
+		Assert.assertEquals("Wrong output rule 170", zero, myRule.isOn(one, zero, zero));
 		Assert.assertEquals("Wrong output rule 170", one, myRule.isOn(one, zero, one));
 		Assert.assertEquals("Wrong output rule 170", zero, myRule.isOn(one, one, zero));
 		Assert.assertEquals("Wrong output rule 170", one, myRule.isOn(one, one, one));
@@ -289,7 +289,7 @@ public class Rule1DTest {
 	public void isOnTestRule210() throws NotValidRuleException {
 
 		// given
-		Rule1D myRule = new Rule1D(90);
+		Rule1D myRule = new Rule1D(210);
 
 		// when
 		System.out.println(myRule.toString());
@@ -300,7 +300,7 @@ public class Rule1DTest {
 		Assert.assertEquals("Wrong output rule 210", zero, myRule.isOn(zero, zero, zero));
 		Assert.assertEquals("Wrong output rule 210", one, myRule.isOn(zero, zero, one));
 		Assert.assertEquals("Wrong output rule 210", zero, myRule.isOn(zero, one, zero));
-		Assert.assertEquals("Wrong output rule 210", one, myRule.isOn(zero, one, one));
+		Assert.assertEquals("Wrong output rule 210", zero, myRule.isOn(zero, one, one));
 		Assert.assertEquals("Wrong output rule 210", one, myRule.isOn(one, zero, zero));
 		Assert.assertEquals("Wrong output rule 210", zero, myRule.isOn(one, zero, one));
 		Assert.assertEquals("Wrong output rule 210", one, myRule.isOn(one, one, zero));

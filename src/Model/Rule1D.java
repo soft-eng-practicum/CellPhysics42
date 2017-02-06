@@ -233,7 +233,7 @@ public class Rule1D {
 	 */
 	@Override
 	public String toString() {
-		return "rule1D [state7=" + state7 + ", state6=" + state6 + ", state5=" + state5 + ", state4=" + state4
+		return "rule1D [rule number = " + rule + " state7=" + state7 + ", state6=" + state6 + ", state5=" + state5 + ", state4=" + state4
 				+ ", state3=" + state3 + ", state2=" + state2 + ", state1=" + state1 + ", state0=" + state0 + "]";
 	}
 
