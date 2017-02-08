@@ -7,6 +7,23 @@ import exception.NotValidRuleException;
 
 public class Rule1DTest {
 
+	@Test 
+	public void setRuleTest() throws NotValidRuleException {
+		//given
+		Rule1D myrule = new Rule1D(90);
+		
+		
+		//when
+		System.out.println(myrule.toString());
+		
+		
+		//then
+		myrule.setRule(10);
+		Assert.assertEquals(10, myrule.getRule());
+		Assert.assertNotEquals(90, myrule.getRule());
+		
+	}
+	
 	@Test
 	public void isOnTestRule90() throws NotValidRuleException {
 
