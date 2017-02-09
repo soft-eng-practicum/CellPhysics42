@@ -12,13 +12,14 @@ public class Rule1D {
 	private byte state1;
 	private byte state0;
 	private int rule;
-	final private int[] rules = { 126, 10, 22, 50, 54, 90, 94, 122, 146, 150, 170, 182, 210, 222, 250, 254 };
+	final private int[] rules = { 126, 10, 22, 50, 54, 90, 94, 122, 146, 150, 178, 182, 210, 222, 250, 254 };
 	private byte[][] filledArray;
 	private byte[][] stateArray;
 	private int width;
 	private int length;
 	private int widthCount;
 	private int lengthCount;
+	private int nextLine;
 
 	public Rule1D(int rule) throws NotValidRuleException {
 		setRule(rule);
@@ -26,6 +27,7 @@ public class Rule1D {
 		this.length = 75;
 		filledArray = new byte[length][width];
 		stateArray = new byte[length][width];
+		nextLine = 0;
 	}
 
 	public Rule1D(int rule, int width, int length) throws NotValidRuleException {
@@ -34,6 +36,7 @@ public class Rule1D {
 		this.length = length;
 		filledArray = new byte[length][width];
 		stateArray = new byte[length][width];
+		nextLine = 0;
 	}
 
 	public void setRule(int rule) throws NotValidRuleException {
@@ -159,6 +162,17 @@ public class Rule1D {
 		if (line >= length)
 			throw new NotValidRuleException("line out of bounds");
 		return stateArray[line];
+	}
+	
+	public byte[][] getNextLine() throws NotValidRuleException{
+		if (nextLine >= length)
+			throw new NotValidRuleException("line out of bounds");
+		
+		byte[][] next = new byte[2][width];
+		next[0] = getNextFillLine(nextLine);
+		next[1] = getNextStateLine(nextLine);
+		nextLine++;
+		return next;
 	}
 	
 	public byte[][] getNextLine(int line) throws NotValidRuleException{
