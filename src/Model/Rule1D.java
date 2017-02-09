@@ -21,6 +21,11 @@ public class Rule1D {
 	private int lengthCount;
 	private int nextLine;
 
+	/** Constructor that takes a int of a valid rule that the class can build.
+	 *
+	 * @param rule
+	 * @throws NotValidRuleException
+	 */
 	public Rule1D(int rule) throws NotValidRuleException {
 		setRule(rule);
 		this.width = 40;
@@ -30,6 +35,13 @@ public class Rule1D {
 		nextLine = 0;
 	}
 
+	/** Constructor that takes a int of a valid rule that the class can build and the custom length and width of the array.
+	 *
+	 * @param rule
+	 * @param width
+	 * @param length
+	 * @throws NotValidRuleException
+	 */
 	public Rule1D(int rule, int width, int length) throws NotValidRuleException {
 		setRule(rule);
 		this.width = width;
@@ -39,6 +51,11 @@ public class Rule1D {
 		nextLine = 0;
 	}
 
+	/** set rule will update the rule number and states on the object.
+	 *
+	 * @param rule
+	 * @throws NotValidRuleException
+	 */
 	public void setRule(int rule) throws NotValidRuleException {
 		boolean check = false;
 		for (int i : rules) {
@@ -63,6 +80,15 @@ public class Rule1D {
 		}
 	}
 
+	/** Takes the previous state and uses as input for the selected cell to determine if it's state is on or off.
+	 *  Updates the stateArrya at the this time.
+	 *
+	 * @param one Is the left most bit of the previous state
+	 * @param two Is the middle bit of the previous state
+	 * @param three Right most bit of the previous state
+	 * @return Returns 1 if cell is on 0 if off
+	 * @throws NotValidRuleException
+	 */
 	public byte isOn(byte one, byte two, byte three) throws NotValidRuleException {
 
 		if (one == 1 && two == 1 && three == 1) {
@@ -94,6 +120,11 @@ public class Rule1D {
 
 	}
 
+	/** This fills the fillArray applying the current rule.  With no input the first line is auto generated with one on state
+	 *  in the middle of the line.  Note: uses integer devision so that any width can be used.
+	 *
+	 * @throws NotValidRuleException
+	 */
 	public void fillArrays() throws NotValidRuleException {
 
 		for (int i = 0; i < this.width; i++) {
@@ -123,6 +154,12 @@ public class Rule1D {
 		}
 	}
 
+	/** This fills the fillArray applying the current rule.  UI needs to provide a valid first line of states.
+	 *   Note: uses integer devision so that any width can be used.
+	 *
+	 * @param firstLine Array of bytes with the beginning states
+	 * @throws NotValidRuleException
+	 */
 	public void fillArrays(byte[] firstLine) throws NotValidRuleException {
 
 		if (firstLine.length == width) {
@@ -151,14 +188,26 @@ public class Rule1D {
 			throw new NotValidRuleException("the array lengths are off");
 		}
 	}
-	
-	public byte[] getNextFillLine(int line) throws NotValidRuleException{
+
+	/** Returns a array of the line selected in the fillArray.
+	 *
+	 * @param line int of line to be returned
+	 * @return reference of the byte array of the line selected
+	 * @throws NotValidRuleException
+	 */
+	public byte[] getFillLine(int line) throws NotValidRuleException{
 		if (line >= length)
 			throw new NotValidRuleException("line out of bounds");
 		return filledArray[line];
 	}
 
-	public byte[] getNextStateLine(int line) throws NotValidRuleException{
+	/** Returns a array of the line selected in the stateAray
+	 *
+	 * @param line int of line to be returned
+	 * @return reference to the byte array of the line selected
+	 * @throws NotValidRuleException
+	 */
+	public byte[] getStateLine(int line) throws NotValidRuleException{
 		if (line >= length)
 			throw new NotValidRuleException("line out of bounds");
 		return stateArray[line];
@@ -176,32 +225,74 @@ public class Rule1D {
 	}
 	
 	public byte[][] getNextLine(int line) throws NotValidRuleException{
+
+	/** Returns a 2D array with both references to the fillArray line and the stateArray line. [0] is the fillArray and
+	 * [1] is the stateArray
+	 *
+	 * @param line int of line to be returned
+	 * @return [0] is the fillArray and [1] is the stateArray of the line selected
+	 * @throws NotValidRuleException
+	 */
+	public byte[][] getLine(int line) throws NotValidRuleException{
 		if (line >= length)
 			throw new NotValidRuleException("line out of bounds");
-		
+
 		byte[][] next = new byte[2][width];
-		next[0] = getNextFillLine(line);
-		next[1] = getNextStateLine(line);
+		next[0] = getFillLine(line);
+		next[1] = getStateLine(line);
 		return next;
 	}
+
+	/** Override of the toString that returns the string vales of each state in the object
+	 * Note: used in testing
+	 *
+	 */
 	@Override
 	public String toString() {
-		return "rule1D [state7=" + state7 + ", state6=" + state6 + ", state5=" + state5 + ", state4=" + state4
+		return "rule1D [rule number = " + rule + " state7=" + state7 + ", state6=" + state6 + ", state5=" + state5 + ", state4=" + state4
 				+ ", state3=" + state3 + ", state2=" + state2 + ", state1=" + state1 + ", state0=" + state0 + "]";
 	}
 
-	private String toBinary(int rule) {
-		return String.format("%16s", Integer.toBinaryString(rule)).replace(' ', '0');
+	/** Creates a new blank array of given size
+	 *
+	 * @param length
+	 * @param width
+	 */
+	public void changeArraySize(int length, int width) {
+		filledArray = new byte[length][width];
+		stateArray = new byte[length][width];
 	}
 
+
+	/** converts the int rule to a binary string
+	 *
+	 * @param rule int of rule to be applied
+	 * @return String of 8 bits
+	 */
+	private String toBinary(int rule) {
+		return String.format("%8s", Integer.toBinaryString(rule)).replace(' ', '0');
+	}
+
+	/** Array of valid rules that the object can use
+	 *
+	 * @return
+	 */
 	public int[] getRules() {
 		return rules;
 	}
 
+	/** current rule of the object
+	 *
+	 * @return
+	 */
 	public int getRule() {
 		return rule;
 	}
 
+	/** current length of the array.
+	 *
+	 * @return
+	 */
 	public int getLength() {
 		return length;
 	}
