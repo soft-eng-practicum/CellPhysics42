@@ -218,13 +218,11 @@ public class Rule1D {
 			throw new NotValidRuleException("line out of bounds");
 		
 		byte[][] next = new byte[2][width];
-		next[0] = getNextFillLine(nextLine);
-		next[1] = getNextStateLine(nextLine);
+		next[0] = getFillLine(nextLine);
+		next[1] = getStateLine(nextLine);
 		nextLine++;
 		return next;
 	}
-	
-	public byte[][] getNextLine(int line) throws NotValidRuleException{
 
 	/** Returns a 2D array with both references to the fillArray line and the stateArray line. [0] is the fillArray and
 	 * [1] is the stateArray
