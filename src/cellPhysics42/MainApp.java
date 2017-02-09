@@ -19,7 +19,6 @@ public class MainApp extends Application {
 		loader.setLocation(MainApp.class.getResource("view/DemoView.fxml"));
 		System.out.println(loader.getLocation());
 		AnchorPane pane = (AnchorPane)loader.load();
-		System.out.println("pane made");
 		Scene scene = new Scene(pane);
 		primaryStage.setScene(scene);
 		primaryStage.show();

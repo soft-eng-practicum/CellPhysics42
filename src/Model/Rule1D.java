@@ -19,6 +19,7 @@ public class Rule1D {
 	private int length;
 	private int widthCount;
 	private int lengthCount;
+	private int nextLine;
 
 	/** Constructor that takes a int of a valid rule that the class can build.
 	 *
@@ -31,6 +32,7 @@ public class Rule1D {
 		this.length = 75;
 		filledArray = new byte[length][width];
 		stateArray = new byte[length][width];
+		nextLine = 0;
 	}
 
 	/** Constructor that takes a int of a valid rule that the class can build and the custom length and width of the array.
@@ -46,6 +48,7 @@ public class Rule1D {
 		this.length = length;
 		filledArray = new byte[length][width];
 		stateArray = new byte[length][width];
+		nextLine = 0;
 	}
 
 	/** set rule will update the rule number and states on the object.
@@ -209,6 +212,19 @@ public class Rule1D {
 			throw new NotValidRuleException("line out of bounds");
 		return stateArray[line];
 	}
+	
+	public byte[][] getNextLine() throws NotValidRuleException{
+		if (nextLine >= length)
+			throw new NotValidRuleException("line out of bounds");
+		
+		byte[][] next = new byte[2][width];
+		next[0] = getNextFillLine(nextLine);
+		next[1] = getNextStateLine(nextLine);
+		nextLine++;
+		return next;
+	}
+	
+	public byte[][] getNextLine(int line) throws NotValidRuleException{
 
 	/** Returns a 2D array with both references to the fillArray line and the stateArray line. [0] is the fillArray and
 	 * [1] is the stateArray
