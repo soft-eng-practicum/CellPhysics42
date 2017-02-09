@@ -20,6 +20,14 @@ public class Rule1D {
 	private int widthCount;
 	private int lengthCount;
 	private int nextLine;
+	
+	/**Rule1D
+	 * 
+	 * no arg constructor used to get rules
+	 */
+	public Rule1D(){
+		
+	}
 
 	/** Constructor that takes a int of a valid rule that the class can build.
 	 *

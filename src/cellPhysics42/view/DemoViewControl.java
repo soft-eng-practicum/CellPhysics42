@@ -1,10 +1,15 @@
 package cellPhysics42.view;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.concurrent.locks.ReentrantLock;
+import java.util.function.Predicate;
 
 import com.sun.org.apache.xml.internal.security.keys.content.KeyValue;
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
 
 import Controller.ControlClass;
+import Model.Rule1D;
 import exception.NotValidRuleException;
 import javafx.animation.Animation;
 import javafx.animation.FillTransition;
@@ -20,22 +25,24 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
 /**Class: DemoViewControl.java 
-   * @author Bess Burnett 
-   * @version 1.0 
-   * Course : ITEC 3870 Spring 2017
-   * Written: Feb 8, 2017 
-  	   * 
-   * This class –  
-   * 
-   * Purpose: –  
-   */
+ * @author Bess Burnett 
+ * @version 1.0 
+ * Course : ITEC 3870 Spring 2017
+ * Written: Feb 8, 2017 
+ * 
+ * This class –  
+ * 
+ * Purpose: –  
+ */
 public class DemoViewControl {
 	@FXML
 	private Label ruleName;
@@ -47,52 +54,55 @@ public class DemoViewControl {
 	private Rectangle rectangle;
 	@FXML
 	private Button runDemoBt;
-	private ObservableList<Node> gridChildren;
 	String[] strings;
 	@FXML
 	Pane rootPane;
 	@FXML
 	private GridPane mainDemoGrid;
+	private int nextRule;
+	private double rowDuration;
+	private ReentrantLock lock;
 
 	/**
 	 * Method name: initialize
 	 */
 	@FXML
 	public void initialize(){
-		gridChildren = displayGrid.getChildren();
-
 		nextRow = 0;
-		numRows = 30;
-		numCols = 60;
+		numRows = 50;
+		numCols = 80;
+		rowDuration = 500;
+		lock = new ReentrantLock();
 	}
 
-	/**
-	 * Method name: getRandomStrings
-	 * @param numStrings
-	 * @param stringLength
-	 * @return
-	 */
-	public String[] getRandomStrings(int numStrings, int stringLength){
-		String[] retStrings = new String[numStrings];
-		for(int i = 0; i < numStrings; i++){
-			retStrings[i] = getRandomString(stringLength);
-		}
-		return retStrings;
-	}
 
-	/**
-	 * Method name: getRandomString
-	 * @param length
-	 * @return
-	 */
-	public String getRandomString(int length){
-		StringBuilder rerString = new StringBuilder();
-		for(int k = 0; k < length; k++){
-			char toAdd = (Math.random() < 0.5) ? '0' : '1';
-			rerString.append(toAdd);
-		}
-		return rerString.toString();
-	}
+	//	/**
+	//	 * Method name: getRandomStrings
+	//	 * @param numStrings
+	//	 * @param stringLength
+	//	 * @return
+	//	 */
+	//	public String[] getRandomStrings(int numStrings, int stringLength){
+	//		String[] retStrings = new String[numStrings];
+	//		for(int i = 0; i < numStrings; i++){
+	//			retStrings[i] = getRandomString(stringLength);
+	//		}
+	//		return retStrings;
+	//	}
+
+	//	/**
+	//	 * Method name: getRandomString
+	//	 * @param length
+	//	 * @return
+	//	 */
+	//	public String getRandomString(int length){
+	//		StringBuilder rerString = new StringBuilder();
+	//		for(int k = 0; k < length; k++){
+	//			char toAdd = (Math.random() < 0.5) ? '0' : '1';
+	//			rerString.append(toAdd);
+	//		}
+	//		return rerString.toString();
+	//	}
 
 	/**
 	 * Method name: runDemo
@@ -101,32 +111,57 @@ public class DemoViewControl {
 	public void runDemo(){
 		//strings = getRandomStrings(10, 20);
 		//displayGrid.setGridLinesVisible(true);
-//		addRectangles();
-		fillGrid();
-	}
-	
-	public void addRectangles(){
-		rectangle = new Rectangle(displayGrid.getWidth()/numCols, displayGrid.getHeight()/numRows, 
-				Color.WHITE);
-		for(int i = 0; i < numCols; i++){
-			for(int j = 0; j < numRows; j++){
-				displayGrid.add(rectangle, i, j);
+		setGridSize();
+		int[] validRules = new Rule1D().getRules();
+		Thread fillThread = new Thread(new Runnable() {
+			public void run() {
+				fillGrid();
+			}
+		});
+		for(int i = 0; i < validRules.length; i++){
+			nextRule = validRules[i];
+			fillThread.run();
+			try {
+				fillThread.wait();
+			} catch (InterruptedException ex) {
 			}
 		}
 	}
-	
-	/**
-	 * Method name: fillGrid
-	 */
-	public void fillGrid(){
+	//		for(int i = 0; i < validRules.length; i++){
+	//			try{
+	//				nextRule = validRules[i];
+	//				fillGrid();
+	//				lock.wait();
+	//			}
+	//			catch(Exception ex){
+	//				System.out.println("Stuck");
+	//			}
+	//		}
+	//fillGrid();
+
+
+/**
+ * Method name: setGridSize
+ */
+public void setGridSize(){
+	for(int i = 0; i < numCols; i++){
+		displayGrid.getColumnConstraints().add(new ColumnConstraints(displayGrid.getWidth()/numCols));
+	}
+	for(int i = 0; i < numRows; i++){
+		displayGrid.getRowConstraints().add(new RowConstraints(displayGrid.getHeight()/numRows));
+	}
+}
+
+/**
+ * Method name: fillGrid
+ */
+public void fillGrid(){
+	try{
 		ControlClass controler = new ControlClass();
-		try{
-			controler.setRule1D(210, numRows, numCols);
-		}
-		catch (Exception ex) {
-		}
+
+		controler.setRule1D(nextRule, numRows, numCols);
 		Timeline timeline = new Timeline();
-		KeyFrame kfFrame = new KeyFrame(Duration.millis(1000), new EventHandler<ActionEvent>() {
+		KeyFrame kfFrame = new KeyFrame(Duration.millis(rowDuration), new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				fillNextLine(controler);
 				nextRow++;
@@ -136,7 +171,10 @@ public class DemoViewControl {
 		timeline.getKeyFrames().add(kfFrame);
 		timeline.play();
 	}
-		
+	catch (Exception ex) {
+	}
+}
+
 //		for(int i = 0; i < numRows; i++){
 //
 //			try{
@@ -148,58 +186,58 @@ public class DemoViewControl {
 //			catch (Exception ex) {
 //			}
 //		}
-	
-	
-	public void fillNextLine(ControlClass controler){
-		try {
-			byte[][] toFill = controler.getNextLine1D();
-			fillNextLine(getStringRow(toFill));
-		} catch (NotValidRuleException ex) {
-			ex.printStackTrace();
-		}
-	}
 
-	/**
-	 * Method name: fillNextLine
-	 * @param nextLine
-	 */
-	public void fillNextLine(String nextLine){
-		displayGrid.setAlignment(Pos.TOP_CENTER);
-		for(int i = 0; i < nextLine.length(); i++){
-			if(nextLine.charAt(i) == '1'){
-				rectangle = new Rectangle(displayGrid.getWidth()/numCols, displayGrid.getHeight()/numRows, 
-						Color.BLACK);
-				displayGrid.add(rectangle, i, nextRow);
-			}
-			else{
-				rectangle = new Rectangle(displayGrid.getWidth()/numCols, displayGrid.getHeight()/numRows, 
-						Color.WHITE);
-				displayGrid.add(rectangle, i, nextRow);
-			}
-		}
-	}
-	
-	public Rectangle getRectangle(int col, int row){
-		for(Node node : gridChildren){
-			if(displayGrid.getRowIndex(node) == row && displayGrid.getColumnIndex(node) == col)
-				return (Rectangle) node;
-		}
-		rectangle.setFill(Color.WHITE);
-		return rectangle;
-	}
 
-	/**
-	 * Method name: getStringRow
-	 * @param nextLineArray
-	 * @return
-	 */
-	public String getStringRow(byte[][] nextLineArray){
-		StringBuilder nextLine = new StringBuilder();
-		for(int i = 0; i < nextLineArray[0].length; i++){
-			nextLine.append(nextLineArray[0][i]);
-		}
-		return nextLine.toString();
+public void fillNextLine(ControlClass controler){
+	try {
+		byte[][] toFill = controler.getNextLine1D();
+		fillNextLine(getStringRow(toFill));
+	} catch (NotValidRuleException ex) {
+		ex.printStackTrace();
 	}
+}
+
+/**
+ * Method name: fillNextLine
+ * @param nextLine
+ */
+public void fillNextLine(String nextLine){
+	displayGrid.setAlignment(Pos.TOP_CENTER);
+	for(int i = 0; i < nextLine.length(); i++){
+		if(nextLine.charAt(i) == '1'){
+			rectangle = new Rectangle(displayGrid.getWidth()/numCols, displayGrid.getHeight()/numRows, 
+					Color.BLACK);
+			displayGrid.add(rectangle, i, nextRow);
+		}
+		else{
+			rectangle = new Rectangle(displayGrid.getWidth()/numCols, displayGrid.getHeight()/numRows, 
+					Color.WHITE);
+			displayGrid.add(rectangle, i, nextRow);
+		}
+	}
+}
+
+//	public Rectangle getRectangle(int col, int row){
+//		for(Node node : gridChildren){
+//			if(displayGrid.getRowIndex(node) == row && displayGrid.getColumnIndex(node) == col)
+//				return (Rectangle) node;
+//		}
+//		rectangle.setFill(Color.WHITE);
+//		return rectangle;
+//	}
+
+/**
+ * Method name: getStringRow
+ * @param nextLineArray
+ * @return
+ */
+public String getStringRow(byte[][] nextLineArray){
+	StringBuilder nextLine = new StringBuilder();
+	for(int i = 0; i < nextLineArray[0].length; i++){
+		nextLine.append(nextLineArray[0][i]);
+	}
+	return nextLine.toString();
+}
 
 //	/**
 //	 * Method name: fillGrid
