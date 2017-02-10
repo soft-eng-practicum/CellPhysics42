@@ -1,18 +1,9 @@
 package cellPhysics42.view;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.concurrent.locks.ReentrantLock;
-import java.util.function.Predicate;
-
-import com.sun.org.apache.xml.internal.security.keys.content.KeyValue;
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
-
 import Controller.ControlClass;
 import Model.Rule1D;
 import exception.NotValidRuleException;
-import javafx.animation.Animation;
-import javafx.animation.FillTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.ObservableList;
@@ -70,8 +61,8 @@ public class DemoViewControl {
 	public void initialize(){
 		nextRow = 0;
 		numRows = 50;
-		numCols = 80;
-		rowDuration = 500;
+		numCols = 81;
+		rowDuration = 200;
 		lock = new ReentrantLock();
 	}
 
