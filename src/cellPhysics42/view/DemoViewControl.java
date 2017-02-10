@@ -71,7 +71,7 @@ public class DemoViewControl {
 		nextRow = 0;
 		numRows = 50;
 		numCols = 80;
-		rowDuration = 500;
+		rowDuration = 200;
 		lock = new ReentrantLock();
 	}
 
@@ -159,7 +159,7 @@ public void fillGrid(){
 	try{
 		ControlClass controler = new ControlClass();
 
-		controler.setRule1D(nextRule, numRows, numCols);
+		controler.setRule1D(90, numRows, numCols);
 		Timeline timeline = new Timeline();
 		KeyFrame kfFrame = new KeyFrame(Duration.millis(rowDuration), new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
