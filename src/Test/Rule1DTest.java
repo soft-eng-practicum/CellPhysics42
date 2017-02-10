@@ -8,7 +8,7 @@ import org.junit.Test;
 import Model.Rule1D;
 import exception.NotValidRuleException;
 
-public class Rule1DTest { 
+public class Rule1DTest {
 
 	@Test
 	public void setRuleTest() throws NotValidRuleException {
@@ -31,18 +31,14 @@ public class Rule1DTest {
 	public void isOnTestRule90() throws NotValidRuleException {
 
 		// given
-<<<<<<< HEAD
 		Rule1D myRule = new Rule1D(90);
-=======
-		Rule1D myRule = new Rule1D(150);  
->>>>>>> branch 'master' of https://github.com/soft-eng-practicum/CellPhysics42.git
 
 		// when
 		System.out.println(myRule.toString());
 		// then
 		byte zero = 0;
 		byte one = 1;
-		
+
 		Assert.assertEquals("Wrong output rule 90", zero, myRule.isOn(zero, zero, zero));
 		Assert.assertEquals("Wrong output rule 90", one, myRule.isOn(zero, zero, one));
 		Assert.assertEquals("Wrong output rule 90", zero, myRule.isOn(zero, one, zero));
@@ -417,9 +413,9 @@ public class Rule1DTest {
 		Assert.assertArrayEquals(new byte[]{0,0,1,0,1,0,1,0,1,0,0,}, rule.getFillLine(7));
 		Assert.assertArrayEquals(new byte[]{0,1,0,0,0,0,0,0,0,1,0,}, rule.getFillLine(8));
 		Assert.assertArrayEquals(new byte[]{1,0,1,0,0,0,0,0,1,0,1,}, rule.getFillLine(9));
-		
+
 		}
-	
+
 	@Test
 	public void getFillLine178Test() throws NotValidRuleException {
 		Rule1D rule = new Rule1D(178, 11, 10);
@@ -437,7 +433,7 @@ public class Rule1DTest {
 		Assert.assertArrayEquals(new byte[]{0,1,0,1,0,1,0,1,0,1,0}, rule.getFillLine(8));
 		Assert.assertArrayEquals(new byte[]{1,0,1,0,1,0,1,0,1,0,1}, rule.getFillLine(9));
 		}
-	
+
 	@Test
 	public void getFillLine126Test() throws NotValidRuleException {
 		Rule1D rule = new Rule1D(126, 11, 10);
