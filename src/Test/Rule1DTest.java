@@ -1,34 +1,37 @@
 package Test;
 
 import org.junit.*;
+import org.junit.Assert.*;
+import org.junit.Test;
+
 
 import Model.Rule1D;
 import exception.NotValidRuleException;
 
 public class Rule1DTest {
 
-	@Test 
+	@Test
 	public void setRuleTest() throws NotValidRuleException {
 		//given
 		Rule1D myrule = new Rule1D(90);
-		
-		
+
+
 		//when
 		System.out.println(myrule.toString());
-		
-		
+
+
 		//then
 		myrule.setRule(10);
 		Assert.assertEquals(10, myrule.getRule());
 		Assert.assertNotEquals(90, myrule.getRule());
-		
+
 	}
-	
+
 	@Test
 	public void isOnTestRule90() throws NotValidRuleException {
 
 		// given
-		Rule1D myRule = new Rule1D(45);
+		Rule1D myRule = new Rule1D(90);
 
 		// when
 		System.out.println(myRule.toString());
@@ -393,5 +396,60 @@ public class Rule1DTest {
 		Assert.assertEquals("Wrong output rule 254", one, myRule.isOn(one, one, one));
 
 	}
+
+	@Test
+	public void getFillLine90Test() throws NotValidRuleException {
+		Rule1D rule = new Rule1D(90, 11, 10);
+		System.out.println(rule.toString());
+		rule.fillArrays();
+
+		Assert.assertArrayEquals(new byte[]{0,0,0,0,0,1,0,0,0,0,0,}, rule.getFillLine(0));
+		Assert.assertArrayEquals(new byte[]{0,0,0,0,1,0,1,0,0,0,0,}, rule.getFillLine(1));
+		Assert.assertArrayEquals(new byte[]{0,0,0,1,0,0,0,1,0,0,0,}, rule.getFillLine(2));
+		Assert.assertArrayEquals(new byte[]{0,0,1,0,1,0,1,0,1,0,0,}, rule.getFillLine(3));
+		Assert.assertArrayEquals(new byte[]{0,1,0,0,0,0,0,0,0,1,0,}, rule.getFillLine(4));
+		Assert.assertArrayEquals(new byte[]{1,0,1,0,0,0,0,0,1,0,1,}, rule.getFillLine(5));
+		Assert.assertArrayEquals(new byte[]{0,0,0,1,0,0,0,1,0,0,0,}, rule.getFillLine(6));
+		Assert.assertArrayEquals(new byte[]{0,0,1,0,1,0,1,0,1,0,0,}, rule.getFillLine(7));
+		Assert.assertArrayEquals(new byte[]{0,1,0,0,0,0,0,0,0,1,0,}, rule.getFillLine(8));
+		Assert.assertArrayEquals(new byte[]{1,0,1,0,0,0,0,0,1,0,1,}, rule.getFillLine(9));
+		
+		}
+	
+	@Test
+	public void getFillLine178Test() throws NotValidRuleException {
+		Rule1D rule = new Rule1D(178, 11, 10);
+		System.out.println(rule.toString());
+		rule.fillArrays();
+
+		Assert.assertArrayEquals(new byte[]{0,0,0,0,0,1,0,0,0,0,0}, rule.getFillLine(0));
+		Assert.assertArrayEquals(new byte[]{0,0,0,0,1,0,1,0,0,0,0}, rule.getFillLine(1));
+		Assert.assertArrayEquals(new byte[]{0,0,0,1,0,1,0,1,0,0,0}, rule.getFillLine(2));
+		Assert.assertArrayEquals(new byte[]{0,0,1,0,1,0,1,0,1,0,0}, rule.getFillLine(3));
+		Assert.assertArrayEquals(new byte[]{0,1,0,1,0,1,0,1,0,1,0}, rule.getFillLine(4));
+		Assert.assertArrayEquals(new byte[]{1,0,1,0,1,0,1,0,1,0,1}, rule.getFillLine(5));
+		Assert.assertArrayEquals(new byte[]{0,1,0,1,0,1,0,1,0,1,0}, rule.getFillLine(6));
+		Assert.assertArrayEquals(new byte[]{1,0,1,0,1,0,1,0,1,0,1}, rule.getFillLine(7));
+		Assert.assertArrayEquals(new byte[]{0,1,0,1,0,1,0,1,0,1,0}, rule.getFillLine(8));
+		Assert.assertArrayEquals(new byte[]{1,0,1,0,1,0,1,0,1,0,1}, rule.getFillLine(9));
+		}
+	
+	@Test
+	public void getFillLine126Test() throws NotValidRuleException {
+		Rule1D rule = new Rule1D(126, 11, 10);
+		System.out.println(rule.toString());
+		rule.fillArrays();
+
+		Assert.assertArrayEquals(new byte[]{0,0,0,0,0,1,0,0,0,0,0}, rule.getFillLine(0));
+		Assert.assertArrayEquals(new byte[]{0,0,0,0,1,1,1,0,0,0,0}, rule.getFillLine(1));
+		Assert.assertArrayEquals(new byte[]{0,0,0,1,1,0,1,1,0,0,0}, rule.getFillLine(2));
+		Assert.assertArrayEquals(new byte[]{0,0,1,1,1,1,1,1,1,0,0}, rule.getFillLine(3));
+		Assert.assertArrayEquals(new byte[]{0,1,1,0,0,0,0,0,1,1,0}, rule.getFillLine(4));
+		Assert.assertArrayEquals(new byte[]{1,1,1,1,0,0,0,1,1,1,1}, rule.getFillLine(5));
+		Assert.assertArrayEquals(new byte[]{1,0,0,1,1,0,1,1,0,0,1}, rule.getFillLine(6));
+		Assert.assertArrayEquals(new byte[]{1,1,1,1,1,1,1,1,1,1,1}, rule.getFillLine(7));
+		Assert.assertArrayEquals(new byte[]{1,0,0,0,0,0,0,0,0,0,1}, rule.getFillLine(8));
+		Assert.assertArrayEquals(new byte[]{1,1,0,0,0,0,0,0,0,1,1}, rule.getFillLine(9));
+		}
 
 }
