@@ -5,7 +5,7 @@ import org.junit.*;
 import Model.Rule1D;
 import exception.NotValidRuleException;
 
-public class Rule1DTest { // jjjj
+public class Rule1DTest { 
 
 	@Test 
 	public void setRuleTest() throws NotValidRuleException {
@@ -28,7 +28,7 @@ public class Rule1DTest { // jjjj
 	public void isOnTestRule90() throws NotValidRuleException {
 
 		// given
-		Rule1D myRule = new Rule1D(90);  
+		Rule1D myRule = new Rule1D(150);  
 
 		// when
 		System.out.println(myRule.toString());
