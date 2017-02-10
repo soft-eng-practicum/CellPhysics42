@@ -299,4 +299,7 @@ public class Rule1D {
 		return length;
 	}
 
+	public int[] getRules(){
+		return rules;
+	}
 }

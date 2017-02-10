@@ -21,6 +21,8 @@
 
         <target name="clean">
                 <delete dir="${test.report.dir}" />
+        	<delete dir="${build.dir}" />
+        	                <delete dir="${test.report.dir}" />
         </target>
 
         <!-- Creates the  build, docs and dist directory-->
@@ -40,7 +42,7 @@
         <!-- Run the JUnit Tests -->
         <!-- Output is XML, could also be plain-->
         <target name="junit" depends="compile">
-                <junit printsummary="on" fork="true" haltonfailure="">
+                <junit printsummary="on">
                         <classpath refid="junit.class.path" />
                         <formatter type="xml" />
                         <batchtest todir="${test.report.dir}">
