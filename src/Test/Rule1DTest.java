@@ -28,7 +28,7 @@ public class Rule1DTest {
 	public void isOnTestRule90() throws NotValidRuleException {
 
 		// given
-		Rule1D myRule = new Rule1D(90);
+		Rule1D myRule = new Rule1D(45);
 
 		// when
 		System.out.println(myRule.toString());

@@ -8,7 +8,7 @@ public class ruleModle
 	{
 		try
 		{
-			Rule1D rule = new Rule1D(178);
+			Rule1D rule = new Rule1D(90, 41, 60);
 			System.out.println(rule.toString());
 			System.out.println(rule.isOn((byte)1,(byte)1,(byte)1));
 			System.out.println(rule.isOn((byte)1,(byte)1,(byte)0));
