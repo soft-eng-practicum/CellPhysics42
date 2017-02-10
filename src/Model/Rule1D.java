@@ -12,7 +12,8 @@ public class Rule1D {
 	private byte state1;
 	private byte state0;
 	private int rule;
-	final private int[] rules = { 126, 10, 22, 50, 54, 90, 94, 122, 146, 150, 178, 182, 210, 222, 250, 254 };
+	final public int[] rules =
+		{ 126, 10, 22, 50, 54, 90, 94, 122, 146, 150, 178, 182, 210, 222, 250, 254 };
 	private byte[][] filledArray;
 	private byte[][] stateArray;
 	private int width;
@@ -20,13 +21,13 @@ public class Rule1D {
 	private int widthCount;
 	private int lengthCount;
 	private int nextLine;
-	
+
 	/**Rule1D
-	 * 
+	 *
 	 * no arg constructor used to get rules
 	 */
 	public Rule1D(){
-		
+
 	}
 
 	/** Constructor that takes a int of a valid rule that the class can build.
@@ -220,11 +221,11 @@ public class Rule1D {
 			throw new NotValidRuleException("line out of bounds");
 		return stateArray[line];
 	}
-	
+
 	public byte[][] getNextLine() throws NotValidRuleException{
 		if (nextLine >= length)
 			throw new NotValidRuleException("line out of bounds");
-		
+
 		byte[][] next = new byte[2][width];
 		next[0] = getFillLine(nextLine);
 		next[1] = getStateLine(nextLine);
@@ -279,13 +280,6 @@ public class Rule1D {
 		return String.format("%8s", Integer.toBinaryString(rule)).replace(' ', '0');
 	}
 
-	/** Array of valid rules that the object can use
-	 *
-	 * @return
-	 */
-	public int[] getRules() {
-		return rules;
-	}
 
 	/** current rule of the object
 	 *
@@ -303,4 +297,7 @@ public class Rule1D {
 		return length;
 	}
 
+	public int[] getRules(){
+		return rules;
+	}
 }
