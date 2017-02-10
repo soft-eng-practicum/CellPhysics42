@@ -4,7 +4,7 @@
         <!-- The value of a property is accessed via ${} -->
         <property name="src.dir" location="src" />
 
-        <property name="build.dir" location="bin" />
+        <property name="build.dir" location="build" />
 
         <!-- Variables used for JUnit testin -->
         <property name="Test.dir" location="src" />
@@ -21,6 +21,9 @@
 
         <target name="clean">
                 <delete dir="${test.report.dir}" />
+        	<delete>
+        	      <fileset dir="${build.dir}}" includes="**/*.class" />
+        	    </delete>
         </target>
 
         <!-- Creates the  build, docs and dist directory-->
@@ -40,7 +43,7 @@
         <!-- Run the JUnit Tests -->
         <!-- Output is XML, could also be plain-->
         <target name="junit" depends="compile">
-                <junit printsummary="on" fork="true" haltonfailure="">
+                <junit printsummary="on">
                         <classpath refid="junit.class.path" />
                         <formatter type="xml" />
                         <batchtest todir="${test.report.dir}">

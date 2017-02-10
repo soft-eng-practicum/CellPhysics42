@@ -5,7 +5,7 @@ import org.junit.*;
 import Model.Rule1D;
 import exception.NotValidRuleException;
 
-public class Rule1DTest {
+public class Rule1DTest { // jjjj
 
 	@Test 
 	public void setRuleTest() throws NotValidRuleException {
@@ -28,14 +28,14 @@ public class Rule1DTest {
 	public void isOnTestRule90() throws NotValidRuleException {
 
 		// given
-		Rule1D myRule = new Rule1D(45);
+		Rule1D myRule = new Rule1D(90);  
 
 		// when
 		System.out.println(myRule.toString());
 		// then
 		byte zero = 0;
 		byte one = 1;
-
+		
 		Assert.assertEquals("Wrong output rule 90", zero, myRule.isOn(zero, zero, zero));
 		Assert.assertEquals("Wrong output rule 90", one, myRule.isOn(zero, zero, one));
 		Assert.assertEquals("Wrong output rule 90", zero, myRule.isOn(zero, one, zero));
