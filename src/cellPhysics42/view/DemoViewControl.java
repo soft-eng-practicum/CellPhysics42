@@ -1,19 +1,12 @@
 package cellPhysics42.view;
 
-import java.util.concurrent.locks.ReentrantLock;
 import Controller.ControlClass;
 import Model.Rule1D;
 import exception.NotValidRuleException;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
@@ -30,9 +23,9 @@ import javafx.util.Duration;
  * Course : ITEC 3870 Spring 2017
  * Written: Feb 8, 2017 
  * 
- * This class –  
+ * This class –  controls the demo view
  * 
- * Purpose: –  
+ * Purpose: –  tells how to cycle through all the valid rules and displays their output in a GUI
  */
 public class DemoViewControl {
 	@FXML
@@ -51,228 +44,148 @@ public class DemoViewControl {
 	@FXML
 	private GridPane mainDemoGrid;
 	private int nextRule;
-	private double rowDuration;
-	private ReentrantLock lock;
+	private long rowDuration;
+	private int[] validRules;
+	private int ruleIndex;
 
 	/**
 	 * Method name: initialize
+	 * 
+	 * FX method called when associated fxml file is built
 	 */
 	@FXML
 	public void initialize(){
 		nextRow = 0;
 		numRows = 50;
-		numCols = 80;
 		numCols = 81;
-		rowDuration = 200;
-		lock = new ReentrantLock();
-	}
-
-
-	//	/**
-	//	 * Method name: getRandomStrings
-	//	 * @param numStrings
-	//	 * @param stringLength
-	//	 * @return
-	//	 */
-	//	public String[] getRandomStrings(int numStrings, int stringLength){
-	//		String[] retStrings = new String[numStrings];
-	//		for(int i = 0; i < numStrings; i++){
-	//			retStrings[i] = getRandomString(stringLength);
-	//		}
-	//		return retStrings;
-	//	}
-
-	//	/**
-	//	 * Method name: getRandomString
-	//	 * @param length
-	//	 * @return
-	//	 */
-	//	public String getRandomString(int length){
-	//		StringBuilder rerString = new StringBuilder();
-	//		for(int k = 0; k < length; k++){
-	//			char toAdd = (Math.random() < 0.5) ? '0' : '1';
-	//			rerString.append(toAdd);
-	//		}
-	//		return rerString.toString();
-	//	}
+		rowDuration = 500;
+		validRules = new Rule1D().getRules();
+		ruleIndex = 0;
+		nextRule = validRules[ruleIndex];
+		ruleIndex++;
+	}	
 
 	/**
 	 * Method name: runDemo
+	 * 
+	 * button on action to run the demo
 	 */
 	@FXML
 	public void runDemo(){
-		//strings = getRandomStrings(10, 20);
-		//displayGrid.setGridLinesVisible(true);
-		setGridSize();
-		int[] validRules = new Rule1D().getRules();
-		Thread fillThread = new Thread(new Runnable() {
-			public void run() {
-				fillGrid();
-			}
-		});
-		for(int i = 0; i < validRules.length; i++){
-			nextRule = validRules[i];
-			fillThread.run();
-			try {
-				fillThread.wait();
-			} catch (InterruptedException ex) {
-			}
+		ruleName.setText("Rule " + nextRule);
+		clearGrid();
+		fillGrid();
+	}
+
+	/**
+	 * Method name: setGridSize
+	 * 
+	 * sets the correct number and size of columns and rows
+	 */
+	public void setGridSize(){
+		displayGrid.getColumnConstraints().removeAll(displayGrid.getColumnConstraints());
+		displayGrid.getRowConstraints().removeAll(displayGrid.getRowConstraints());
+		for(int i = 0; i < numCols; i++){
+			displayGrid.getColumnConstraints().add(new ColumnConstraints(displayGrid.getWidth()/numCols));
+		}
+		for(int i = 0; i < numRows; i++){
+			displayGrid.getRowConstraints().add(new RowConstraints(displayGrid.getHeight()/numRows));
 		}
 	}
-	//		for(int i = 0; i < validRules.length; i++){
-	//			try{
-	//				nextRule = validRules[i];
-	//				fillGrid();
-	//				lock.wait();
-	//			}
-	//			catch(Exception ex){
-	//				System.out.println("Stuck");
-	//			}
-	//		}
-	//fillGrid();
 
+	/**
+	 * Method name: fillGrid
+	 * 
+	 * fills in the grid based on what the next rule is
+	 */
+	public void fillGrid(){
+			ControlClass controler = new ControlClass();
+			try {
+				controler.setRule1D(nextRule, numRows, numCols);
+			} catch (NotValidRuleException ex) {
+				ex.printStackTrace();
+			}
 
-/**
- * Method name: setGridSize
- */
-public void setGridSize(){
-	for(int i = 0; i < numCols; i++){
-		displayGrid.getColumnConstraints().add(new ColumnConstraints(displayGrid.getWidth()/numCols));
-	}
-	for(int i = 0; i < numRows; i++){
-		displayGrid.getRowConstraints().add(new RowConstraints(displayGrid.getHeight()/numRows));
-	}
-}
-
-/**
- * Method name: fillGrid
- */
-public void fillGrid(){
-	try{
-		ControlClass controler = new ControlClass();
-
-		controler.setRule1D(90, numRows, numCols);
-		Timeline timeline = new Timeline();
-		KeyFrame kfFrame = new KeyFrame(Duration.millis(rowDuration), new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent event) {
+			Timeline timeline = new Timeline();
+			KeyFrame keyFrame = new KeyFrame(new Duration(rowDuration), e->{
 				fillNextLine(controler);
 				nextRow++;
+			});
+			timeline.setCycleCount(numRows);
+			timeline.getKeyFrames().add(keyFrame);
+			timeline.setOnFinished(e->{
+				if(ruleIndex == validRules.length){
+					ruleIndex = 0;
+				}
+				nextRule = validRules[ruleIndex];
+				ruleIndex++;
+				nextRow = 0;
+				runDemo();
+			});
+			timeline.play();
+	}
+	
+	/**
+	 * Method name: clearGrid
+	 * 
+	 * resets the grid to blank so a new rule can be started
+	 */
+	public void clearGrid(){
+		displayGrid.getChildren().removeAll(displayGrid.getChildren());
+		setGridSize();
+	}
+
+
+	/**
+	 * Method name: fillNextLine
+	 * @param controler
+	 * 
+	 * helper method so the to use the controler to get the string to build the next line
+	 */
+	public void fillNextLine(ControlClass controler){
+		try {
+			byte[][] toFill = controler.getNextLine1D();
+			fillNextLine(getStringRow(toFill));
+		} catch (NotValidRuleException ex) {
+			ex.printStackTrace();
+		}
+	}
+
+	/**
+	 * Method name: fillNextLine
+	 * @param nextLine
+	 * 
+	 * takes a bit string and fills the row accordingly 
+	 */
+	public synchronized void fillNextLine(String nextLine){
+		displayGrid.setAlignment(Pos.TOP_CENTER);
+		for(int i = 0; i < nextLine.length(); i++){
+			if(nextLine.charAt(i) == '1'){
+				rectangle = new Rectangle(displayGrid.getWidth()/numCols, displayGrid.getHeight()/numRows, 
+						Color.BLACK);
+				displayGrid.add(rectangle, i, nextRow);
 			}
-		});
-		timeline.setCycleCount(numRows);
-		timeline.getKeyFrames().add(kfFrame);
-		timeline.play();
-	}
-	catch (Exception ex) {
-	}
-}
-
-//		for(int i = 0; i < numRows; i++){
-//
-//			try{
-//				byte[][] toFill = controler.getNextLine1D();
-//				fillNextLine(getStringRow(toFill));
-//				//make line display and rest for second
-//				nextRow++;
-//			}
-//			catch (Exception ex) {
-//			}
-//		}
-
-
-public void fillNextLine(ControlClass controler){
-	try {
-		byte[][] toFill = controler.getNextLine1D();
-		fillNextLine(getStringRow(toFill));
-	} catch (NotValidRuleException ex) {
-		ex.printStackTrace();
-	}
-}
-
-/**
- * Method name: fillNextLine
- * @param nextLine
- */
-public void fillNextLine(String nextLine){
-	displayGrid.setAlignment(Pos.TOP_CENTER);
-	for(int i = 0; i < nextLine.length(); i++){
-		if(nextLine.charAt(i) == '1'){
-			rectangle = new Rectangle(displayGrid.getWidth()/numCols, displayGrid.getHeight()/numRows, 
-					Color.BLACK);
-			displayGrid.add(rectangle, i, nextRow);
-		}
-		else{
-			rectangle = new Rectangle(displayGrid.getWidth()/numCols, displayGrid.getHeight()/numRows, 
-					Color.WHITE);
-			displayGrid.add(rectangle, i, nextRow);
+			else{
+				rectangle = new Rectangle(displayGrid.getWidth()/numCols, displayGrid.getHeight()/numRows, 
+						Color.WHITE);
+				displayGrid.add(rectangle, i, nextRow);
+			}
 		}
 	}
-}
 
-//	public Rectangle getRectangle(int col, int row){
-//		for(Node node : gridChildren){
-//			if(displayGrid.getRowIndex(node) == row && displayGrid.getColumnIndex(node) == col)
-//				return (Rectangle) node;
-//		}
-//		rectangle.setFill(Color.WHITE);
-//		return rectangle;
-//	}
-
-/**
- * Method name: getStringRow
- * @param nextLineArray
- * @return
- */
-public String getStringRow(byte[][] nextLineArray){
-	StringBuilder nextLine = new StringBuilder();
-	for(int i = 0; i < nextLineArray[0].length; i++){
-		nextLine.append(nextLineArray[0][i]);
+	/**
+	 * Method name: getStringRow
+	 * @param nextLineArray
+	 * @return String
+	 * 
+	 * takes a 2d arrary that contains the information for the next line and returns the bit string 
+	 * needed to fill the row
+	 */
+	public String getStringRow(byte[][] nextLineArray){
+		StringBuilder nextLine = new StringBuilder();
+		for(int i = 0; i < nextLineArray[0].length; i++){
+			nextLine.append(nextLineArray[0][i]);
+		}
+		return nextLine.toString();
 	}
-	return nextLine.toString();
-}
-
-//	/**
-//	 * Method name: fillGrid
-//	 */
-//	public void fillGrid(){
-//		ControlClass controler = new ControlClass();
-//		try{
-//			controler.setRule1D(22, numRows, numCols);
-//		}
-//		catch (Exception ex) {
-//		}
-//		Timeline timeline = new Timeline();
-//		for(int i = 0; i < numRows; i++){
-//
-//			try{
-//				byte[][] toFill = controler.getNextLine1D();
-//				fillNextLine(getStringRow(toFill), timeline);
-//				//make line display and rest for second
-//				timeline.play();
-//				nextRow++;
-//			}
-//			catch (Exception ex) {
-//			}
-//		}
-//	}
-//	
-//
-//	/**
-//	 * Method name: fillNextLine
-//	 * @param nextLine
-//	 */
-//	public void fillNextLine(String nextLine, Timeline timeline){
-//		for(int i = 0; i < nextLine.length(); i++){
-//			if(nextLine.charAt(i) == '1'){
-//				rectangle = new Rectangle(displayGrid.getWidth()/numCols, displayGrid.getHeight()/numRows, 
-//						Color.BLACK);
-//				displayGrid.add(rectangle, i, nextRow);
-//			}
-//			else{
-//				rectangle = new Rectangle(displayGrid.getWidth()/numCols, displayGrid.getHeight()/numRows, 
-//						Color.WHITE);
-//				displayGrid.add(rectangle, i, nextRow);
-//			}
-//		}
-//	}
 }

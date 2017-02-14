@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane fx:id="mainPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.cellPhysics42.view.CustomizeViewControl">
+<BorderPane fx:id="mainPane" prefHeight="900.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.cellPhysics42.view.CustomizeViewControl">
    <bottom>
       <GridPane BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -90,7 +90,7 @@
                   <Insets right="10.0" />
                </padding>
             </RadioButton>
-            <Button mnemonicParsing="false" text="Stop" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <Button mnemonicParsing="false" text="Stop" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <font>
                   <Font size="18.0" />
                </font>
@@ -103,6 +103,14 @@
                <font>
                   <Font size="18.0" />
                </font>
+            </Button>
+            <Button mnemonicParsing="false" text="Demo" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin>
             </Button>
          </children>
          <padding>
@@ -141,6 +149,14 @@
             <Label layoutX="43.0" layoutY="47.0" text="100" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
             <Label layoutX="43.0" layoutY="47.0" text="101" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
             <Label layoutX="43.0" layoutY="47.0" text="110" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Label text="1" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+            <Label layoutX="10.0" layoutY="17.0" text="0" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+            <Label layoutX="10.0" layoutY="17.0" text="1" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+            <Label layoutX="10.0" layoutY="17.0" text="1" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+            <Label layoutX="10.0" layoutY="17.0" text="0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+            <Label layoutX="10.0" layoutY="17.0" text="1" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+            <Label layoutX="10.0" layoutY="17.0" text="0" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+            <Label layoutX="651.0" layoutY="77.0" text="0" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
          </children>
       </GridPane>
    </top>

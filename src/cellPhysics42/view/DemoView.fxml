@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
@@ -17,8 +18,8 @@
           <RowConstraints maxHeight="789.0" minHeight="10.0" prefHeight="715.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="runDemoBt" mnemonicParsing="false" onAction="#runDemo" text="Button" />
-            <Label text="Rule Demo" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <Button fx:id="runDemoBt" mnemonicParsing="false" onAction="#runDemo" text="Demo" />
+            <Label fx:id="ruleName" text="Rule Demo" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>
                   <Font size="24.0" />
                </font></Label>
@@ -29,6 +30,9 @@
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
+               <GridPane.margin>
+                  <Insets right="20.0" />
+               </GridPane.margin>
             </GridPane>
          </children>
       </GridPane>
