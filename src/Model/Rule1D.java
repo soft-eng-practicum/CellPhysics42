@@ -13,7 +13,7 @@ public class Rule1D {
 	private byte state0;
 	private int rule;
 	final public int[] rules =
-		{ 126, 22, 50, 54, 90, 94, 122, 146, 150, 178, 182, 210, 222, 250, 10, 254 };
+		{10, 22, 50, 54, 90, 94, 122, 126,  146, 150, 178, 182, 210, 222, 250, 254 };
 	private byte[][] filledArray;
 	private byte[][] stateArray;
 	private int width;

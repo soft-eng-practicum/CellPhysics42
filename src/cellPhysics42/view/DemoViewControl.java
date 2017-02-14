@@ -9,6 +9,9 @@ import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -47,6 +50,9 @@ public class DemoViewControl {
 	private long rowDuration;
 	private int[] validRules;
 	private int ruleIndex;
+	private Color oneColor;
+	private Color zeroColor;
+	
 
 	/**
 	 * Method name: initialize
@@ -63,6 +69,9 @@ public class DemoViewControl {
 		ruleIndex = 0;
 		nextRule = validRules[ruleIndex];
 		ruleIndex++;
+		oneColor = Color.BLACK;
+		zeroColor = Color.LIGHTSKYBLUE;
+		rootPane.setBackground(new Background(new BackgroundFill(zeroColor, null, null)));
 	}	
 
 	/**
@@ -74,6 +83,7 @@ public class DemoViewControl {
 	public void runDemo(){
 		ruleName.setText("Rule " + nextRule);
 		clearGrid();
+		//displayGrid.setGridLinesVisible(true);
 		fillGrid();
 	}
 
@@ -86,11 +96,12 @@ public class DemoViewControl {
 		displayGrid.getColumnConstraints().removeAll(displayGrid.getColumnConstraints());
 		displayGrid.getRowConstraints().removeAll(displayGrid.getRowConstraints());
 		for(int i = 0; i < numCols; i++){
-			displayGrid.getColumnConstraints().add(new ColumnConstraints(displayGrid.getWidth()/numCols));
+			displayGrid.getColumnConstraints().add(new ColumnConstraints(Math.floor(displayGrid.getWidth()/numCols)));
 		}
 		for(int i = 0; i < numRows; i++){
-			displayGrid.getRowConstraints().add(new RowConstraints(displayGrid.getHeight()/numRows));
+			displayGrid.getRowConstraints().add(new RowConstraints(Math.floor(displayGrid.getHeight()/numRows)));
 		}
+		displayGrid.setAlignment(Pos.CENTER);
 	}
 
 	/**
@@ -158,16 +169,15 @@ public class DemoViewControl {
 	 * takes a bit string and fills the row accordingly 
 	 */
 	public synchronized void fillNextLine(String nextLine){
-		displayGrid.setAlignment(Pos.TOP_CENTER);
 		for(int i = 0; i < nextLine.length(); i++){
 			if(nextLine.charAt(i) == '1'){
-				rectangle = new Rectangle(displayGrid.getWidth()/numCols, displayGrid.getHeight()/numRows, 
-						Color.BLACK);
+				rectangle = new Rectangle(Math.floor(displayGrid.getWidth()/numCols), Math.floor(displayGrid.getHeight()/numRows), 
+						oneColor);
 				displayGrid.add(rectangle, i, nextRow);
 			}
 			else{
-				rectangle = new Rectangle(displayGrid.getWidth()/numCols, displayGrid.getHeight()/numRows, 
-						Color.WHITE);
+				rectangle = new Rectangle(Math.floor(displayGrid.getWidth()/numCols), Math.floor(displayGrid.getHeight()/numRows), 
+						zeroColor);
 				displayGrid.add(rectangle, i, nextRow);
 			}
 		}
