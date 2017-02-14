@@ -87,6 +87,8 @@ public class Rule1D {
 		} else {
 			throw new NotValidRuleException(rule + " is not a valid rule");
 		}
+
+		nextLine = 0;
 	}
 
 	/** Takes the previous state and uses as input for the selected cell to determine if it's state is on or off.
