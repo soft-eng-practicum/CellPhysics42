@@ -191,7 +191,6 @@ public class Rule1D {
 						filledArray[lengthCount][widthCount] = isOn(filledArray[lengthCount - 1][widthCount - 1],
 								filledArray[lengthCount - 1][widthCount], filledArray[lengthCount - 1][widthCount + 1]);
 					}
-					System.out.println(widthCount + " " + lengthCount);
 				}
 			}
 		}
