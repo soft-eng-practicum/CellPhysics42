@@ -43,7 +43,7 @@ public class DemoViewControl {
 	private Button runDemoBt;
 	String[] strings;
 	@FXML
-	Pane rootPane;
+	private Pane rootPane;
 	@FXML
 	private GridPane mainDemoGrid;
 	private int nextRule;
@@ -52,6 +52,8 @@ public class DemoViewControl {
 	private int ruleIndex;
 	private Color oneColor;
 	private Color zeroColor;
+	private Color edgeColor;
+	private Triangle triangle;
 	
 
 	/**
@@ -69,8 +71,9 @@ public class DemoViewControl {
 		ruleIndex = 0;
 		nextRule = validRules[ruleIndex];
 		ruleIndex++;
-		oneColor = Color.BLACK;
+		oneColor = Color.AQUA;
 		zeroColor = Color.LIGHTSKYBLUE;
+		edgeColor = Color.BLACK;
 		rootPane.setBackground(new Background(new BackgroundFill(zeroColor, null, null)));
 	}	
 
@@ -174,17 +177,38 @@ public class DemoViewControl {
 	public synchronized void fillNextLine(String nextLine){
 		for(int i = 0; i < nextLine.length(); i++){
 			if(nextLine.charAt(i) == '1'){
-				rectangle = new Rectangle(Math.floor(displayGrid.getWidth()/numCols), Math.floor(displayGrid.getHeight()/numRows), 
+				rectangle = new Rectangle(Math.floor(displayGrid.getWidth()/numCols) -1 , Math.floor(displayGrid.getHeight()/numRows) -1 , 
 						oneColor);
+				rectangle.setStroke(edgeColor);
+				rectangle.setStrokeWidth(0.75);
 				displayGrid.add(rectangle, i, nextRow);
 			}
 			else{
-				rectangle = new Rectangle(Math.floor(displayGrid.getWidth()/numCols), Math.floor(displayGrid.getHeight()/numRows), 
+				rectangle = new Rectangle(Math.floor(displayGrid.getWidth()/numCols) - 1, Math.floor(displayGrid.getHeight()/numRows) -1 , 
 						zeroColor);
+				//rectangle.setStroke(edgeColor);
+				//rectangle.setStrokeWidth(0.75);
 				displayGrid.add(rectangle, i, nextRow);
 			}
 		}
 	}
+	
+//	public synchronized void fillNextLine(String nextLine){
+//		for(int i = 0; i < nextLine.length(); i++){
+//			if(nextLine.charAt(i) == '1'){
+//				triangle = new Triangle(Math.floor(displayGrid.getWidth()/numCols), Math.floor(displayGrid.getHeight()/numRows));
+//				triangle.setFill(oneColor);
+//				//triangle.setStroke(edgeColor);
+//				displayGrid.add(triangle, i, nextRow);
+//			}
+//			else{
+//				triangle = new Triangle(Math.floor(displayGrid.getWidth()/numCols), Math.floor(displayGrid.getHeight()/numRows));
+//				//rectangle.setStroke(edgeColor);
+//				triangle.setFill(zeroColor);
+//				displayGrid.add(triangle, i, nextRow);
+//			}
+//		}
+//	}
 
 	/**
 	 * Method name: getStringRow
