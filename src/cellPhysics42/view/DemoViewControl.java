@@ -112,6 +112,9 @@ public class DemoViewControl {
 	public void fillGrid(){
 			ControlClass controler = new ControlClass();
 			try {
+				//byte[] firstRow = {0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0,
+			//			0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0,
+				//		0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 1};
 				controler.setRule1D(nextRule, numRows, numCols);
 			} catch (NotValidRuleException ex) {
 				ex.printStackTrace();
