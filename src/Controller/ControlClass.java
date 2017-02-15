@@ -14,4 +14,9 @@ public class ControlClass {
 		rule1d = new Rule1D(num, columns, rows);
 		rule1d.fillArrays();
 	}
+	
+	public void setRule1D(int num, int rows, int columns, byte[] firstRow) throws NotValidRuleException{
+		rule1d = new Rule1D(num, columns, rows);
+		rule1d.fillArrays(firstRow);
+	}
 }
