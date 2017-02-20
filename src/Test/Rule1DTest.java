@@ -415,7 +415,7 @@ public class Rule1DTest {
 		Assert.assertArrayEquals(new byte[]{1,0,1,0,0,0,0,0,1,0,1,}, rule.getFillLine(9));
 
 		}
-	
+
 	@Test
 	public void getStateLine90Test() throws NotValidRuleException {
 		Rule1D rule = new Rule1D(90, 11, 10);
@@ -434,13 +434,13 @@ public class Rule1DTest {
 		Assert.assertArrayEquals(new byte[]{1,2,4,0,0,0,0,0,1,2,4}, rule.getStateLine(9));
 
 		}
-	
+
 	@Test
 	public void getLine90Test() throws NotValidRuleException {
 		Rule1D rule = new Rule1D(90, 11, 10);
 		System.out.println(rule.toString());
 		rule.fillArrays();
-		
+
 		byte[][] line0 = {{0,0,0,0,0,1,0,0,0,0,0,},{0,0,0,0,0,1,0,0,0,0,0,}};
 		byte[][] line1 = {{0,0,0,0,1,0,1,0,0,0,0,},{0,0,0,0,1,2,4,0,0,0,0}};
 		byte[][] line2 = {{0,0,0,1,0,0,0,1,0,0,0,},{0,0,0,1,2,5,2,4,0,0,0}};
@@ -464,13 +464,13 @@ public class Rule1DTest {
 		Assert.assertArrayEquals(line9, rule.getLine(9));
 
 		}
-	
+
 	@Test
 	public void getNext90Test() throws NotValidRuleException {
 		Rule1D rule = new Rule1D(90, 11, 10);
 		System.out.println(rule.toString());
 		rule.fillArrays();
-		
+
 		byte[][] line0 = {{0,0,0,0,0,1,0,0,0,0,0,},{0,0,0,0,0,1,0,0,0,0,0,}};
 		byte[][] line1 = {{0,0,0,0,1,0,1,0,0,0,0,},{0,0,0,0,1,2,4,0,0,0,0}};
 		byte[][] line2 = {{0,0,0,1,0,0,0,1,0,0,0,},{0,0,0,1,2,5,2,4,0,0,0}};
@@ -530,20 +530,32 @@ public class Rule1DTest {
 		Assert.assertArrayEquals(new byte[]{1,0,0,0,0,0,0,0,0,0,1}, rule.getFillLine(8));
 		Assert.assertArrayEquals(new byte[]{1,1,0,0,0,0,0,0,0,1,1}, rule.getFillLine(9));
 		}
-	
+
 	@Test
 	public void getFillLineStart18() throws NotValidRuleException
-	{		
+	{
 		Rule1D rule = new Rule1D(18, 20, 5);
 		System.out.println(rule.toString());
 		rule.fillArrays(new byte[]{0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0});
-		
+
 		Assert.assertArrayEquals(new byte[]{0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0}, rule.getFillLine(0));
 		Assert.assertArrayEquals(new byte[]{0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,1,0,1}, rule.getFillLine(1));
 		Assert.assertArrayEquals(new byte[]{0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,1,0,0,0}, rule.getFillLine(2));
 		Assert.assertArrayEquals(new byte[]{0,0,0,0,0,0,1,0,1,0,1,0,1,0,0,1,0,1,0,0}, rule.getFillLine(3));
 		Assert.assertArrayEquals(new byte[]{0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,0,0,0,1,0}, rule.getFillLine(4));
-		
+
+	}
+
+	@Test
+	public void changeArraySizeTest() throws NotValidRuleException
+	{
+		Rule1D rule = new Rule1D(90);
+		int newLength = 50;
+		int newWidth = 45;
+		rule.changeArraySize(newLength, newWidth);
+
+		Assert.assertSame(newLength, rule.getLength());
+		Assert.assertSame(newWidth, rule.getWidth());
 	}
 
 }
