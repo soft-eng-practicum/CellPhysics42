@@ -53,12 +53,18 @@ public class ruleModle
 //		}
 
 		try {
-			Rule1D rule = new Rule1D(178, 40, 60);
-			byte[] firstLine = new byte[40];
-			firstLine[10] = 1;
-			firstLine[32] = 1;
+			Rule1D rule = new Rule1D(22, 101, 125);
+			rule.fillArrays();
 			
-			rule.fillArrays(firstLine);
+			for(int i = 0; i < 125; i++)
+			{
+				byte stat[] = rule.getFillLine(i);
+				for(int n = 0; n < 101; n++)
+				{
+					System.out.print(stat[n]+",");
+				}
+				System.out.println();
+			}
 			
 		} catch (NotValidRuleException e) {
 			// TODO Auto-generated catch block

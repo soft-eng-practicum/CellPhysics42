@@ -9,7 +9,6 @@ import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.ColumnConstraints;
@@ -53,7 +52,7 @@ public class DemoViewControl {
 	private Color oneColor;
 	private Color zeroColor;
 	private Color edgeColor;
-	//private Triangle triangle;
+
 	
 
 	/**
@@ -64,9 +63,9 @@ public class DemoViewControl {
 	@FXML
 	public void initialize(){
 		nextRow = 0;
-		numRows = 50;
+		numRows = 60;
 		numCols = 81;
-		rowDuration = 500;
+		rowDuration = 200;
 		validRules = new Rule1D().getRules();
 		ruleIndex = 0;
 		nextRule = validRules[ruleIndex];
@@ -115,9 +114,10 @@ public class DemoViewControl {
 	public void fillGrid(){
 			ControlClass controler = new ControlClass();
 			try {
-				//byte[] firstRow = {0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0,
-			//			0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0,
-				//		0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 1};
+				byte[] firstRow = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0,
+						0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0,
+						0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0};
+				//controler.setRule1D(nextRule, numRows, numCols, firstRow);
 				controler.setRule1D(nextRule, numRows, numCols);
 			} catch (NotValidRuleException ex) {
 				ex.printStackTrace();

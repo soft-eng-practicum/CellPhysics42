@@ -268,8 +268,10 @@ public class Rule1D {
 	 * @param width
 	 */
 	public void changeArraySize(int length, int width) {
-		filledArray = new byte[length][width];
-		stateArray = new byte[length][width];
+		this.length = length;
+		this.width = width;
+		filledArray = new byte[this.length][this.width];
+		stateArray = new byte[this.length][this.width];
 	}
 
 
@@ -282,6 +284,10 @@ public class Rule1D {
 		return String.format("%8s", Integer.toBinaryString(rule)).replace(' ', '0');
 	}
 
+
+	public int getWidth() {
+		return width;
+	}
 
 	/** current rule of the object
 	 *
