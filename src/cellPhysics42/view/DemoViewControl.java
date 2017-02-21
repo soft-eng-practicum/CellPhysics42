@@ -53,7 +53,7 @@ public class DemoViewControl {
 	private Color oneColor;
 	private Color zeroColor;
 	private Color edgeColor;
-	private Triangle triangle;
+	//private Triangle triangle;
 	
 
 	/**
