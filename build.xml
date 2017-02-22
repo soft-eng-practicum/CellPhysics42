@@ -1,60 +1,132 @@
-<?xml version="1.0"?>
-<project name="Ant-Test" default="main" basedir=".">
-        <!-- Sets variables which can later be used. -->
-        <!-- The value of a property is accessed via ${} -->
-        <property name="src.dir" location="src" />
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="xslt-converter" basedir="." default="package">
 
-        <property name="build.dir" location="bin" />
+    <property name="version" value="1.8"/>
+    <property name="haltonfailure" value="no"/>
 
-        <!-- Variables used for JUnit testin -->
-        <property name="Test.dir" location="src" />
-        <property name="test.report.dir" location="testreport" />
+    <property name="out" value="out"/>
 
-        <!-- Define the classpath which includes the junit.jar and the classes after compiling-->
-        <path id="junit.class.path">
-                <pathelement location="lib/junit.jar" />
-                <pathelement location="${build.dir}" />
-        </path>
+    <property name="production.src" value="src"/>
+    <property name="production.lib" value="lib"/>
+    <property name="production.resources" value="config"/>
+    <property name="production.classes" value="${out}/production/${ant.project.name}"/>
 
+    <property name="test.src" value="test"/>
+    <property name="test.lib" value="lib"/>
+    <property name="test.resources" value="config"/>
+    <property name="test.classes" value="${out}/test/${ant.project.name}"/>
 
-        <!-- Deletes the existing build, docs and dist directory-->
+    <property name="exploded" value="out/exploded/${ant.project.name}"/>
+    <property name="exploded.classes" value="${exploded}/WEB-INF/classes"/>
+    <property name="exploded.lib" value="${exploded}/WEB-INF/lib"/>
 
-        <target name="clean">
-                <delete dir="${test.report.dir}" />
-        	<delete dir="${build.dir}" />
-        	                <delete dir="${test.report.dir}" />
-        </target>
+    <property name="reports.out" value="${out}/reports"/>
+    <property name="junit.out" value="${reports.out}/junit"/>
+    <property name="testng.out" value="${reports.out}/testng"/>
 
-        <!-- Creates the  build, docs and dist directory-->
-        <target name="makedir">
-                <mkdir dir="${build.dir}" />
-                <mkdir dir="${test.report.dir}" />
-        </target>
+    <path id="production.class.path">
+        <pathelement location="${production.classes}"/>
+        <pathelement location="${production.resources}"/>
+        <fileset dir="${production.lib}">
+            <include name="**/*.jar"/>
+            <exclude name="**/junit*.jar"/>
+            <exclude name="**/*test*.jar"/>
+        </fileset>
+    </path>
 
-        <!-- Compiles the java code (including the usage of library for JUnit -->
-        <target name="compile" depends="clean, makedir">
-                <javac srcdir="${src.dir}" destdir="${build.dir}">
-                        <classpath refid="junit.class.path" />
-                </javac>
+    <path id="test.class.path">                            
+        <path refid="production.class.path"/>
+        <pathelement location="${test.classes}"/>
+        <pathelement location="${test.resources}"/>
+        <fileset dir="${test.lib}">
+            <include name="**/junit*.jar"/>
+            <include name="**/*test*.jar"/>
+        </fileset>
+    </path>
 
-        </target>
+    <path id="testng.class.path">
+        <fileset dir="${test.lib}">
+            <include name="**/testng*.jar"/>
+        </fileset>
+    </path>
 
-        <!-- Run the JUnit Tests -->
-        <!-- Output is XML, could also be plain-->
-        <target name="junit" depends="compile">
-                <junit printsummary="on">
-                        <classpath refid="junit.class.path" />
-                        <formatter type="xml" />
-                        <batchtest todir="${test.report.dir}">
-                                <fileset dir="${src.dir}">
-                                        <include name="**/*Test*.java" />
-                                </fileset>
-                        </batchtest>
-                </junit>
-        </target>
+    <available file="${out}" property="outputExists"/>
 
-        <target name="main" depends="compile, junit">
-                <description>Main target</description>
-        </target>
+    <target name="clean" description="remove all generated artifacts" if="outputExists">
+        <delete dir="${out}" includeEmptyDirs="true"/>
+        <delete dir="${reports.out}" includeEmptyDirs="true"/>
+    </target>
+
+    <target name="create" description="create the output directories" unless="outputExists">
+        <mkdir dir="${production.classes}"/>
+        <mkdir dir="${test.classes}"/>
+        <mkdir dir="${reports.out}"/>
+        <mkdir dir="${junit.out}"/>
+        <mkdir dir="${testng.out}"/>
+        <mkdir dir="${exploded.classes}"/>
+        <mkdir dir="${exploded.lib}"/>
+    </target>
+
+    <target name="compile" description="compile all .java source files" depends="create">
+        <!-- Debug output
+                <property name="production.class.path" refid="production.class.path"/>
+                <echo message="${production.class.path}"/>
+        -->
+        <javac srcdir="src" destdir="${out}/production/${ant.project.name}" debug="on" source="${version}">
+            <classpath refid="production.class.path"/>
+            <include name="**/*.java"/>
+            <exclude name="**/*Test.java"/>
+        </javac>
+        <javac srcdir="${test.src}" destdir="${out}/test/${ant.project.name}" debug="on" source="${version}">
+            <classpath refid="test.class.path"/>
+            <include name="**/*Test.java"/>
+        </javac>
+    </target>
+
+    <target name="junit-test" description="run all junit tests" depends="compile">
+        <!-- Debug output
+                <property name="test.class.path" refid="test.class.path"/>
+                <echo message="${test.class.path}"/>
+        -->
+        <junit printsummary="yes" haltonfailure="${haltonfailure}">
+            <classpath refid="test.class.path"/>
+            <formatter type="xml"/>
+            <batchtest fork="yes" todir="${junit.out}">
+                <fileset dir="${test.src}">
+                    <include name="**/*Test.java"/>
+                </fileset>
+            </batchtest>
+        </junit>
+        <junitreport todir="${junit.out}">
+            <fileset dir="${junit.out}">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report todir="${junit.out}" format="frames"/>
+        </junitreport>
+    </target>
+
+    <taskdef resource="testngtasks" classpathref="testng.class.path"/>
+    <target name="testng-test" description="run all testng tests" depends="compile">
+        <!-- Debug output
+                <property name="test.class.path" refid="test.class.path"/>
+                <echo message="${test.class.path}"/>
+        -->
+        <testng classpathref="test.class.path" outputDir="${testng.out}" haltOnFailure="${haltonfailure}" verbose="2" parallel="methods" threadcount="50">
+            <classfileset dir="${out}/test/${ant.project.name}" includes="**/*.class"/>
+        </testng>
+    </target>
+
+    <target name="exploded" description="create exploded deployment" depends="testng-test">
+        <copy todir="${exploded.classes}">
+            <fileset dir="${production.classes}"/>
+        </copy>
+        <copy todir="${exploded.lib}">
+            <fileset dir="${production.lib}"/>
+        </copy>
+    </target>
+
+    <target name="package" description="create package file" depends="exploded">
+        <jar destfile="${out}/${ant.project.name}.jar" basedir="${production.classes}" includes="**/*.class"/>
+    </target>
 
 </project>
