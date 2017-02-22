@@ -8,10 +8,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 
 import cellPhysics42.MainApp;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 
@@ -45,6 +49,16 @@ public class CustomizeViewControl extends BorderPane {
 		AnchorPane pane = (AnchorPane)loader.load();
 		Scene scene = new Scene(pane);
 		Stage newStage = (Stage) demoButton.getScene().getWindow();
+		
+		ChangeListener<Scene> listener = new ChangeListener<Scene>() {
+			@Override
+			public void changed(ObservableValue<? extends Scene> observable, Scene oldValue, Scene newValue) {
+				DemoViewControl dvc = loader.getController();
+				dvc.runDemo();
+			}
+		};
+		
+		newStage.sceneProperty().addListener(listener);
 		newStage.setScene(scene);
 		}
 		
