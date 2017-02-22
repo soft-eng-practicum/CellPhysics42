@@ -52,6 +52,7 @@ public class DemoViewControl {
 	private Color oneColor;
 	private Color zeroColor;
 	private Color edgeColor;
+	private ControlClass controler;
 	
 
 	/**
@@ -62,7 +63,7 @@ public class DemoViewControl {
 	@FXML
 	public void initialize(){
 		nextRow = 0;
-		numRows = 60;
+		numRows = 100;
 		numCols = 81;
 		rowDuration = 200;
 		validRules = new Rule1D().getRules();
@@ -70,8 +71,9 @@ public class DemoViewControl {
 		nextRule = validRules[ruleIndex];
 		ruleIndex++;
 		oneColor = Color.AQUA;
-		zeroColor = Color.LIGHTSKYBLUE;
+		zeroColor = Color.DARKBLUE;
 		edgeColor = Color.BLACK;
+		controler = new ControlClass();
 		rootPane.setBackground(new Background(new BackgroundFill(zeroColor, null, null)));
 	}	
 
@@ -82,6 +84,7 @@ public class DemoViewControl {
 	 */
 	@FXML
 	public void runDemo(){
+		runDemoBt.setVisible(false);
 		ruleName.setText("Rule " + nextRule);
 		clearGrid();
 		//displayGrid.setGridLinesVisible(true);
@@ -111,7 +114,6 @@ public class DemoViewControl {
 	 * fills in the grid based on what the next rule is
 	 */
 	public void fillGrid(){
-			ControlClass controler = new ControlClass();
 			try {
 				byte[] firstRow = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0,
 						0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0,
@@ -125,6 +127,7 @@ public class DemoViewControl {
 			Timeline timeline = new Timeline();
 			KeyFrame keyFrame = new KeyFrame(new Duration(rowDuration), e->{
 				fillNextLine(controler);
+				//System.out.println("Line fill");
 				nextRow++;
 			});
 			timeline.setCycleCount(numRows);

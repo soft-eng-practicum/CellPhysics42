@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
@@ -19,7 +20,7 @@
         </rowConstraints>
          <children>
             <Button fx:id="runDemoBt" mnemonicParsing="false" onAction="#runDemo" text="Demo" />
-            <Label fx:id="ruleName" text="Rule Demo" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <Label fx:id="ruleName" text="Rule Demo" textFill="#12c1f2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>
                   <Font size="24.0" />
                </font></Label>
