@@ -85,16 +85,18 @@ public class DemoViewControl {
 	 * 
 	 * button on action to run the demo
 	 */
-	@FXML
 	public void runDemo(){
 		controler = new ControlClass();
-		runDemoBt.setVisible(false);
 		ruleName.setText("Rule " + nextRule);
 		clearGrid();
 		//displayGrid.setGridLinesVisible(true);
 		fillGrid();
 	}
 
+	@FXML
+	public void goToCustomView(){
+		
+	}
 	/**
 	 * Method name: setGridSize
 	 * 

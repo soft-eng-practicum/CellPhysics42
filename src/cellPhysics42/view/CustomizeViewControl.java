@@ -1,6 +1,5 @@
 package cellPhysics42.view;
 
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -8,14 +7,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
-
 import java.io.IOException;
+import java.security.acl.Group;
 
 import cellPhysics42.MainApp;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 
@@ -36,10 +33,13 @@ public class CustomizeViewControl extends BorderPane {
 	@FXML
 	Label ruleNameLabel;
 	@FXML
-	GridPane binaryRuleGrid;
-	@FXML
 	private Button demoButton;
+
 	
+	
+	/**
+	 * Method name: runDemo
+	 */
 	@FXML
 	public void runDemo(){
 		try{

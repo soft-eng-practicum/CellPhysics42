@@ -19,7 +19,7 @@
           <RowConstraints maxHeight="789.0" minHeight="10.0" prefHeight="715.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="runDemoBt" mnemonicParsing="false" onAction="#runDemo" text="Demo" />
+            <Button fx:id="exitBt" mnemonicParsing="false" onAction="#goToCustomView" text="Exit Demo" />
             <Label fx:id="ruleName" text="Rule Demo" textFill="#12c1f2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>
                   <Font size="24.0" />
