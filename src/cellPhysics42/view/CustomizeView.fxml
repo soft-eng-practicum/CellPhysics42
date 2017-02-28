@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import cellPhysics42.view.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.*?>
 <?import javafx.geometry.*?>
@@ -55,18 +56,7 @@
                               <Label layoutX="43.0" layoutY="47.0" text="100" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                               <Label layoutX="43.0" layoutY="47.0" text="101" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                               <Label layoutX="43.0" layoutY="47.0" text="110" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                              <StackPane prefHeight="30.0" prefWidth="30.0" GridPane.rowIndex="1">
-                                 <children>
-                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="30.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
-                                    <Label alignment="CENTER" layoutX="556.0" layoutY="392.0" text="0" />
-                                 </children>
-                              </StackPane>
-                              <StackPane layoutX="10.0" layoutY="40.0" prefHeight="30.0" prefWidth="30.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                 <children>
-                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#da260e" height="30.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
-                                    <Label alignment="CENTER" layoutX="556.0" layoutY="392.0" text="1" textFill="#f5f5f0" />
-                                 </children>
-                              </StackPane>
+                              <LabeledRectangle GridPane.rowIndex="1" />
                            </children>
                         </GridPane>
                      </children>
@@ -84,29 +74,23 @@
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button fx:id="startButton" mnemonicParsing="false" text="Start" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <Button fx:id="demoButton" mnemonicParsing="false" onAction="#runDemo" text="Demo" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <Button fx:id="demoButton" mnemonicParsing="false" onAction="#runDemo" text="Demo" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <Button fx:id="demoButton1" layoutX="560.0" layoutY="8.0" mnemonicParsing="false" onAction="#runDemo" text="Stop" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <Button fx:id="demoButton1" layoutX="560.0" layoutY="8.0" mnemonicParsing="false" onAction="#runDemo" text="Stop" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="demoButton11" layoutX="10.0" layoutY="8.0" mnemonicParsing="false" onAction="#runDemo" text="Customize" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <Button fx:id="customizeBt" layoutX="10.0" layoutY="8.0" mnemonicParsing="false" onAction="#showCustomOptions" text="Customize" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <font>
                         <Font size="18.0" />
                      </font>

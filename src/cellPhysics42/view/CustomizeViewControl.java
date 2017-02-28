@@ -4,8 +4,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.security.acl.Group;
@@ -34,6 +37,8 @@ public class CustomizeViewControl extends BorderPane {
 	Label ruleNameLabel;
 	@FXML
 	private Button demoButton;
+	@FXML
+	private Button customizeBt;
 
 	
 	
@@ -64,6 +69,21 @@ public class CustomizeViewControl extends BorderPane {
 		
 		catch(IOException ex){
 			System.out.println("error" + ex.getMessage());
+		}
+	}
+	
+	@FXML
+	public void showCustomOptions(){
+		try{
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainApp.class.getResource("view/CustomizeOptions.fxml"));
+			AnchorPane pane = (AnchorPane)loader.load();
+			pane.setBackground(new Background(new BackgroundFill(Color.CADETBLUE, null, null)));
+			mainPane.setCenter(pane);
+			System.out.println(loader.getLocation());
+		}
+		catch (Exception ex) {
+			System.out.println(ex.getMessage());
 		}
 	}
 	
