@@ -149,7 +149,8 @@ public class Rule2D {
 
 	public void save3DFile(String fileName) throws IOException
 	{
-		FileWriter file = getFile(fileName);
+		FileWriter file = getFile(fileName + ".scad");
+		file.write("module whole(){\r\n");
 		if(file != null)
 		{
 			int level;
@@ -171,8 +172,99 @@ public class Rule2D {
 				}
 			}
 		}
+		int finTran = (((filledArray.length *2 + 1)*5)/2)+1;
+		file.write("}\r\n");
+		file.write("translate([-"+finTran+",-"+finTran+",0]){\r\n");
+		file.write("whole();}\r\n");
 		file.close();
 
+	}
+
+	public void save3DFileByLayers(String fileName) throws IOException
+	{
+		String newFileName ="";
+		if(filledArray.length % 2 != 0 && filledArray.length > 2)
+		{
+			newFileName = fileName + "Layers0-3.scad";
+			save3DFileLayers(getFile(newFileName),0,3);
+			for(int i = 3; i < filledArray.length; i+=2)
+			{
+				newFileName = fileName +"Layers" + (i+1) + "-" + (i+2) + " .scad";
+				save3DFileLayers(getFile(newFileName),i,i+2);
+			}
+		}
+		else
+		{
+			for(int i = 0; i < filledArray.length; i+=2)
+			{
+				newFileName = fileName +"Layers" + (i) + "-" + (i+1) + " .scad";
+				save3DFileLayers(getFile(newFileName),i,i+2);
+			}
+		}
+
+	}
+
+	public void save3DFileLayers(FileWriter file, int start, int end) throws IOException
+	{
+		int level;
+		boolean diff = start>0;
+		
+		if (diff)
+		{
+			level = ((start-1)-filledArray.length+1) *-1;
+			file.write("//Layer " + level + "\r\n");
+			file.write("module diff(){\r\n");
+
+			for (int y = 0; y < filledArray[1].length; y++)
+			{
+				for (int x = 0; x < filledArray[1][1].length; x++)
+				{
+					if(filledArray[start -1][x][y] == 1)
+					{
+						file.write("translate([" + factor*x + "," + factor*y + ","  + factor*level +"]){\r\n");
+						file.write("cube(" + (size + 1) + ");}\r\n");
+					}
+				}
+			}
+			file.write("}\r\n");
+		}
+		
+		file.write("module whole(){\r\n");
+		for(; start < end; start++)
+		{
+			level = (start-filledArray.length+1) *-1;
+			file.write("//Layer " + level + "\r\n");
+
+			for (int y = 0; y < filledArray[1].length; y++)
+			{
+				for (int x = 0; x < filledArray[1][1].length; x++)
+				{
+					if(filledArray[start][x][y] == 1)
+					{
+						file.write("translate([" + factor*x + "," + factor*y + ","  + factor*level +"]){\r\n");
+						file.write("cube(" + size + ");}\r\n");
+					}
+				}
+			}
+		}
+		
+		int finTran = (((filledArray.length *2 + 1)*5)/2)+1;
+		int finZ = (filledArray.length - end) * 5;
+		file.write("}\r\n");
+		
+		if(diff)
+		{
+			file.write("translate([-"+finTran+",-"+finTran+",-"+finZ+"]){\r\n");
+			file.write("difference(){\r\n");
+			file.write("whole();\r\n");
+			file.write("diff();}}\r\n");
+		}
+		else
+		{
+		file.write("translate([-"+finTran+",-"+finTran+",-"+finZ+"]){\r\n");
+		file.write("whole();}\r\n");
+		}
+		file.close();
 	}
 
 	public void setLayers(int layers)
