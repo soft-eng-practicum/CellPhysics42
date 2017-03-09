@@ -1,38 +1,50 @@
 package Model;
+import java.io.IOException;
+
 import exception.NotValidRuleException;
 
 public class ruleModle
 {
 
-	public static void main(String[] args)
+	public static void main(String[] args) throws NotValidRuleException
 	{
+		Rule2D rule = new Rule2D();
+		int[] rules = rule.getRules();
+		String fileName;
 
-		try {
-			Rule2D rule = new Rule2D(451, 4);
-			rule.fillArray();
-			for(int t = 0; t < 4; t++)
-			{
-			byte[][] test = rule.nextLayer();
-			
-			for (int n = 0 ; n < test.length; n++)
-			{
-				for(int i = 0; i < test[1].length; i++)
+		for(int rl = 0; rl < rules.length; rl++)
+		{
+			rule.setRule(rules[rl]);
+			rule.setLayers(17);
+			try {
+
+				rule.fillArray();
+				byte[][] test = rule.lastLayer();
+
+				for (int n = 0 ; n < test.length; n++)
 				{
-					System.out.print(test[i][n]);
+					for(int i = 0; i < test[1].length; i++)
+					{
+						if(test[i][n] == 1)
+							System.out.print("*");
+						else
+							System.out.print(" ");
+					}
+					System.out.println();
 				}
-				System.out.println();
-			}
-			}
-			
-			
-			
-		} catch (NotValidRuleException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
+				fileName = "Rule" + rules[rl]+"layers17.scad";
+				rule.save3DFile(fileName);
 
+			} catch (NotValidRuleException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+
+		}
 	}
 
 }

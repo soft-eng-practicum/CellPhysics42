@@ -1,5 +1,9 @@
 package Model;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import exception.NotValidRuleException;
 
 public class Rule2D {
@@ -16,20 +20,24 @@ public class Rule2D {
 	private byte state0;
 	private int rule;
 	private int nextLayer;
+	private int factor, size;
 	final public int[] rules =
 		{451, 452, 453, 454, 457, 459, 460, 461, 462, 465, 467, 468, 469, 470 +
-			473, 475, 476, 478, 481, 483, 484, 485, 486, 489, 491, 492, 493, 494, 497};
+				473, 475, 476, 478, 481, 483, 484, 485, 486, 489, 491, 492, 493, 494, 497};
 	private byte[][][] filledArray;
 
 	public Rule2D()
 	{
-
+		factor = 5;
+		size = 6;
 	}
 
 	public Rule2D(int ruleNumber, int layers) throws NotValidRuleException
 	{
 		setRule(ruleNumber);
 		filledArray = new byte[layers][(2*layers) +1][(2*layers) +1];
+		factor = 5;
+		size = 6;
 	}
 
 	public void setRule(int rule) throws NotValidRuleException {
@@ -129,7 +137,7 @@ public class Rule2D {
 	{
 		return filledArray[layer];
 	}
-	
+
 	public byte[][] lastLayer()
 	{
 		return filledArray[filledArray.length - 1];
@@ -139,14 +147,54 @@ public class Rule2D {
 		return rules;
 	}
 
-	public void save3DFile()
+	public void save3DFile(String fileName) throws IOException
 	{
+		FileWriter file = getFile(fileName);
+		if(file != null)
+		{
+			int level;
+			file.write("//Top of the object\r\n");
+			for(int z = 0; z < filledArray.length; z++)
+			{
+				level = (z-filledArray.length+1) *-1;
+				file.write("//Layer " + level + "\r\n");
+				for (int y = 0; y < filledArray[1].length; y++)
+				{
+					for (int x = 0; x < filledArray[1][1].length; x++)
+					{
+						if(filledArray[z][x][y] == 1)
+						{
+							file.write("translate([" + factor*x + "," + factor*y + ","  + factor*level +"]){\r\n");
+							file.write("cube(" + size + ");}\r\n");
+						}
+					}
+				}
+			}
+		}
+		file.close();
 
 	}
-	
+
 	public void setLayers(int layers)
 	{
 		filledArray = new byte[layers][(2*layers) +1][(2*layers) +1];
+	}
+
+	private FileWriter getFile(String fileName)
+	{
+		File file = new File(fileName);
+		FileWriter fr;
+		try
+		{
+			fr = new FileWriter(file);
+
+		} catch (IOException e)
+		{
+			fr = null;
+			e.printStackTrace();
+		}
+
+		return fr;
 	}
 
 }
