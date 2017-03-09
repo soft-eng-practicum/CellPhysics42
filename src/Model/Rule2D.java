@@ -185,7 +185,7 @@ public class Rule2D {
 		String newFileName ="";
 		if(filledArray.length % 2 != 0 && filledArray.length > 2)
 		{
-			newFileName = fileName + "Layers0-3.scad";
+			newFileName = fileName + "Layers1-3.scad";
 			save3DFileLayers(getFile(newFileName),0,3);
 			for(int i = 3; i < filledArray.length; i+=2)
 			{
@@ -208,7 +208,7 @@ public class Rule2D {
 	{
 		int level;
 		boolean diff = start>0;
-		
+
 		if (diff)
 		{
 			level = ((start-1)-filledArray.length+1) *-1;
@@ -228,7 +228,7 @@ public class Rule2D {
 			}
 			file.write("}\r\n");
 		}
-		
+
 		file.write("module whole(){\r\n");
 		for(; start < end; start++)
 		{
@@ -247,11 +247,11 @@ public class Rule2D {
 				}
 			}
 		}
-		
+
 		int finTran = (((filledArray.length *2 + 1)*5)/2)+1;
 		int finZ = (filledArray.length - end) * 5;
 		file.write("}\r\n");
-		
+
 		if(diff)
 		{
 			file.write("translate([-"+finTran+",-"+finTran+",-"+finZ+"]){\r\n");
