@@ -14,7 +14,7 @@
    <children>
       <BorderPane fx:id="mainPane" prefHeight="900.0" prefWidth="1100.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
          <top>
-            <GridPane>
+            <GridPane fx:id="ruleGrid">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
                </columnConstraints>
@@ -32,7 +32,7 @@
                         <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <GridPane BorderPane.alignment="CENTER" GridPane.columnIndex="1">
+                        <GridPane fx:id="squaresGrid" BorderPane.alignment="CENTER" GridPane.columnIndex="1">
                           <columnConstraints>
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -48,20 +48,81 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Label text="111" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                              <Label layoutX="43.0" layoutY="47.0" text="000" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                              <Label layoutX="43.0" layoutY="47.0" text="001" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                              <Label layoutX="43.0" layoutY="47.0" text="010" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                              <Label layoutX="43.0" layoutY="47.0" text="011" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                              <Label layoutX="43.0" layoutY="47.0" text="100" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                              <Label layoutX="43.0" layoutY="47.0" text="101" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                              <Label layoutX="43.0" layoutY="47.0" text="110" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                              <LabeledRectangle GridPane.rowIndex="1" />
+                              <LabeledRectangle fx:id="squareSeven" GridPane.rowIndex="1" />
+                              <LabeledRectangle fx:id="squareSix" layoutX="10.0" layoutY="40.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <LabeledRectangle fx:id="squareFive" layoutX="10.0" layoutY="10.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                              <LabeledRectangle fx:id="squareFour" layoutX="10.0" layoutY="10.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                              <LabeledRectangle fx:id="squareZero" layoutX="10.0" layoutY="10.0" GridPane.columnIndex="7" GridPane.rowIndex="1" />
+                              <LabeledRectangle fx:id="squareOne" layoutX="10.0" layoutY="10.0" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+                              <LabeledRectangle fx:id="squareTwo" layoutX="10.0" layoutY="10.0" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+                              <LabeledRectangle fx:id="squareThree" layoutX="10.0" layoutY="10.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                              <HBox fx:id="numberSeven" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <LabeledRectangle>
+                                       <padding>
+                                          <Insets right="1.0" />
+                                       </padding></LabeledRectangle>
+                                    <LabeledRectangle layoutX="10.0" layoutY="10.0">
+                                       <padding>
+                                          <Insets right="1.0" />
+                                       </padding></LabeledRectangle>
+                                    <LabeledRectangle layoutX="20.0" layoutY="10.0" />
+                                 </children>
+                              </HBox>
+                              <HBox fx:id="numberSix" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
+                                 <children>
+                                    <LabeledRectangle />
+                                    <LabeledRectangle layoutX="10.0" layoutY="10.0" />
+                                    <LabeledRectangle layoutX="20.0" layoutY="10.0" />
+                                 </children>
+                              </HBox>
+                              <HBox fx:id="numberFive" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2">
+                                 <children>
+                                    <LabeledRectangle />
+                                    <LabeledRectangle layoutX="10.0" layoutY="10.0" />
+                                    <LabeledRectangle layoutX="20.0" layoutY="10.0" />
+                                 </children>
+                              </HBox>
+                              <HBox fx:id="numberFour" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3">
+                                 <children>
+                                    <LabeledRectangle />
+                                    <LabeledRectangle layoutX="10.0" layoutY="10.0" />
+                                    <LabeledRectangle layoutX="20.0" layoutY="10.0" />
+                                 </children>
+                              </HBox>
+                              <HBox fx:id="numberThree" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="4">
+                                 <children>
+                                    <LabeledRectangle />
+                                    <LabeledRectangle layoutX="10.0" layoutY="10.0" />
+                                    <LabeledRectangle layoutX="20.0" layoutY="10.0" />
+                                 </children>
+                              </HBox>
+                              <HBox fx:id="numberTwo" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="5">
+                                 <children>
+                                    <LabeledRectangle />
+                                    <LabeledRectangle layoutX="10.0" layoutY="10.0" />
+                                    <LabeledRectangle layoutX="20.0" layoutY="10.0" />
+                                 </children>
+                              </HBox>
+                              <HBox fx:id="numberOne" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="6">
+                                 <children>
+                                    <LabeledRectangle />
+                                    <LabeledRectangle layoutX="10.0" layoutY="10.0" />
+                                    <LabeledRectangle layoutX="20.0" layoutY="10.0" />
+                                 </children>
+                              </HBox>
+                              <HBox fx:id="numberZero" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="7">
+                                 <children>
+                                    <LabeledRectangle />
+                                    <LabeledRectangle layoutX="10.0" layoutY="10.0" />
+                                    <LabeledRectangle layoutX="20.0" layoutY="10.0" />
+                                 </children>
+                              </HBox>
                            </children>
                         </GridPane>
                      </children>
                   </GridPane>
-                  <Label fx:id="ruleNameLabel" text="Rule 90" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <Label fx:id="ruleNameLabel" text="rule" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -85,7 +146,7 @@
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <Button fx:id="demoButton1" layoutX="560.0" layoutY="8.0" mnemonicParsing="false" onAction="#runDemo" text="Stop" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <Button fx:id="stopBt" layoutX="560.0" layoutY="8.0" mnemonicParsing="false" onAction="#runDemo" text="Stop" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <font>
                         <Font size="18.0" />
                      </font>
