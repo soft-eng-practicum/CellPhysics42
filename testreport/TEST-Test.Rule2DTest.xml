@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite errors="1" failures="0" hostname="Jorys-MacBook-Pro.local" name="Test.Rule2DTest" skipped="0" tests="1" time="5.008" timestamp="2017-03-13T16:10:38">
+  <properties>
+    <property name="ant.project.invoked-targets" value="main" />
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment" />
+    <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_91.jdk/Contents/Home/jre/lib" />
+    <property name="java.vm.version" value="25.91-b14" />
+    <property name="ant.library.dir" value="/Users/Jory/.p2/pool/plugins/org.apache.ant_1.9.6.v201510161327/lib" />
+    <property name="gopherProxySet" value="false" />
+    <property name="ant.version" value="Apache Ant(TM) version 1.9.6 compiled on June 29 2015" />
+    <property name="ant.java.version" value="1.8" />
+    <property name="java.vm.vendor" value="Oracle Corporation" />
+    <property name="java.vendor.url" value="http://java.oracle.com/" />
+    <property name="path.separator" value=":" />
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM" />
+    <property name="file.encoding.pkg" value="sun.io" />
+    <property name="user.country" value="US" />
+    <property name="sun.java.launcher" value="SUN_STANDARD" />
+    <property name="sun.os.patch.level" value="unknown" />
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification" />
+    <property name="user.dir" value="/Users/Jory/Desktop/Repository/CellPhysics42" />
+    <property name="java.runtime.version" value="1.8.0_91-b14" />
+    <property name="java.awt.graphicsenv" value="sun.awt.CGraphicsEnvironment" />
+    <property name="basedir" value="/Users/Jory/Desktop/Repository/CellPhysics42" />
+    <property name="java.endorsed.dirs" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_91.jdk/Contents/Home/jre/lib/endorsed" />
+    <property name="os.arch" value="x86_64" />
+    <property name="Test.dir" value="/Users/Jory/Desktop/Repository/CellPhysics42/src" />
+    <property name="ant.project.default-target" value="main" />
+    <property name="java.io.tmpdir" value="/var/folders/xj/4g6lg2d95ms5kw_yf19100m00000gn/T/" />
+    <property name="ant.core.lib" value="/Users/Jory/.p2/pool/plugins/org.apache.ant_1.9.6.v201510161327/lib/ant.jar" />
+    <property name="line.separator" value="&#xa;" />
+    <property name="java.vm.specification.vendor" value="Oracle Corporation" />
+    <property name="os.name" value="Mac OS X" />
+    <property name="ant.home" value="/Users/Jory/.p2/pool/plugins/org.apache.ant_1.9.6.v201510161327" />
+    <property name="build.dir" value="/Users/Jory/Desktop/Repository/CellPhysics42/bin" />
+    <property name="ant.project.name" value="Ant-Test" />
+    <property name="sun.jnu.encoding" value="UTF-8" />
+    <property name="java.library.path" value="/Users/Jory/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.:/Applications/Eclipse.app/Contents/Eclipse/configuration/org.eclipse.osgi/857/0/.cp" />
+    <property name="ant.file.Ant-Test" value="/Users/Jory/Desktop/Repository/CellPhysics42/build.xml" />
+    <property name="java.class.version" value="52.0" />
+    <property name="java.specification.name" value="Java Platform API Specification" />
+    <property name="test.report.dir" value="/Users/Jory/Desktop/Repository/CellPhysics42/testreport" />
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers" />
+    <property name="os.version" value="10.12.2" />
+    <property name="ant.file" value="/Users/Jory/Desktop/Repository/CellPhysics42/build.xml" />
+    <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16" />
+    <property name="user.home" value="/Users/Jory" />
+    <property name="user.timezone" value="" />
+    <property name="java.awt.printerjob" value="sun.lwawt.macosx.CPrinterJob" />
+    <property name="java.specification.version" value="1.8" />
+    <property name="file.encoding" value="UTF-8" />
+    <property name="java.class.path" value="/Users/Jory/.p2/pool/plugins/org.apache.ant_1.9.6.v201510161327/lib/ant-antlr.jar:/Users/Jory/.p2/pool/plugins/org.apache.ant_1.9.6.v201510161327/lib/ant-apache-bcel.jar:/Users/Jory/.p2/pool/plugins/org.apache.ant_1.9.6.v201510161327/lib/ant-apache-bsf.jar:/Users/Jory/.p2/pool/plugins/org.apache.ant_1.9.6.v201510161327/lib/ant-apache-log4j.jar:/Users/Jory/.p2/pool/plugins/org.apache.ant_1.9.6.v201510161327/lib/ant-apache-oro.jar:/Users/Jory/.p2/pool/plugins/org.apache.ant_1.9.6.v201510161327/lib/ant-apache-regexp.jar:/Users/Jory/.p2/pool/plugins/org.apache.ant_1.9.6.v201510161327/lib/ant-apache-resolver.jar:/Users/Jory/.p2/pool/plugins/org.apache.ant_1.9.6.v201510161327/lib/ant-apache-xalan2.jar:/Users/Jory/.p2/pool/plugins/org.apache.ant_1.9.6.v201510161327/lib/ant-commons-logging.jar:/Users/Jory/.p2/pool/plugins/org.apache.ant_1.9.6.v201510161327/lib/ant-commons-net.jar:/Users/Jory/.p2/pool/plugins/org.apache.ant_1.9.6.v201510161327/lib/ant-jai.jar:/Users/Jory/.p2/pool/plugins/org.apache.ant_1.9.6.v201510161327/lib/ant-javamail.jar:/Users/Jory/.p2/pool/plugins/org.apache.ant_1.9.6.v201510161327/lib/ant-jdepend.jar:/Users/Jory/.p2/pool/plugins/org.apache.ant_1.9.6.v201510161327/lib/ant-jmf.jar:/Users/Jory/.p2/pool/plugins/org.apache.ant_1.9.6.v201510161327/lib/ant-jsch.jar:/Users/Jory/.p2/pool/plugins/org.apache.ant_1.9.6.v201510161327/lib/ant-junit.jar:/Users/Jory/.p2/pool/plugins/org.apache.ant_1.9.6.v201510161327/lib/ant-junit4.jar:/Users/Jory/.p2/pool/plugins/org.apache.ant_1.9.6.v201510161327/lib/ant-launcher.jar:/Users/Jory/.p2/pool/plugins/org.apache.ant_1.9.6.v201510161327/lib/ant-netrexx.jar:/Users/Jory/.p2/pool/plugins/org.apache.ant_1.9.6.v201510161327/lib/ant-swing.jar:/Users/Jory/.p2/pool/plugins/org.apache.ant_1.9.6.v201510161327/lib/ant-testutil.jar:/Users/Jory/.p2/pool/plugins/org.apache.ant_1.9.6.v201510161327/lib/ant.jar:/Applications/Eclipse.app/Contents/Eclipse/configuration/org.eclipse.osgi/529/0/.cp/lib/antdebug.jar:/Applications/Eclipse.app/Contents/Eclipse/configuration/org.eclipse.osgi/529/0/.cp/lib/remote.jar:/Applications/Eclipse.app/Contents/Eclipse/configuration/org.eclipse.osgi/530/0/.cp/lib/remoteAnt.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_91.jdk/Contents/Home/lib/tools.jar:/Users/Jory/.p2/pool/plugins/org.eclipse.swt.cocoa.macosx.x86_64_3.105.2.v20161122-0613.jar" />
+    <property name="user.name" value="Jory" />
+    <property name="java.vm.specification.version" value="1.8" />
+    <property name="sun.java.command" value="org.eclipse.ant.internal.launching.remote.InternalAntRunner -Dorg.eclipse.ant.core.ANT_PROCESS_ID=1489421430942 -Declipse.connect.port=52600 -Dant.home=/Users/Jory/.p2/pool/plugins/org.apache.ant_1.9.6.v201510161327 -logger org.eclipse.ant.internal.launching.remote.logger.RemoteAntBuildLogger -inputhandler org.eclipse.ant.internal.ui.antsupport.inputhandler.ProxyInputHandler -buildfile /Users/Jory/Desktop/Repository/CellPhysics42/build.xml" />
+    <property name="sun.arch.data.model" value="64" />
+    <property name="java.home" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_91.jdk/Contents/Home/jre" />
+    <property name="java.specification.vendor" value="Oracle Corporation" />
+    <property name="user.language" value="en" />
+    <property name="awt.toolkit" value="sun.lwawt.macosx.LWCToolkit" />
+    <property name="java.vm.info" value="mixed mode" />
+    <property name="java.version" value="1.8.0_91" />
+    <property name="java.ext.dirs" value="/Users/Jory/Library/Java/Extensions:/Library/Java/JavaVirtualMachines/jdk1.8.0_91.jdk/Contents/Home/jre/lib/ext:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java" />
+    <property name="sun.boot.class.path" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_91.jdk/Contents/Home/jre/lib/resources.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_91.jdk/Contents/Home/jre/lib/rt.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_91.jdk/Contents/Home/jre/lib/sunrsasign.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_91.jdk/Contents/Home/jre/lib/jsse.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_91.jdk/Contents/Home/jre/lib/jce.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_91.jdk/Contents/Home/jre/lib/charsets.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_91.jdk/Contents/Home/jre/lib/jfr.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_91.jdk/Contents/Home/jre/classes" />
+    <property name="java.vendor" value="Oracle Corporation" />
+    <property name="file.separator" value="/" />
+    <property name="src.dir" value="/Users/Jory/Desktop/Repository/CellPhysics42/src" />
+    <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/" />
+    <property name="sun.cpu.endian" value="little" />
+    <property name="sun.io.unicode.encoding" value="UnicodeBig" />
+    <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16" />
+    <property name="ant.file.type.Ant-Test" value="file" />
+    <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16" />
+    <property name="sun.cpu.isalist" value="" />
+  </properties>
+  <testcase classname="Test.Rule2DTest" name="initializationError" time="0.001">
+    <error message="org/hamcrest/SelfDescribing" type="java.lang.NoClassDefFoundError">java.lang.NoClassDefFoundError: org/hamcrest/SelfDescribing
+	at java.lang.ClassLoader.defineClass1(Native Method)
+	at java.lang.ClassLoader.defineClass(ClassLoader.java:763)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at org.eclipse.ant.internal.launching.remote.EclipseDefaultExecutor.executeTargets(EclipseDefaultExecutor.java:36)
+	at org.eclipse.ant.internal.launching.remote.InternalAntRunner.run(InternalAntRunner.java:456)
+	at org.eclipse.ant.internal.launching.remote.InternalAntRunner.main(InternalAntRunner.java:140)
+Caused by: java.lang.ClassNotFoundException: org.hamcrest.SelfDescribing
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+</error>
+  </testcase>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
