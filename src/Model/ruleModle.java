@@ -8,10 +8,10 @@ public class ruleModle
 
 	public static void main(String[] args) throws NotValidRuleException
 	{
-		Rule2D rule = new Rule2D(494,17);
+		Rule2D rule = new Rule2D(497,17);
 		rule.fillArray();
 		try {
-			rule.save3DFile("rule494");
+			rule.save3DFileByLayers("rule497ByLayers");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

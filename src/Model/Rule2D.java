@@ -21,21 +21,18 @@ public class Rule2D {
 	private int rule;
 	private int nextLayer;
 	private int factor, size;
-	final public int[] rules =
-		{451, 452, 453, 454, 457, 459, 460, 461, 462, 465, 467, 468, 469, 470 +
-				473, 475, 476, 478, 481, 483, 484, 485, 486, 489, 491, 492, 493, 494, 497};
+	final public int[] rules = { 451, 452, 453, 454, 457, 459, 460, 461, 462, 465, 467, 468, 469, 470 + 473, 475, 476,
+			478, 481, 483, 484, 485, 486, 489, 491, 492, 493, 494, 497 };
 	private byte[][][] filledArray;
 
-	public Rule2D()
-	{
+	public Rule2D() {
 		factor = 5;
 		size = 6;
 	}
 
-	public Rule2D(int ruleNumber, int layers) throws NotValidRuleException
-	{
+	public Rule2D(int ruleNumber, int layers) throws NotValidRuleException {
 		setRule(ruleNumber);
-		filledArray = new byte[layers][(2*layers) +1][(2*layers) +1];
+		filledArray = new byte[layers][(2 * layers) + 1][(2 * layers) + 1];
 		factor = 5;
 		size = 6;
 	}
@@ -68,78 +65,71 @@ public class Rule2D {
 		nextLayer = 0;
 	}
 
-	/** converts the int rule to a binary string
+	/**
+	 * converts the int rule to a binary string
 	 *
-	 * @param rule int of rule to be applied
+	 * @param rule
+	 *            int of rule to be applied
 	 * @return String of 8 bits
 	 */
 	private String toBinary(int rule) {
 		return String.format("%10s", Integer.toBinaryString(rule)).replace(' ', '0');
 	}
 
-	private byte isOn(byte one, byte two, byte three, byte four, byte five) throws NotValidRuleException
-	{
-		int sum = one  + two + three + four;
+	private byte isOn(byte one, byte two, byte three, byte four, byte five) throws NotValidRuleException {
+		int sum = one + two + three + four;
 
-		if(five == 0 && sum == 0)
+		if (five == 0 && sum == 0)
 			return state0;
-		else if(five == 1 && sum == 0)
+		else if (five == 1 && sum == 0)
 			return state1;
-		else if(five == 0 && sum == 1)
+		else if (five == 0 && sum == 1)
 			return state2;
-		else if(five == 1 && sum == 1)
+		else if (five == 1 && sum == 1)
 			return state3;
-		else if(five == 0 &&  sum == 2)
+		else if (five == 0 && sum == 2)
 			return state4;
-		else if(five == 1 && sum == 2)
+		else if (five == 1 && sum == 2)
 			return state5;
-		else if(five == 0 && sum == 3)
+		else if (five == 0 && sum == 3)
 			return state6;
-		else if(five == 1 && sum == 3)
+		else if (five == 1 && sum == 3)
 			return state7;
-		else if(five == 0 && sum == 4)
+		else if (five == 0 && sum == 4)
 			return state8;
-		else if(five == 1 && sum == 4)
+		else if (five == 1 && sum == 4)
 			return state9;
 		else
 			throw new NotValidRuleException("Bad input for ison");
 	}
 
-	public void fillArray() throws NotValidRuleException
-	{
-		int middle = filledArray[1].length/2;
+	public void fillArray() throws NotValidRuleException {
+		int middle = filledArray[1].length / 2;
 		filledArray[0][middle][middle] = 1;
 
-
-		for(int z = 1; z < filledArray.length ; z++)
-		{
-			for(int x = 1; x < filledArray[1].length -1; x++)
-			{
-				for(int y = 1; y < filledArray[1][1].length - 1; y++)
-				{
-					filledArray[z][x][y] = isOn((byte)filledArray[z-1][x-1][y], (byte)filledArray[z-1][x+1][y],
-							(byte)filledArray[z-1][x][y-1], (byte)filledArray[z-1][x][y+1],
-							(byte)filledArray[z-1][x][y] );
+		for (int z = 1; z < filledArray.length; z++) {
+			for (int x = 1; x < filledArray[1].length - 1; x++) {
+				for (int y = 1; y < filledArray[1][1].length - 1; y++) {
+					filledArray[z][x][y] = isOn((byte) filledArray[z - 1][x - 1][y],
+							(byte) filledArray[z - 1][x + 1][y], (byte) filledArray[z - 1][x][y - 1],
+							(byte) filledArray[z - 1][x][y + 1], (byte) filledArray[z - 1][x][y]);
 				}
 			}
 
 		}
 	}
 
-	public byte[][] nextLayer()
-	{
+	public byte[][] nextLayer() {
 		int current = nextLayer;
 		nextLayer++;
 		return filledArray[current];
 	}
 
-	public byte[][] layer(int layer)
-	{
+	public byte[][] layer(int layer) {
 		return filledArray[layer];
 	}
 
-	public byte[][] lastLayer()
-	{
+	public byte[][] lastLayer() {
 		return filledArray[filledArray.length - 1];
 	}
 
@@ -147,81 +137,66 @@ public class Rule2D {
 		return rules;
 	}
 
-	public void save3DFile(String fileName) throws IOException
-	{
+	public void save3DFile(String fileName) throws IOException {
 		FileWriter file = getFile(fileName + ".scad");
 		file.write("module whole(){\r\n");
-		if(file != null)
-		{
+		if (file != null) {
 			int level;
 			file.write("//Top of the object\r\n");
-			for(int z = 0; z < filledArray.length; z++)
-			{
-				level = (z-filledArray.length+1) *-1;
+			for (int z = 0; z < filledArray.length; z++) {
+				level = (z - filledArray.length + 1) * -1;
 				file.write("//Layer " + level + "\r\n");
-				for (int y = 0; y < filledArray[1].length; y++)
-				{
-					for (int x = 0; x < filledArray[1][1].length; x++)
-					{
-						if(filledArray[z][x][y] == 1)
-						{
-							file.write("translate([" + factor*x + "," + factor*y + ","  + factor*level +"]){\r\n");
+				for (int y = 0; y < filledArray[1].length; y++) {
+					for (int x = 0; x < filledArray[1][1].length; x++) {
+						if (filledArray[z][x][y] == 1) {
+							file.write(
+									"translate([" + factor * x + "," + factor * y + "," + factor * level + "]){\r\n");
 							file.write("cube(" + size + ");}\r\n");
 						}
 					}
 				}
 			}
+			int finTran = (((filledArray.length * 2 + 1) * 5) / 2) + 1;
+			file.write("}\r\n");
+			file.write("translate([-" + finTran + ",-" + finTran + ",0]){\r\n");
+			file.write("whole();}\r\n");
 		}
-		int finTran = (((filledArray.length *2 + 1)*5)/2)+1;
-		file.write("}\r\n");
-		file.write("translate([-"+finTran+",-"+finTran+",0]){\r\n");
-		file.write("whole();}\r\n");
+
 		file.close();
 
 	}
 
-	public void save3DFileByLayers(String fileName) throws IOException
-	{
-		String newFileName ="";
-		if(filledArray.length % 2 != 0 && filledArray.length > 2)
-		{
+	public void save3DFileByLayers(String fileName) throws IOException {
+		String newFileName = "";
+		if (filledArray.length % 2 != 0 && filledArray.length > 2) {
 			newFileName = fileName + "Layers1-3.scad";
-			save3DFileLayers(getFile(newFileName),0,3);
-			for(int i = 3; i < filledArray.length; i+=2)
-			{
-				newFileName = fileName +"Layers" + (i+1) + "-" + (i+2) + " .scad";
-				save3DFileLayers(getFile(newFileName),i,i+2);
+			save3DFileLayers(getFile(newFileName), 0, 3);
+			for (int i = 3; i < filledArray.length; i += 2) {
+				newFileName = fileName + "Layers" + (i + 1) + "-" + (i + 2) + " .scad";
+				save3DFileLayers(getFile(newFileName), i, i + 2);
 			}
-		}
-		else
-		{
-			for(int i = 0; i < filledArray.length; i+=2)
-			{
-				newFileName = fileName +"Layers" + (i) + "-" + (i+1) + " .scad";
-				save3DFileLayers(getFile(newFileName),i,i+2);
+		} else {
+			for (int i = 0; i < filledArray.length; i += 2) {
+				newFileName = fileName + "Layers" + (i) + "-" + (i + 1) + " .scad";
+				save3DFileLayers(getFile(newFileName), i, i + 2);
 			}
 		}
 
 	}
 
-	public void save3DFileLayers(FileWriter file, int start, int end) throws IOException
-	{
+	public void save3DFileLayers(FileWriter file, int start, int end) throws IOException {
 		int level;
-		boolean diff = start>0;
+		boolean diff = start > 0;
 
-		if (diff)
-		{
-			level = ((start-1)-filledArray.length+1) *-1;
+		if (diff) {
+			level = ((start - 1) - filledArray.length + 1) * -1;
 			file.write("//Layer " + level + "\r\n");
 			file.write("module diff(){\r\n");
 
-			for (int y = 0; y < filledArray[1].length; y++)
-			{
-				for (int x = 0; x < filledArray[1][1].length; x++)
-				{
-					if(filledArray[start -1][x][y] == 1)
-					{
-						file.write("translate([" + factor*x + "," + factor*y + ","  + factor*level +"]){\r\n");
+			for (int y = 0; y < filledArray[1].length; y++) {
+				for (int x = 0; x < filledArray[1][1].length; x++) {
+					if (filledArray[start - 1][x][y] == 1) {
+						file.write("translate([" + factor * x + "," + factor * y + "," + factor * level + "]){\r\n");
 						file.write("cube(" + (size + 1) + ");}\r\n");
 					}
 				}
@@ -230,58 +205,47 @@ public class Rule2D {
 		}
 
 		file.write("module whole(){\r\n");
-		for(; start < end; start++)
-		{
-			level = (start-filledArray.length+1) *-1;
+		for (; start < end; start++) {
+			level = (start - filledArray.length + 1) * -1;
 			file.write("//Layer " + level + "\r\n");
 
-			for (int y = 0; y < filledArray[1].length; y++)
-			{
-				for (int x = 0; x < filledArray[1][1].length; x++)
-				{
-					if(filledArray[start][x][y] == 1)
-					{
-						file.write("translate([" + factor*x + "," + factor*y + ","  + factor*level +"]){\r\n");
+			for (int y = 0; y < filledArray[1].length; y++) {
+				for (int x = 0; x < filledArray[1][1].length; x++) {
+					if (filledArray[start][x][y] == 1) {
+						file.write("translate([" + factor * x + "," + factor * y + "," + factor * level + "]){\r\n");
 						file.write("cube(" + size + ");}\r\n");
 					}
 				}
 			}
 		}
 
-		int finTran = (((filledArray.length *2 + 1)*5)/2)+1;
+		int finTran = (((filledArray.length * 2 + 1) * 5) / 2) + 1;
 		int finZ = (filledArray.length - end) * 5;
 		file.write("}\r\n");
 
-		if(diff)
-		{
-			file.write("translate([-"+finTran+",-"+finTran+",-"+finZ+"]){\r\n");
+		if (diff) {
+			file.write("translate([-" + finTran + ",-" + finTran + ",-" + finZ + "]){\r\n");
 			file.write("difference(){\r\n");
 			file.write("whole();\r\n");
 			file.write("diff();}}\r\n");
-		}
-		else
-		{
-		file.write("translate([-"+finTran+",-"+finTran+",-"+finZ+"]){\r\n");
-		file.write("whole();}\r\n");
+		} else {
+			file.write("translate([-" + finTran + ",-" + finTran + ",-" + finZ + "]){\r\n");
+			file.write("whole();}\r\n");
 		}
 		file.close();
 	}
 
-	public void setLayers(int layers)
-	{
-		filledArray = new byte[layers][(2*layers) +1][(2*layers) +1];
+	public void setLayers(int layers) {
+		filledArray = new byte[layers][(2 * layers) + 1][(2 * layers) + 1];
 	}
 
-	private FileWriter getFile(String fileName)
-	{
+	private FileWriter getFile(String fileName) {
 		File file = new File(fileName);
 		FileWriter fr;
-		try
-		{
+		try {
 			fr = new FileWriter(file);
 
-		} catch (IOException e)
-		{
+		} catch (IOException e) {
 			fr = null;
 			e.printStackTrace();
 		}
