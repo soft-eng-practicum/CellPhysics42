@@ -1,13 +1,20 @@
 package cellPhysics42.view;
 
+import java.io.IOException;
+
 import Controller.ControlClass;
 import Model.Rule1D;
+import cellPhysics42.MainApp;
 import exception.NotValidRuleException;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -19,6 +26,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 /**Class: DemoViewControl.java 
@@ -29,11 +37,13 @@ import javafx.util.Duration;
  * 
  * This class –  controls the demo view
  * 
- * Purpose: –  tells how to cycle through all the valid rules and displays their output in a GUI
+ * Purpose: –  cycle through all the valid rules and displays their output in a GUI
  */
 public class DemoViewControl {
 	@FXML
 	private Label ruleName;
+	@FXML
+	private Button exitBt;
 	@FXML
 	private GridPane displayGrid;
 	private int nextRow;
@@ -55,9 +65,6 @@ public class DemoViewControl {
 	private Color zeroColor;
 	private Color edgeColor;
 	private ControlClass controler;
-
-
-	
 
 	/**
 	 * Method name: initialize
@@ -93,10 +100,6 @@ public class DemoViewControl {
 		fillGrid();
 	}
 
-	@FXML
-	public void goToCustomView(){
-		
-	}
 	/**
 	 * Method name: setGridSize
 	 * 
@@ -201,6 +204,22 @@ public class DemoViewControl {
 		}
 	}
 	
+	@FXML
+	public void exitDemo(){
+		try{
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(MainApp.class.getResource("view/CustomizeView.fxml"));
+		System.out.println(loader.getLocation());
+		AnchorPane pane = (AnchorPane)loader.load();
+		Scene scene = new Scene(pane);
+		Stage newStage = (Stage) exitBt.getScene().getWindow();
+		newStage.setScene(scene);
+		}
+		
+		catch(IOException ex){
+			System.out.println("error" + ex.getMessage());
+		}
+	}
 //	public synchronized void fillNextLine(String nextLine){
 //		for(int i = 0; i < nextLine.length(); i++){
 //			if(nextLine.charAt(i) == '1'){
