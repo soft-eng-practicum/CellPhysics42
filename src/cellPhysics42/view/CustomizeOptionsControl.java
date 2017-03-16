@@ -1,21 +1,30 @@
 package cellPhysics42.view;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import Controller.ControlClass;
+import cellPhysics42.MainApp;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ContentDisplay;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 
 public class CustomizeOptionsControl {
 	@FXML
@@ -36,6 +45,8 @@ public class CustomizeOptionsControl {
 	private GridPane firstRowInput;
 	@FXML
 	private Button setStartState;
+	@FXML
+	private Slider speedSlidBar;
 
 	private int gridWidthSquares;
 	private int gridHeightSquares;
@@ -53,6 +64,11 @@ public class CustomizeOptionsControl {
 		setRuleChoices();
 		oneColor = Color.BLACK;
 		zeroColor = Color.WHITE;
+		onesColorPicker.setValue(Color.BLACK);
+		zeroColorPicker.setValue(Color.WHITE);
+		startSquares = new ArrayList<>();
+		gridHeightTF.setText("55");
+		ruleSelectChoiceBox.setValue(90);
 	}
 
 	/**
@@ -84,7 +100,36 @@ public class CustomizeOptionsControl {
 	 */
 	@FXML
 	public void startCustom(){
-		
+		int numSquaresWidth = gridWidthCB.getValue();
+		int numSquaresHeight = Integer.parseInt(gridHeightTF.getText());
+		double rowDuration = (speedSlidBar.getValue() < 1) ? 1 : speedSlidBar.getValue();
+		oneColor = onesColorPicker.getValue();
+		zeroColor = zeroColorPicker.getValue();
+		int ruleNumber = ruleSelectChoiceBox.getValue();
+
+		try{
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainApp.class.getResource("view/CustomizeView.fxml"));
+			AnchorPane pane = (AnchorPane) loader.load();
+			Scene scene = new Scene(pane);
+			Stage newStage = (Stage) startButton.getScene().getWindow();
+
+			ChangeListener<Scene> listener = new ChangeListener<Scene>() {
+				@Override
+				public void changed(ObservableValue<? extends Scene> observable, Scene oldValue, Scene newValue) {
+					CustomizeViewControl cvc = loader.getController();
+					//set custom options before running?
+					cvc.runCustom(numSquaresWidth, numSquaresHeight, rowDuration, oneColor, zeroColor, ruleNumber, startSquares);
+				}
+			};
+
+			newStage.sceneProperty().addListener(listener);
+			newStage.setScene(scene);
+		}
+
+		catch(IOException ex){
+			System.out.println("error" + ex.getMessage());
+		}
 	}
 
 	/**
@@ -106,12 +151,11 @@ public class CustomizeOptionsControl {
 	@FXML
 	public void showFirstRow(){
 		setStartState.setText("Reset Start State");
-		startSquares = new ArrayList<>();
 		gridWidthSquares = gridWidthCB.getValue();
 		double gridWidth = mainPane.getWidth();
 		double gridHeight = gridWidth/gridWidthSquares;
-		//		oneColor = onesColorPicker.getValue();
-		//		zeroColor = zeroColorPicker.getValue();
+		oneColor = onesColorPicker.getValue();
+		zeroColor = zeroColorPicker.getValue();
 		clearFirstRow();
 		for(int i = 0; i < gridWidthSquares; i++){
 			Rectangle rectangle = new Rectangle(gridWidth/gridWidthSquares, gridHeight);

@@ -1,5 +1,7 @@
 package cellPhysics42.view;
 
+import com.sun.xml.internal.bind.v2.runtime.Coordinator;
+
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -52,6 +54,7 @@ public class LabeledRectangle extends StackPane {
 	 */
 	public void setFill(Color color){
 		rectangle.setFill(color);
+		number.setTextFill(color.invert());
 	}
 	
 	/**

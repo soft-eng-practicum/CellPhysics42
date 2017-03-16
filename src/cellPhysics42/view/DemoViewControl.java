@@ -125,10 +125,6 @@ public class DemoViewControl {
 	public void fillGrid(){
 			ControlClass controler = new ControlClass();
 			try {
-				byte[] firstRow = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0,
-						0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0,
-						0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0};
-				//controler.setRule1D(nextRule, numRows, numCols, firstRow);
 				controler.setRule1D(nextRule, numRows, numCols);
 			} catch (NotValidRuleException ex) {
 				ex.printStackTrace();
@@ -204,6 +200,9 @@ public class DemoViewControl {
 		}
 	}
 	
+	/**
+	 * Method name: exitDemo
+	 */
 	@FXML
 	public void exitDemo(){
 		try{

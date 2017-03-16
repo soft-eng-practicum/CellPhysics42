@@ -59,54 +59,35 @@
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
-                <RowConstraints maxHeight="188.6530532836914" minHeight="10.0" prefHeight="188.6530532836914" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="178.71047973632812" minHeight="10.0" prefHeight="61.346946716308594" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="188.6530532836914" minHeight="10.0" prefHeight="82.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="188.6530532836914" minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="188.6530532836914" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="178.71047973632812" minHeight="10.0" prefHeight="126.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="107.1483154296875" minHeight="10.0" prefHeight="45.289520263671875" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label text="0 Color" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+                  <Label text="0 Color" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label text="1 Color" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+                  <Label text="1 Color" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <ColorPicker fx:id="zeroColorPicker" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
-                  <ColorPicker fx:id="onesColorPicker" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
-                  <Button fx:id="setStartState" mnemonicParsing="false" onAction="#showFirstRow" text="Set Top Row" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                  <ColorPicker fx:id="zeroColorPicker" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP" />
+                  <ColorPicker fx:id="onesColorPicker" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP" />
+                  <Button fx:id="setStartState" mnemonicParsing="false" onAction="#showFirstRow" text="Set Top Row" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+                  <Label alignment="TOP_CENTER" text="Select Rule" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <ChoiceBox fx:id="ruleSelectChoiceBox" prefHeight="0.0" prefWidth="143.0" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
                </children>
             </GridPane>
          </right>
-         <center>
-            <GridPane prefHeight="297.0" prefWidth="139.0" BorderPane.alignment="CENTER">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints />
-                  <ColumnConstraints />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints maxHeight="137.4712677001953" minHeight="10.0" prefHeight="136.25836181640625" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="120.07888793945312" minHeight="0.0" prefHeight="62.74163818359375" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="224.0" minHeight="10.0" prefHeight="137.8828125" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <Label alignment="TOP_CENTER" text="Select Rule" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <Button fx:id="startButton" mnemonicParsing="false" onAction="#startCustom" text="Start" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Button>
-                  <ChoiceBox fx:id="ruleSelectChoiceBox" prefHeight="0.0" prefWidth="143.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
-               </children>
-            </GridPane>
-         </center>
          <bottom>
             <GridPane fx:id="firstRowInput" prefHeight="30.0" BorderPane.alignment="CENTER">
               <columnConstraints>
@@ -117,6 +98,13 @@
               </rowConstraints>
             </GridPane>
          </bottom>
+         <center>
+            <Button fx:id="startButton" mnemonicParsing="false" onAction="#startCustom" text="Start" BorderPane.alignment="CENTER">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+         </center>
       </BorderPane>
    </children>
 </AnchorPane>
