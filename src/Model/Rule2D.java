@@ -184,7 +184,7 @@ public class Rule2D {
 
 	}
 
-	public void save3DFileLayers(FileWriter file, int start, int end) throws IOException {
+	private void save3DFileLayers(FileWriter file, int start, int end) throws IOException {
 		int level;
 		boolean diff = start > 0;
 
@@ -196,7 +196,7 @@ public class Rule2D {
 			for (int y = 0; y < filledArray[1].length; y++) {
 				for (int x = 0; x < filledArray[1][1].length; x++) {
 					if (filledArray[start - 1][x][y] == 1) {
-						file.write("translate([" + factor * x + "," + factor * y + "," + factor * level + "]){\r\n");
+						file.write("translate([" + ((factor * x)-.5) + "," + ((factor * y)-.5) + "," + factor * level + "]){\r\n");
 						file.write("cube(" + (size + 1) + ");}\r\n");
 					}
 				}
