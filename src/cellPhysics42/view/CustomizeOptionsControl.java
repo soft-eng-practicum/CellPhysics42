@@ -59,7 +59,7 @@ public class CustomizeOptionsControl {
 	 */
 	@FXML
 	public void initialize(){
-		gridWidthCB.setValue(31);
+		gridWidthCB.setValue(43);
 		setWidthValues();
 		setRuleChoices();
 		oneColor = Color.BLACK;
@@ -89,7 +89,7 @@ public class CustomizeOptionsControl {
 	 */
 	public void setWidthValues(){
 		ObservableList<Integer> widths = FXCollections.observableArrayList();
-		for(int i = 25; i < 99; i += 2){
+		for(int i = 35; i < 99; i += 2){
 			widths.add(i);
 		}
 		gridWidthCB.setItems(widths);
@@ -106,7 +106,11 @@ public class CustomizeOptionsControl {
 		oneColor = onesColorPicker.getValue();
 		zeroColor = zeroColorPicker.getValue();
 		int ruleNumber = ruleSelectChoiceBox.getValue();
-
+		//Scene currentScene = startButton.getScene();
+		
+//		BorderPane cvPane = (BorderPane)mainPane.getParent();
+//		cvPane.setP
+		
 		try{
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainApp.class.getResource("view/CustomizeView.fxml"));

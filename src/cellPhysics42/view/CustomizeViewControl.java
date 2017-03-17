@@ -4,12 +4,16 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
@@ -28,21 +32,24 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 
 /**Class: CustomizeViewControl.java 
-   * @author Bess Burnett 
-   * @version 1.0 
-   * Course : ITEC  Spring 2017
-   * Written: Feb 17, 2017 
-  	   * 
-   * This class –  Controls the customized view
-   * 
-   * Purpose: –  This enables the user to select which rule they would like, how big they want the screen and 
-   * which colors they would like to see the view displayed in.
-   */
+ * @author Bess Burnett 
+ * @version 1.0 
+ * Course : ITEC  Spring 2017
+ * Written: Feb 17, 2017 
+ * 
+ * This class –  Controls the customized view
+ * 
+ * Purpose: –  This enables the user to select which rule they would like, how big they want the screen and 
+ * which colors they would like to see the view displayed in.
+ */
 public class CustomizeViewControl extends BorderPane {
 	@FXML
 	private BorderPane mainPane;
+	@FXML
+	private ScrollPane gridScroll;
 	@FXML
 	private GridPane displayGrid;
 	@FXML
@@ -97,6 +104,8 @@ public class CustomizeViewControl extends BorderPane {
 	private int nextRow;
 	private int numRows;
 	private int numCols;
+	private double squareSize;
+	
 	/**
 	 * Method name: initialize
 	 */
@@ -104,9 +113,11 @@ public class CustomizeViewControl extends BorderPane {
 	public void initialize(){
 		edgeColor = Color.BLACK;
 		//setRuleNum(90);
-		squaresGrid.setVisible(true);
+		//squaresGrid.setVisible(true);
+		oneColor = Color.BLACK;
+		zeroColor = Color.WHITE;
 	}
-	
+
 	/**
 	 * Method name: setRuleNum
 	 * @param ruleNum
@@ -116,7 +127,7 @@ public class CustomizeViewControl extends BorderPane {
 		setSquareNums(Integer.toBinaryString(ruleNum));
 		setPaneNumbers();
 	}
-	
+
 
 	/**
 	 * Method name: setSquareNums
@@ -151,7 +162,7 @@ public class CustomizeViewControl extends BorderPane {
 		squareSeven.setOutline(edgeColor);
 		squareSeven.setFill((binaryString.charAt(0) == '1') ? oneColor : zeroColor);
 	}
-	
+
 	/**
 	 * Method name: setPaneNumbers
 	 */
@@ -165,7 +176,7 @@ public class CustomizeViewControl extends BorderPane {
 		setThreeDigBinaryNubmer(6, numberSix);
 		setThreeDigBinaryNubmer(7, numberSeven);
 	}
-	
+
 	/**
 	 * Method name: setThreeDigBinaryNubmer
 	 * @param num
@@ -185,62 +196,78 @@ public class CustomizeViewControl extends BorderPane {
 		}
 	}
 	
-	public void runCustom(int width, int height, double rowDur, Color oneC, Color zeroC, int ruleNum, ArrayList<Integer> firstRow){
-	ControlClass controler = new ControlClass();
-	displayGrid.getChildren().removeAll(displayGrid.getChildren());
-	numRows = height;
-	this.zeroColor = zeroC;
-	this.oneColor = oneC;
-	numCols = width;
-	setRuleNum(ruleNum);
-	try {
-		controler.setRule1D(ruleNum, height, width, firstRow);
-	} catch (NotValidRuleException ex) {
-		ex.printStackTrace();
+	public void setGridSize(int rows, int columns){
+		displayGrid.getColumnConstraints().removeAll(displayGrid.getColumnConstraints());
+		displayGrid.getRowConstraints().removeAll(displayGrid.getRowConstraints());
+		for(int i = 0; i < columns; i++){
+			displayGrid.getColumnConstraints().add(new ColumnConstraints(squareSize));
+		}
+		for(int i = 0; i < rows; i++){
+			displayGrid.getRowConstraints().add(new RowConstraints(squareSize));
+		}
+		displayGrid.setAlignment(Pos.CENTER);
 	}
-	rowDuration = rowDur * 100;
-	timeline = new Timeline();
-	KeyFrame keyFrame = new KeyFrame(new Duration(rowDuration), e->{
-		fillNextLine(controler);
-		nextRow++;
-	});
-	timeline.setCycleCount(height);
-	timeline.getKeyFrames().add(keyFrame);
-	timeline.setOnFinished(e->{
-		nextRow = 0;
-	});
-	timeline.play();
-}
+
+	public void runCustom(int width, int height, double rowDur, Color oneC, Color zeroC, int ruleNum, ArrayList<Integer> firstRow){
+		ControlClass controler = new ControlClass();
+		//mainPane.setCenter(gridScroll);
+		displayGrid.getChildren().removeAll(displayGrid.getChildren());
+		numRows = height;
+		this.zeroColor = zeroC;
+		this.oneColor = oneC;
+		numCols = width;
+		setRuleNum(ruleNum);
+		//mainPane.setTop(ruleGrid);
+		squareSize = Math.floor(gridScroll.getWidth()/width);
+		setGridSize(height, width);
+		try {
+			controler.setRule1D(ruleNum, height, width, firstRow);
+		} catch (NotValidRuleException ex) {
+			ex.printStackTrace();
+		}
+		rowDuration = rowDur * 100;
+		timeline = new Timeline();
+		KeyFrame keyFrame = new KeyFrame(new Duration(rowDuration), e->{
+			fillNextLine(controler);
+			nextRow++;
+		});
+		timeline.setCycleCount(height);
+		timeline.getKeyFrames().add(keyFrame);
+		timeline.setOnFinished(e->{
+			nextRow = 0;
+		});
+		timeline.play();
+	}
 	/**
 	 * Method name: runDemo
 	 */
 	@FXML
 	public void runDemo(){
 		try{
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(MainApp.class.getResource("view/DemoView.fxml"));
-		System.out.println(loader.getLocation());
-		AnchorPane pane = (AnchorPane)loader.load();
-		Scene scene = new Scene(pane);
-		Stage newStage = (Stage) demoButton.getScene().getWindow();
-		
-		ChangeListener<Scene> listener = new ChangeListener<Scene>() {
-			@Override
-			public void changed(ObservableValue<? extends Scene> observable, Scene oldValue, Scene newValue) {
-				DemoViewControl dvc = loader.getController();
-				dvc.runDemo();
-			}
-		};
-		
-		newStage.sceneProperty().addListener(listener);
-		newStage.setScene(scene);
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainApp.class.getResource("view/DemoView.fxml"));
+			System.out.println(loader.getLocation());
+			AnchorPane pane = (AnchorPane)loader.load();
+			Scene scene = new Scene(pane);
+			Stage newStage = (Stage) demoButton.getScene().getWindow();
+
+			ChangeListener<Scene> listener = new ChangeListener<Scene>() {
+				@Override
+				public void changed(ObservableValue<? extends Scene> observable, Scene oldValue, Scene newValue) {
+					DemoViewControl dvc = loader.getController();
+					dvc.runDemo(oneColor, zeroColor);
+				}
+			};
+
+			newStage.sceneProperty().addListener(listener);
+			newStage.setScene(scene);
 		}
-		
+
 		catch(IOException ex){
 			System.out.println("error" + ex.getMessage());
 		}
 	}
-	
+
 	/**
 	 * Method name: showCustomOptions
 	 */
@@ -249,10 +276,13 @@ public class CustomizeViewControl extends BorderPane {
 		try{
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainApp.class.getResource("view/CustomizeOptions.fxml"));
-			AnchorPane pane = (AnchorPane)loader.load();
-			pane.setBackground(new Background(new BackgroundFill(Color.CADETBLUE, null, null)));
-			mainPane.setCenter(pane);
-			
+			StackPane pane = (StackPane)loader.load();
+			pane.setPrefWidth(mainPane.getWidth());
+			pane.setPrefHeight(mainPane.getHeight());
+			//pane.setBackground(new Background(new BackgroundFill(Color.CADETBLUE, null, null)));
+			Stage currentStage = (Stage) customizeBt.getScene().getWindow();
+			currentStage.setScene(new Scene(pane));
+
 			System.out.println(loader.getLocation());
 		}
 		catch (Exception ex) {
@@ -260,6 +290,10 @@ public class CustomizeViewControl extends BorderPane {
 		}
 	}
 	
+	public void resetCenter(){
+		
+	}
+
 	/**
 	 * Method name: fillNextLine
 	 * @param controler
@@ -285,24 +319,22 @@ public class CustomizeViewControl extends BorderPane {
 		Rectangle rectangle;
 		for(int i = 0; i < nextLine.length(); i++){
 			if(nextLine.charAt(i) == '1'){
-				rectangle = new Rectangle(Math.floor(displayGrid.getWidth()/numCols) -1 , Math.floor(displayGrid.getHeight()/numRows) -1 , 
-						oneColor);
+				rectangle = new Rectangle(squareSize -1 , squareSize -1 , oneColor);
 				rectangle.setStroke(edgeColor);
 				rectangle.setStrokeWidth(0.75);
 				displayGrid.add(rectangle, i, nextRow);
 			}
 			else{
-				rectangle = new Rectangle(Math.floor(displayGrid.getWidth()/numCols) - 1, Math.floor(displayGrid.getHeight()/numRows) -1 , 
-						zeroColor);
+				rectangle = new Rectangle(squareSize -1 , squareSize -1 , zeroColor);
 				//rectangle.setStroke(edgeColor);
 				//rectangle.setStrokeWidth(0.75);
 				displayGrid.add(rectangle, i, nextRow);
 			}
 		}
 	}
-	
 
-//	
+
+	//	
 	/**
 	 * Method name: getStringRow
 	 * @param nextLineArray

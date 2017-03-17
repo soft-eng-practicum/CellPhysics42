@@ -99,6 +99,15 @@ public class DemoViewControl {
 		//displayGrid.setGridLinesVisible(true);
 		fillGrid();
 	}
+	
+	public void runDemo(Color oneColor, Color zeroColor){
+		this.oneColor = oneColor;
+		this.zeroColor = zeroColor;
+		edgeColor = oneColor.invert();
+		ruleName.setTextFill(zeroColor.invert());
+		rootPane.setBackground(new Background(new BackgroundFill(zeroColor, null, null)));
+		runDemo();
+	}
 
 	/**
 	 * Method name: setGridSize

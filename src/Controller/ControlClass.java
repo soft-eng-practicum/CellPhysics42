@@ -31,9 +31,12 @@ public class ControlClass {
 		if(firstRowList.isEmpty()){
 			rule1d.fillArrays();
 		}
+		else{
 		byte[] firstRow = new byte[columns];
 		for(int i = 0; i < firstRow.length; i ++){
 			firstRow[i] = (firstRowList.contains(i)) ? (byte)1 : (byte)0;
+		}
+		rule1d.fillArrays(firstRow);
 		}
 	}
 

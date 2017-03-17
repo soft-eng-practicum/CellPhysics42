@@ -7,9 +7,10 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cellPhysics42.view.CustomizeOptionsControl">
+
+<StackPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cellPhysics42.view.CustomizeOptionsControl">
    <children>
-      <BorderPane fx:id="mainPane" layoutX="126.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+      <BorderPane fx:id="mainPane" maxHeight="350.0" maxWidth="450.0">
          <top>
             <Label text="Customize" BorderPane.alignment="CENTER">
                <font>
@@ -57,6 +58,7 @@
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints />
               </columnConstraints>
               <rowConstraints>
                   <RowConstraints maxHeight="188.6530532836914" minHeight="10.0" prefHeight="82.0" vgrow="SOMETIMES" />
@@ -107,4 +109,4 @@
          </center>
       </BorderPane>
    </children>
-</AnchorPane>
+</StackPane>
