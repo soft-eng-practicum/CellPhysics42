@@ -21,7 +21,7 @@ public class Rule2D {
 	private int rule;
 	private int nextLayer;
 	private int factor, size;
-	final public int[] rules = { 451, 452, 453, 454, 457, 459, 460, 461, 462, 465, 467, 468, 469, 470 + 473, 475, 476,
+	final public int[] rules = {451, 452, 453, 454, 457, 459, 460, 461, 462, 465, 467, 468, 469, 470 + 473, 475, 476,
 			478, 481, 483, 484, 485, 486, 489, 491, 492, 493, 494, 497 };
 	private byte[][][] filledArray;
 
