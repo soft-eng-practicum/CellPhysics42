@@ -65,6 +65,8 @@ public class CustomizeViewControl extends BorderPane {
 	@FXML
 	private Button stopBt;
 	@FXML
+	private Button stepThruButton;
+	@FXML
 	private HBox numberZero;
 	@FXML
 	private HBox numberOne;
@@ -349,6 +351,21 @@ public class CustomizeViewControl extends BorderPane {
 			nextLine.append(nextLineArray[0][i]);
 		}
 		return nextLine.toString();
+	}
+	
+	@FXML
+	public void runStepThru(){
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(MainApp.class.getResource("view/StepThruView.fxml"));
+		System.out.println(loader.getLocation());
+		try{
+		AnchorPane pane = loader.load();
+		Stage stage = (Stage)stepThruButton.getScene().getWindow();
+		stage.setScene(new Scene(pane));
+		}
+		catch (Exception ex) {
+			System.out.println(ex.getMessage());
+		}
 	}
 }
 
