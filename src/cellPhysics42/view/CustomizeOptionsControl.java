@@ -144,7 +144,7 @@ public class CustomizeOptionsControl {
 		for(Node rectangle : rectangles){
 			((Rectangle)rectangle).setFill(zeroColor);
 			if(startSquares.contains(Integer.parseInt(rectangle.getId()))){
-				startSquares.remove(Integer.parseInt(rectangle.getId()));
+				startSquares.remove((Integer)Integer.parseInt(rectangle.getId()));
 			}
 		}
 	}
@@ -168,7 +168,7 @@ public class CustomizeOptionsControl {
 			rectangle.setOnMouseClicked(e->{
 				if(startSquares.contains(Integer.parseInt(((Rectangle)e.getSource()).getId()))){
 					rectangle.setFill(zeroColor);
-					startSquares.remove(Integer.parseInt(((Rectangle)e.getSource()).getId()));
+					startSquares.remove((Integer)Integer.parseInt(((Rectangle)e.getSource()).getId()));
 				}
 				else{
 					rectangle.setFill(oneColor);

@@ -8,10 +8,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="800.0" prefWidth="1100.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="cellPhysics42.view.StepThruViewControl">
+<AnchorPane prefHeight="800.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cellPhysics42.view.StepThruViewControl">
    <children>
-      <GridPane layoutX="212.0" layoutY="327.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+      <GridPane fx:id="parentGrid" layoutX="212.0" layoutY="327.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="536.9972534179688" minWidth="10.0" prefWidth="304.91705322265625" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="787.0836486816406" minWidth="10.0" prefWidth="785.0829467773438" />
@@ -194,6 +193,9 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
+                           <GridPane.margin>
+                              <Insets right="20.0" />
+                           </GridPane.margin>
                         </GridPane>
                      </children>
                      <columnConstraints>
@@ -220,7 +222,7 @@
                   <Insets right="10.0" />
                </GridPane.margin>
             </GridPane>
-            <Label alignment="TOP_CENTER" text="Selcet Rule" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+            <Label alignment="TOP_CENTER" text="Select Rule" GridPane.halignment="CENTER" GridPane.valignment="TOP">
                <font>
                   <Font size="24.0" />
                </font>
@@ -231,12 +233,12 @@
             <ChoiceBox fx:id="ruleSelectChoiceBox" prefWidth="150.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
             <Button fx:id="startBt" mnemonicParsing="false" onAction="#startStepThru" text="Start" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
                <GridPane.margin>
-                  <Insets bottom="30.0" left="30.0" />
+                  <Insets bottom="40.0" left="30.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="nextBt" mnemonicParsing="false" onAction="#nextST" text="Next" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
+            <Button fx:id="nextBt" mnemonicParsing="false" onAction="#nextST" text="Next" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                <GridPane.margin>
-                  <Insets bottom="30.0" right="30.0" />
+                  <Insets bottom="40.0" />
                </GridPane.margin>
             </Button>
             <Label text="Explanation" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
@@ -258,11 +260,24 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
             </GridPane>
-            <TextArea fx:id="explanationText" prefHeight="200.0" prefWidth="200.0" wrapText="true" GridPane.rowIndex="1">
+            <Button fx:id="exitBt" mnemonicParsing="false" onAction="#exitStepThru" text="Exit Step Thru" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                <GridPane.margin>
-                  <Insets top="80.0" />
+                  <Insets />
                </GridPane.margin>
-            </TextArea>
+            </Button>
+            <Button fx:id="backBt" mnemonicParsing="false" onAction="#stepBack" text="Back" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="40.0" right="30.0" />
+               </GridPane.margin>
+            </Button>
+            <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets top="70.0" />
+               </GridPane.margin>
+               <content>
+                  <VBox fx:id="explanationTextPane" prefHeight="200.0" prefWidth="100.0" />
+               </content>
+            </ScrollPane>
          </children>
       </GridPane>
    </children>

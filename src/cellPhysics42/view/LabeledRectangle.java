@@ -1,7 +1,5 @@
 package cellPhysics42.view;
 
-import com.sun.xml.internal.bind.v2.runtime.Coordinator;
-
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -45,9 +43,16 @@ public class LabeledRectangle extends StackPane {
 		super.getChildren().addAll(rectangle, number);
 		super.setWidth(width + 2.0);
 		super.setHeight(height + 2.0);
-		setFill(Color.CYAN);
 	}
 	
+	public LabeledRectangle(double width, double height, Color fillColor){
+		rectangle = new Rectangle(width, height);
+		number = new Label("");
+		super.getChildren().addAll(rectangle, number);
+		super.setWidth(width + 2.0);
+		super.setHeight(height + 2.0);
+		setFill(fillColor);
+	}
 	/**
 	 * Method name: setFill
 	 * @param color
