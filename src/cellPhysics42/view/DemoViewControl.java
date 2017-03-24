@@ -71,6 +71,9 @@ public class DemoViewControl {
 	 * 
 	 * FX method called when associated fxml file is built
 	 */
+	/**
+	 * Method name: initialize
+	 */
 	@FXML
 	public void initialize(){
 		nextRow = 0;
@@ -92,6 +95,9 @@ public class DemoViewControl {
 	 * 
 	 * button on action to run the demo
 	 */
+	/**
+	 * Method name: runDemo
+	 */
 	public void runDemo(){
 		controler = new ControlClass();
 		ruleName.setText("Rule " + nextRule);
@@ -100,6 +106,11 @@ public class DemoViewControl {
 		fillGrid();
 	}
 	
+	/**
+	 * Method name: runDemo
+	 * @param oneColor
+	 * @param zeroColor
+	 */
 	public void runDemo(Color oneColor, Color zeroColor){
 		this.oneColor = oneColor;
 		this.zeroColor = zeroColor;
@@ -113,6 +124,9 @@ public class DemoViewControl {
 	 * Method name: setGridSize
 	 * 
 	 * sets the correct number and size of columns and rows
+	 */
+	/**
+	 * Method name: setGridSize
 	 */
 	public void setGridSize(){
 		displayGrid.getColumnConstraints().removeAll(displayGrid.getColumnConstraints());
@@ -130,6 +144,9 @@ public class DemoViewControl {
 	 * Method name: fillGrid
 	 * 
 	 * fills in the grid based on what the next rule is
+	 */
+	/**
+	 * Method name: fillGrid
 	 */
 	public void fillGrid(){
 			ControlClass controler = new ControlClass();
@@ -163,6 +180,9 @@ public class DemoViewControl {
 	 * 
 	 * resets the grid to blank so a new rule can be started
 	 */
+	/**
+	 * Method name: clearGrid
+	 */
 	public void clearGrid(){
 		displayGrid.getChildren().removeAll(displayGrid.getChildren());
 		setGridSize();
@@ -174,6 +194,10 @@ public class DemoViewControl {
 	 * @param controler
 	 * 
 	 * helper method so the to use the controler to get the string to build the next line
+	 */
+	/**
+	 * Method name: fillNextLine
+	 * @param controler
 	 */
 	public void fillNextLine(ControlClass controler){
 		try {
@@ -189,6 +213,10 @@ public class DemoViewControl {
 	 * @param nextLine
 	 * 
 	 * takes a bit string and fills the row accordingly 
+	 */
+	/**
+	 * Method name: fillNextLine
+	 * @param nextLine
 	 */
 	public synchronized void fillNextLine(String nextLine){
 		for(int i = 0; i < nextLine.length(); i++){
@@ -209,6 +237,9 @@ public class DemoViewControl {
 		}
 	}
 	
+	/**
+	 * Method name: exitDemo
+	 */
 	/**
 	 * Method name: exitDemo
 	 */

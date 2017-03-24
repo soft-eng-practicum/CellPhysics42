@@ -49,7 +49,7 @@
                                     </LabeledRectangle>
                                  </children>
                                  <GridPane.margin>
-                                    <Insets left="5.0" right="5.0" />
+                                    <Insets left="5.0" />
                                  </GridPane.margin>
                               </HBox>
                               <HBox fx:id="numberSix" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
@@ -67,7 +67,7 @@
                                     </LabeledRectangle>
                                  </children>
                                  <GridPane.margin>
-                                    <Insets left="5.0" right="5.0" />
+                                    <Insets />
                                  </GridPane.margin>
                               </HBox>
                               <HBox fx:id="numberFive" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2">
@@ -85,7 +85,7 @@
                                     </LabeledRectangle>
                                  </children>
                                  <GridPane.margin>
-                                    <Insets left="5.0" right="5.0" />
+                                    <Insets />
                                  </GridPane.margin>
                               </HBox>
                               <HBox fx:id="numberFour" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3">
@@ -103,7 +103,7 @@
                                     </LabeledRectangle>
                                  </children>
                                  <GridPane.margin>
-                                    <Insets left="5.0" right="5.0" />
+                                    <Insets />
                                  </GridPane.margin>
                               </HBox>
                               <HBox fx:id="numberThree" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="4">
@@ -121,7 +121,7 @@
                                     </LabeledRectangle>
                                  </children>
                                  <GridPane.margin>
-                                    <Insets left="5.0" right="5.0" />
+                                    <Insets />
                                  </GridPane.margin>
                               </HBox>
                               <HBox fx:id="numberTwo" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="5">
@@ -139,7 +139,7 @@
                                     </LabeledRectangle>
                                  </children>
                                  <GridPane.margin>
-                                    <Insets left="5.0" right="5.0" />
+                                    <Insets />
                                  </GridPane.margin>
                               </HBox>
                               <HBox fx:id="numberOne" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="6">
@@ -152,12 +152,12 @@
                                     <LabeledRectangle layoutX="10.0" layoutY="10.0" />
                                     <LabeledRectangle layoutX="20.0" layoutY="10.0">
                                        <padding>
-                                          <Insets right="10.0" />
+                                          <Insets right="20.0" />
                                        </padding>
                                     </LabeledRectangle>
                                  </children>
                                  <GridPane.margin>
-                                    <Insets left="5.0" right="5.0" />
+                                    <Insets />
                                  </GridPane.margin>
                               </HBox>
                               <HBox fx:id="numberZero" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="7">
@@ -175,26 +175,26 @@
                                     </LabeledRectangle>
                                  </children>
                                  <GridPane.margin>
-                                    <Insets left="5.0" right="5.0" />
+                                    <Insets right="5.0" />
                                  </GridPane.margin>
                               </HBox>
                            </children>
                            <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="12.5" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="12.5" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="12.5" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="12.5" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="12.5" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="12.5" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="12.5" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="12.5" prefWidth="100.0" />
                            </columnConstraints>
                            <rowConstraints>
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <GridPane.margin>
-                              <Insets right="20.0" />
+                              <Insets left="20.0" right="20.0" />
                            </GridPane.margin>
                         </GridPane>
                      </children>
@@ -236,9 +236,9 @@
                   <Insets bottom="40.0" left="30.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="nextBt" mnemonicParsing="false" onAction="#nextST" text="Next" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+            <Button fx:id="nextBt" mnemonicParsing="false" onAction="#nextST" text="Next" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
                <GridPane.margin>
-                  <Insets bottom="40.0" />
+                  <Insets bottom="40.0" right="40.0" />
                </GridPane.margin>
             </Button>
             <Label text="Explanation" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
@@ -265,19 +265,22 @@
                   <Insets />
                </GridPane.margin>
             </Button>
-            <Button fx:id="backBt" mnemonicParsing="false" onAction="#stepBack" text="Back" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
+            <GridPane fx:id="explanationTextPane" prefHeight="479.0" prefWidth="304.0" GridPane.rowIndex="1">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" percentHeight="25.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" percentHeight="25.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
                <GridPane.margin>
-                  <Insets bottom="40.0" right="30.0" />
+                  <Insets bottom="100.0" top="80.0" />
                </GridPane.margin>
-            </Button>
-            <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
-               <GridPane.margin>
-                  <Insets top="70.0" />
-               </GridPane.margin>
-               <content>
-                  <VBox fx:id="explanationTextPane" prefHeight="200.0" prefWidth="100.0" />
-               </content>
-            </ScrollPane>
+            </GridPane>
          </children>
       </GridPane>
    </children>

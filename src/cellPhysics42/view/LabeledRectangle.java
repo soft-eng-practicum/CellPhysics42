@@ -26,7 +26,7 @@ public class LabeledRectangle extends StackPane {
 	 * creates a LabeledRectangle object with 
 	 */
 	public LabeledRectangle(){
-		this(30.0,30.0, "1");
+		this(25.0,25.0, "1");
 	}
 	
 	/**LabeledRectangle
