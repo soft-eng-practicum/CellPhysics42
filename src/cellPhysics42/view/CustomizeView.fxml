@@ -34,14 +34,14 @@
                      <children>
                         <GridPane fx:id="squaresGrid" BorderPane.alignment="CENTER" GridPane.columnIndex="1">
                           <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="12.5" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="12.5" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="12.5" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="12.5" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="12.5" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="12.5" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="12.5" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="12.5" prefWidth="100.0" />
                           </columnConstraints>
                           <rowConstraints>
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -58,14 +58,8 @@
                               <LabeledRectangle fx:id="squareThree" layoutX="10.0" layoutY="10.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
                               <HBox fx:id="numberSeven" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <LabeledRectangle>
-                                       <padding>
-                                          <Insets right="1.0" />
-                                       </padding></LabeledRectangle>
-                                    <LabeledRectangle layoutX="10.0" layoutY="10.0">
-                                       <padding>
-                                          <Insets right="1.0" />
-                                       </padding></LabeledRectangle>
+                                    <LabeledRectangle />
+                                    <LabeledRectangle layoutX="10.0" layoutY="10.0" />
                                     <LabeledRectangle layoutX="20.0" layoutY="10.0" />
                                  </children>
                               </HBox>
@@ -147,7 +141,7 @@
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <Button fx:id="stopBt" layoutX="560.0" layoutY="8.0" mnemonicParsing="false" onAction="#runDemo" text="Stop" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <Button fx:id="stopBt" layoutX="560.0" layoutY="8.0" mnemonicParsing="false" onAction="#stopRunThru" text="Stop" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <font>
                         <Font size="18.0" />
                      </font>

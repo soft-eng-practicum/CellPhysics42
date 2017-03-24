@@ -22,6 +22,8 @@ import javafx.util.Duration;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import com.apple.eawt.event.GestureListener;
+
 import Controller.ControlClass;
 import cellPhysics42.MainApp;
 import exception.NotValidRuleException;
@@ -107,6 +109,7 @@ public class CustomizeViewControl extends BorderPane {
 	private int numRows;
 	private int numCols;
 	private double squareSize;
+	private ChangeListener<Scene> listenerScene;
 	
 	/**
 	 * Method name: initialize
@@ -253,21 +256,29 @@ public class CustomizeViewControl extends BorderPane {
 			Scene scene = new Scene(pane);
 			Stage newStage = (Stage) demoButton.getScene().getWindow();
 
-			ChangeListener<Scene> listener = new ChangeListener<Scene>() {
-				@Override
-				public void changed(ObservableValue<? extends Scene> observable, Scene oldValue, Scene newValue) {
-					DemoViewControl dvc = loader.getController();
-					dvc.runDemo(oneColor, zeroColor);
-				}
-			};
-
-			newStage.sceneProperty().addListener(listener);
+//			listenerScene = new ChangeListener<Scene>() {
+//				@Override
+//				public void changed(ObservableValue<? extends Scene> observable, Scene oldValue, Scene newValue) {
+//					DemoViewControl dvc = loader.getController();
+//					dvc.runDemo(oneColor, zeroColor);
+//				}
+//			};
+//
+//			newStage.sceneProperty().addListener(listenerScene);
+			DemoViewControl dvc = loader.getController();
 			newStage.setScene(scene);
+			dvc.runDemo(oneColor, zeroColor);
 		}
 
 		catch(IOException ex){
 			System.out.println("error" + ex.getMessage());
 		}
+	}
+	
+	
+	@FXML
+	public void stopRunThru(){
+		timeline.stop();
 	}
 
 	/**
@@ -366,6 +377,12 @@ public class CustomizeViewControl extends BorderPane {
 		catch (Exception ex) {
 			System.out.println(ex.getMessage());
 		}
+	}
+
+	public void setColors(Color oneColor2, Color zeroColor2) {
+		oneColor = oneColor2;
+		zeroColor = zeroColor2;
+		setPaneNumbers();
 	}
 }
 

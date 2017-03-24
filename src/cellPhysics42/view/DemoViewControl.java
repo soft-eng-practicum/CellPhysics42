@@ -65,6 +65,7 @@ public class DemoViewControl {
 	private Color zeroColor;
 	private Color edgeColor;
 	private ControlClass controler;
+	private Timeline timeline;
 
 	/**
 	 * Method name: initialize
@@ -104,6 +105,7 @@ public class DemoViewControl {
 		clearGrid();
 		//displayGrid.setGridLinesVisible(true);
 		fillGrid();
+		System.out.println("Demo running");
 	}
 	
 	/**
@@ -156,7 +158,7 @@ public class DemoViewControl {
 				ex.printStackTrace();
 			}
 
-			Timeline timeline = new Timeline();
+			timeline = new Timeline();
 			KeyFrame keyFrame = new KeyFrame(new Duration(rowDuration), e->{
 				fillNextLine(controler);
 				nextRow++;
@@ -252,6 +254,10 @@ public class DemoViewControl {
 		AnchorPane pane = (AnchorPane)loader.load();
 		Scene scene = new Scene(pane);
 		Stage newStage = (Stage) exitBt.getScene().getWindow();
+		timeline.stop();
+		CustomizeViewControl cvc = loader.getController();
+		cvc.setColors(oneColor, zeroColor);
+		//newStage.sceneProperty().removeListener(.getListener());
 		newStage.setScene(scene);
 		}
 		
