@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="1" failures="0" hostname="Jorys-MacBook-Pro.local" name="Test.Rule2DTest" skipped="0" tests="1" time="5.008" timestamp="2017-03-13T16:10:38">
+<testsuite errors="0" failures="1" hostname="Jorys-MacBook-Pro.local" name="Test.Rule2DTest" skipped="0" tests="6" time="5.023" timestamp="2017-03-27T15:33:55">
   <properties>
     <property name="ant.project.invoked-targets" value="main" />
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment" />
@@ -52,7 +52,7 @@
     <property name="java.class.path" value="/Users/Jory/.p2/pool/plugins/org.apache.ant_1.9.6.v201510161327/lib/ant-antlr.jar:/Users/Jory/.p2/pool/plugins/org.apache.ant_1.9.6.v201510161327/lib/ant-apache-bcel.jar:/Users/Jory/.p2/pool/plugins/org.apache.ant_1.9.6.v201510161327/lib/ant-apache-bsf.jar:/Users/Jory/.p2/pool/plugins/org.apache.ant_1.9.6.v201510161327/lib/ant-apache-log4j.jar:/Users/Jory/.p2/pool/plugins/org.apache.ant_1.9.6.v201510161327/lib/ant-apache-oro.jar:/Users/Jory/.p2/pool/plugins/org.apache.ant_1.9.6.v201510161327/lib/ant-apache-regexp.jar:/Users/Jory/.p2/pool/plugins/org.apache.ant_1.9.6.v201510161327/lib/ant-apache-resolver.jar:/Users/Jory/.p2/pool/plugins/org.apache.ant_1.9.6.v201510161327/lib/ant-apache-xalan2.jar:/Users/Jory/.p2/pool/plugins/org.apache.ant_1.9.6.v201510161327/lib/ant-commons-logging.jar:/Users/Jory/.p2/pool/plugins/org.apache.ant_1.9.6.v201510161327/lib/ant-commons-net.jar:/Users/Jory/.p2/pool/plugins/org.apache.ant_1.9.6.v201510161327/lib/ant-jai.jar:/Users/Jory/.p2/pool/plugins/org.apache.ant_1.9.6.v201510161327/lib/ant-javamail.jar:/Users/Jory/.p2/pool/plugins/org.apache.ant_1.9.6.v201510161327/lib/ant-jdepend.jar:/Users/Jory/.p2/pool/plugins/org.apache.ant_1.9.6.v201510161327/lib/ant-jmf.jar:/Users/Jory/.p2/pool/plugins/org.apache.ant_1.9.6.v201510161327/lib/ant-jsch.jar:/Users/Jory/.p2/pool/plugins/org.apache.ant_1.9.6.v201510161327/lib/ant-junit.jar:/Users/Jory/.p2/pool/plugins/org.apache.ant_1.9.6.v201510161327/lib/ant-junit4.jar:/Users/Jory/.p2/pool/plugins/org.apache.ant_1.9.6.v201510161327/lib/ant-launcher.jar:/Users/Jory/.p2/pool/plugins/org.apache.ant_1.9.6.v201510161327/lib/ant-netrexx.jar:/Users/Jory/.p2/pool/plugins/org.apache.ant_1.9.6.v201510161327/lib/ant-swing.jar:/Users/Jory/.p2/pool/plugins/org.apache.ant_1.9.6.v201510161327/lib/ant-testutil.jar:/Users/Jory/.p2/pool/plugins/org.apache.ant_1.9.6.v201510161327/lib/ant.jar:/Applications/Eclipse.app/Contents/Eclipse/configuration/org.eclipse.osgi/529/0/.cp/lib/antdebug.jar:/Applications/Eclipse.app/Contents/Eclipse/configuration/org.eclipse.osgi/529/0/.cp/lib/remote.jar:/Applications/Eclipse.app/Contents/Eclipse/configuration/org.eclipse.osgi/530/0/.cp/lib/remoteAnt.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_91.jdk/Contents/Home/lib/tools.jar:/Users/Jory/.p2/pool/plugins/org.eclipse.swt.cocoa.macosx.x86_64_3.105.2.v20161122-0613.jar" />
     <property name="user.name" value="Jory" />
     <property name="java.vm.specification.version" value="1.8" />
-    <property name="sun.java.command" value="org.eclipse.ant.internal.launching.remote.InternalAntRunner -Dorg.eclipse.ant.core.ANT_PROCESS_ID=1489421430942 -Declipse.connect.port=52600 -Dant.home=/Users/Jory/.p2/pool/plugins/org.apache.ant_1.9.6.v201510161327 -logger org.eclipse.ant.internal.launching.remote.logger.RemoteAntBuildLogger -inputhandler org.eclipse.ant.internal.ui.antsupport.inputhandler.ProxyInputHandler -buildfile /Users/Jory/Desktop/Repository/CellPhysics42/build.xml" />
+    <property name="sun.java.command" value="org.eclipse.ant.internal.launching.remote.InternalAntRunner -Dorg.eclipse.ant.core.ANT_PROCESS_ID=1490628829643 -Declipse.connect.port=49899 -Dant.home=/Users/Jory/.p2/pool/plugins/org.apache.ant_1.9.6.v201510161327 -logger org.eclipse.ant.internal.launching.remote.logger.RemoteAntBuildLogger -inputhandler org.eclipse.ant.internal.ui.antsupport.inputhandler.ProxyInputHandler -buildfile /Users/Jory/Desktop/Repository/CellPhysics42/build.xml" />
     <property name="sun.arch.data.model" value="64" />
     <property name="java.home" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_91.jdk/Contents/Home/jre" />
     <property name="java.specification.vendor" value="Oracle Corporation" />
@@ -73,19 +73,115 @@
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16" />
     <property name="sun.cpu.isalist" value="" />
   </properties>
-  <testcase classname="Test.Rule2DTest" name="initializationError" time="0.001">
-    <error message="org/hamcrest/SelfDescribing" type="java.lang.NoClassDefFoundError">java.lang.NoClassDefFoundError: org/hamcrest/SelfDescribing
-	at java.lang.ClassLoader.defineClass1(Native Method)
-	at java.lang.ClassLoader.defineClass(ClassLoader.java:763)
-	at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
-	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+  <testcase classname="Test.Rule2DTest" name="getRulesTest" time="0.006">
+    <failure message="array lengths differed, expected.length=28 actual.length=29" type="junit.framework.AssertionFailedError">junit.framework.AssertionFailedError: array lengths differed, expected.length=28 actual.length=29
+	at Test.Rule2DTest.getRulesTest(Rule2DTest.java:154)
 	at org.eclipse.ant.internal.launching.remote.EclipseDefaultExecutor.executeTargets(EclipseDefaultExecutor.java:36)
 	at org.eclipse.ant.internal.launching.remote.InternalAntRunner.run(InternalAntRunner.java:456)
 	at org.eclipse.ant.internal.launching.remote.InternalAntRunner.main(InternalAntRunner.java:140)
-Caused by: java.lang.ClassNotFoundException: org.hamcrest.SelfDescribing
-	at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
-</error>
+</failure>
   </testcase>
-  <system-out><![CDATA[]]></system-out>
+  <testcase classname="Test.Rule2DTest" name="getNextLayerSOMENUMBERTest" time="0.005" />
+  <testcase classname="Test.Rule2DTest" name="save3DTest" time="0.0" />
+  <testcase classname="Test.Rule2DTest" name="getLayerSOMENUMBERTest" time="0.0" />
+  <testcase classname="Test.Rule2DTest" name="getLayer451Test" time="0.004" />
+  <testcase classname="Test.Rule2DTest" name="getLastLayer" time="0.001" />
+  <system-out><![CDATA[0111000011
+0111000011
+000000000
+000000000
+000000000
+000000000
+000010000
+000000000
+000000000
+000000000
+000000000
+
+000000000
+011111110
+011111110
+011101110
+011010110
+011101110
+011111110
+011111110
+000000000
+
+000000000
+001111100
+010010010
+010010010
+011111110
+010010010
+010010010
+001111100
+000000000
+
+000000000
+000010000
+000000000
+000000000
+010000010
+000000000
+000000000
+000010000
+000000000
+
+0111000011
+0111000011
+000000000
+000000000
+000000000
+000000000
+000010000
+000000000
+000000000
+000000000
+000000000
+
+000000000
+011111110
+011111110
+011101110
+011010110
+011101110
+011111110
+011111110
+000000000
+
+000000000
+001111100
+010010010
+010010010
+011111110
+010010010
+010010010
+001111100
+000000000
+
+000000000
+000010000
+000000000
+000000000
+010000010
+000000000
+000000000
+000010000
+000000000
+
+0111000011
+0111000011
+000000000
+000010000
+000000000
+000000000
+010000010
+000000000
+000000000
+000010000
+000000000
+
+]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

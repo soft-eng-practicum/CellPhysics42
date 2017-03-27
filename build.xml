@@ -13,6 +13,7 @@
          <!-- Define the classpath which includes the junit.jar and the classes after compiling-->
          <path id="junit.class.path">
                  <pathelement location="lib/junit.jar" />
+         	<pathelement location="lib/hamcrest-all-1.3.jar" />
                  <pathelement location="${build.dir}" />
          </path>
  
@@ -21,7 +22,6 @@
  
          <target name="clean">
                  <delete dir="${test.report.dir}" />
-         	<delete dir="${build.dir}" />
          	                <delete dir="${test.report.dir}" />
          </target>
  
