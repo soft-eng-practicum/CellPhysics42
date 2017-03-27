@@ -22,7 +22,7 @@ public class MainApp extends Application {
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		}
-		
+
 		catch(IOException ex){
 			System.out.println("error" + ex.getMessage());
 		}

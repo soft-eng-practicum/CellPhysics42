@@ -100,32 +100,56 @@ public class Rule1D {
 	 * @return Returns 1 if cell is on 0 if off
 	 * @throws NotValidRuleException
 	 */
-	public byte isOn(byte one, byte two, byte three) throws NotValidRuleException {
+	private byte isOn(byte one, byte two, byte three) throws NotValidRuleException {
+
+		if (one == 1 && two == 1 && three == 1) {
+			return state7;
+		} else if (one == 1 && two == 1 && three == 0) {
+			return state6;
+		} else if (one == 1 && two == 0 && three == 1) {
+			return state5;
+		} else if (one == 1 && two == 0 && three == 0) {
+			return state4;
+		} else if (one == 0 && two == 1 && three == 1) {
+			return state3;
+		} else if (one == 0 && two == 1 && three == 0) {
+			return state2;
+		} else if (one == 0 && two == 0 && three == 1) {
+			return state1;
+		} else if (one == 0 && two == 0 && three == 0) {
+			return state0;
+		} else
+			throw new NotValidRuleException("Bad input for isOn method");
+
+	}
+
+	/** Takes the previous state and uses as input for the selected cell to determine if it's state is on or off.
+	 *  Updates the stateArrya at the this time.
+	 *
+	 * @param one Is the left most bit of the previous state
+	 * @param two Is the middle bit of the previous state
+	 * @param three Right most bit of the previous state
+	 * @return Returns 1 if cell is on 0 if off
+	 * @throws NotValidRuleException
+	 */
+	private void setFillArray(byte one, byte two, byte three) throws NotValidRuleException {
 
 		if (one == 1 && two == 1 && three == 1) {
 			stateArray[lengthCount][widthCount] = (byte)7;
-			return state7;
 		} else if (one == 1 && two == 1 && three == 0) {
 			stateArray[lengthCount][widthCount] = (byte)6;
-			return state6;
 		} else if (one == 1 && two == 0 && three == 1) {
 			stateArray[lengthCount][widthCount] = (byte)5;
-			return state5;
 		} else if (one == 1 && two == 0 && three == 0) {
 			stateArray[lengthCount][widthCount] = (byte)4;
-			return state4;
 		} else if (one == 0 && two == 1 && three == 1) {
 			stateArray[lengthCount][widthCount] = (byte)3;
-			return state3;
 		} else if (one == 0 && two == 1 && three == 0) {
 			stateArray[lengthCount][widthCount] = (byte)2;
-			return state2;
 		} else if (one == 0 && two == 0 && three == 1) {
 			stateArray[lengthCount][widthCount] = (byte)1;
-			return state1;
 		} else if (one == 0 && two == 0 && three == 0) {
 			stateArray[lengthCount][widthCount] = (byte)0;
-			return state0;
 		} else
 			throw new NotValidRuleException("Bad input for isOn method");
 
@@ -155,14 +179,26 @@ public class Rule1D {
 					filledArray[lengthCount][widthCount] = isOn((byte) 0,
 							filledArray[lengthCount - 1][widthCount],
 							filledArray[lengthCount - 1][widthCount + 1]);
+
+					setFillArray((byte) 0,
+							filledArray[lengthCount - 1][widthCount],
+							filledArray[lengthCount - 1][widthCount + 1]);
 				} else if (widthCount + 1 == width) {
 					filledArray[lengthCount][widthCount] = isOn(filledArray[lengthCount - 1]
 							[widthCount - 1],
 							filledArray[lengthCount - 1][widthCount],
 							(byte) 0);
+
+					setFillArray(filledArray[lengthCount - 1][widthCount - 1],
+							filledArray[lengthCount - 1][widthCount],
+							(byte) 0);
 				} else {
 					filledArray[lengthCount][widthCount] = isOn(filledArray[lengthCount - 1]
 							[widthCount - 1],
+							filledArray[lengthCount - 1][widthCount],
+							filledArray[lengthCount - 1][widthCount + 1]);
+
+					setFillArray(filledArray[lengthCount - 1][widthCount - 1],
 							filledArray[lengthCount - 1][widthCount],
 							filledArray[lengthCount - 1][widthCount + 1]);
 				}

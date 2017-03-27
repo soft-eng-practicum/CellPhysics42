@@ -116,8 +116,10 @@ public class Rule2D {
 			for (int x = 1; x < filledArray[1].length - 1; x++) {
 				for (int y = 1; y < filledArray[1][1].length - 1; y++) {
 					filledArray[z][x][y] = isOn((byte) filledArray[z - 1][x - 1][y],
-							(byte) filledArray[z - 1][x + 1][y], (byte) filledArray[z - 1][x][y - 1],
-							(byte) filledArray[z - 1][x][y + 1], (byte) filledArray[z - 1][x][y]);
+							(byte) filledArray[z - 1][x + 1][y], 
+							(byte) filledArray[z - 1][x][y - 1],
+							(byte) filledArray[z - 1][x][y + 1],
+							(byte) filledArray[z - 1][x][y]);
 				}
 			}
 
