@@ -31,7 +31,8 @@ public class Rule1DTest {
 	public void isOnTestRule90() throws NotValidRuleException {
 
 		// given
-		Rule1D myRule = new Rule1D(90);
+		Rule1D myRule = new Rule1D(90, 2,2);
+		myRule.fillArrays();
 
 		// when
 		System.out.println(myRule.toString());
@@ -47,6 +48,7 @@ public class Rule1DTest {
 		Assert.assertEquals("Wrong output rule 90", zero, myRule.isOn(one, zero, one));
 		Assert.assertEquals("Wrong output rule 90", one, myRule.isOn(one, one, zero));
 		Assert.assertEquals("Wrong output rule 90", zero, myRule.isOn(one, one, one));
+		
 
 	}
 

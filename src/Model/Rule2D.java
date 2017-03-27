@@ -21,7 +21,7 @@ public class Rule2D {
 	private int rule;
 	private int nextLayer;
 	private int factor, size;
-	final public int[] rules = {451, 452, 453, 454, 457, 459, 460, 461, 462, 465, 467, 468, 469, 470 + 473, 475, 476,
+	final public int[] rules = {451, 452, 453, 454, 457, 459, 460, 461, 462, 465, 467, 468, 469, 470, 473, 475, 476,
 			478, 481, 483, 484, 485, 486, 489, 491, 492, 493, 494, 497 };
 	private byte[][][] filledArray;
 
@@ -48,7 +48,7 @@ public class Rule2D {
 		if (check) {
 			this.rule = rule;
 			String binary = toBinary(rule);
-			state7 = Byte.parseByte(binary.substring(binary.length() - 10, binary.length() - 9));
+			state9 = Byte.parseByte(binary.substring(binary.length() - 10, binary.length() - 9));
 			state8 = Byte.parseByte(binary.substring(binary.length() - 9, binary.length() - 8));
 			state7 = Byte.parseByte(binary.substring(binary.length() - 8, binary.length() - 7));
 			state6 = Byte.parseByte(binary.substring(binary.length() - 7, binary.length() - 6));
@@ -58,6 +58,8 @@ public class Rule2D {
 			state2 = Byte.parseByte(binary.substring(binary.length() - 3, binary.length() - 2));
 			state1 = Byte.parseByte(binary.substring(binary.length() - 2, binary.length() - 1));
 			state0 = Byte.parseByte(binary.substring(binary.length() - 1, binary.length()));
+			this.rule = rule;
+			System.out.println("" + state9 + state8 + state7 + state6 + state5 + state4+ state3 + state2+ state1+ state0);
 		} else {
 			throw new NotValidRuleException(rule + " is not a valid rule");
 		}
@@ -73,6 +75,7 @@ public class Rule2D {
 	 * @return String of 8 bits
 	 */
 	private String toBinary(int rule) {
+		System.out.println(String.format("%10s", Integer.toBinaryString(rule)).replace(' ', '0'));
 		return String.format("%10s", Integer.toBinaryString(rule)).replace(' ', '0');
 	}
 
@@ -101,6 +104,8 @@ public class Rule2D {
 			return state9;
 		else
 			throw new NotValidRuleException("Bad input for ison");
+		
+
 	}
 
 	public void fillArray() throws NotValidRuleException {
