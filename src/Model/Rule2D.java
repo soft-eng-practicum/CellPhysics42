@@ -25,11 +25,19 @@ public class Rule2D {
 			478, 481, 483, 484, 485, 486, 489, 491, 492, 493, 494, 497 };
 	private byte[][][] filledArray;
 
+	/**
+	 * 
+	 */
 	public Rule2D() {
 		factor = 5;
 		size = 6;
 	}
 
+	/**
+	 * @param ruleNumber
+	 * @param layers
+	 * @throws NotValidRuleException
+	 */
 	public Rule2D(int ruleNumber, int layers) throws NotValidRuleException {
 		setRule(ruleNumber);
 		filledArray = new byte[layers][(2 * layers) + 1][(2 * layers) + 1];
@@ -37,6 +45,10 @@ public class Rule2D {
 		size = 6;
 	}
 
+	/**
+	 * @param rule
+	 * @throws NotValidRuleException
+	 */
 	public void setRule(int rule) throws NotValidRuleException {
 		boolean check = false;
 		for (int i : rules) {
@@ -70,8 +82,7 @@ public class Rule2D {
 	/**
 	 * converts the int rule to a binary string
 	 *
-	 * @param rule
-	 *            int of rule to be applied
+	 * @param rule int of rule to be applied
 	 * @return String of 8 bits
 	 */
 	private String toBinary(int rule) {
@@ -79,6 +90,15 @@ public class Rule2D {
 		return String.format("%10s", Integer.toBinaryString(rule)).replace(' ', '0');
 	}
 
+	/**
+	 * @param one
+	 * @param two
+	 * @param three
+	 * @param four
+	 * @param five
+	 * @return
+	 * @throws NotValidRuleException
+	 */
 	private byte isOn(byte one, byte two, byte three, byte four, byte five) throws NotValidRuleException {
 		int sum = one + two + three + four;
 
@@ -108,6 +128,9 @@ public class Rule2D {
 
 	}
 
+	/**
+	 * @throws NotValidRuleException
+	 */
 	public void fillArray() throws NotValidRuleException {
 		int middle = filledArray[1].length / 2;
 		filledArray[0][middle][middle] = 1;
@@ -126,24 +149,41 @@ public class Rule2D {
 		}
 	}
 
+	/**
+	 * @return
+	 */
 	public byte[][] nextLayer() {
 		int current = nextLayer;
 		nextLayer++;
 		return filledArray[current];
 	}
 
+	/**
+	 * @param layer
+	 * @return
+	 */
 	public byte[][] layer(int layer) {
 		return filledArray[layer];
 	}
 
+	/**
+	 * @return
+	 */
 	public byte[][] lastLayer() {
 		return filledArray[filledArray.length - 1];
 	}
 
+	/**
+	 * @return
+	 */
 	public int[] getRules() {
 		return rules;
 	}
 
+	/**
+	 * @param fileName
+	 * @throws IOException
+	 */
 	public void save3DFile(String fileName) throws IOException {
 		FileWriter file = getFile(fileName + ".scad");
 		file.write("module whole(){\r\n");
@@ -173,6 +213,10 @@ public class Rule2D {
 
 	}
 
+	/**
+	 * @param fileName
+	 * @throws IOException
+	 */
 	public void save3DFileByLayers(String fileName) throws IOException {
 		String newFileName = "";
 		if (filledArray.length % 2 != 0 && filledArray.length > 2) {
@@ -191,6 +235,12 @@ public class Rule2D {
 
 	}
 
+	/**
+	 * @param file
+	 * @param start
+	 * @param end
+	 * @throws IOException
+	 */
 	private void save3DFileLayers(FileWriter file, int start, int end) throws IOException {
 		int level;
 		boolean diff = start > 0;
@@ -242,10 +292,17 @@ public class Rule2D {
 		file.close();
 	}
 
+	/**
+	 * @param layers
+	 */
 	public void setLayers(int layers) {
 		filledArray = new byte[layers][(2 * layers) + 1][(2 * layers) + 1];
 	}
 
+	/**
+	 * @param fileName
+	 * @return
+	 */
 	private FileWriter getFile(String fileName) {
 		File file = new File(fileName);
 		FileWriter fr;
