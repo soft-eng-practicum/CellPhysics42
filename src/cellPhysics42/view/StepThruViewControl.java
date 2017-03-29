@@ -1,19 +1,12 @@
 package cellPhysics42.view;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-
 import Controller.ControlClass;
 import cellPhysics42.MainApp;
 import exception.NotValidRuleException;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.beans.property.StringProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -30,13 +23,11 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.RowConstraints;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import javafx.animation.FillTransition;
 
 /**Class: StepThruViewControl.java 
  * @author Bess Burnett 
