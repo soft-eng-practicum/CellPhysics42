@@ -3,10 +3,12 @@ package Controller;
 import java.util.ArrayList;
 
 import Model.Rule1D;
+import Model.Rule2D;
 import exception.NotValidRuleException;
 
 public class ControlClass {
 	private Rule1D rule1d;
+	private Rule2D rule2d;
 
 	public ControlClass(){
 		rule1d = new Rule1D();
@@ -42,5 +44,15 @@ public class ControlClass {
 
 	public int[] getValidRules(){
 		return rule1d.getRules();
+	}
+	
+	public ArrayList<String> getCubeTranslations(int ruleNum){
+		try {
+			rule2d = new Rule2D(ruleNum, 10);
+			rule2d.fillArray();
+		} catch (NotValidRuleException ex) {
+			ex.printStackTrace();
+		}
+		return rule2d.getCubeTranslations();
 	}
 }

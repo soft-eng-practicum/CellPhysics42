@@ -3,6 +3,7 @@ package Model;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import exception.NotValidRuleException;
 
@@ -104,7 +105,7 @@ public class Rule2D {
 			return state9;
 		else
 			throw new NotValidRuleException("Bad input for ison");
-		
+
 
 	}
 
@@ -140,6 +141,22 @@ public class Rule2D {
 
 	public int[] getRules() {
 		return rules;
+	}
+
+	public ArrayList<String> getCubeTranslations(){
+		ArrayList<String> translations = new ArrayList<>(200);
+		for (int z = 0; z < filledArray.length; z++) {
+			for (int y = 0; y < filledArray[1].length; y++) {
+				for (int x = 0; x < filledArray[1][1].length; x++) {
+					if (filledArray[z][x][y] == 1) {
+						int level = (z - filledArray.length + 1) * -1;
+						String translation =  "" + factor * x + "," + factor * y + "," + factor * level;
+						translations.add(translation);
+					}
+				}
+			}
+		}
+		return translations;
 	}
 
 	public void save3DFile(String fileName) throws IOException {

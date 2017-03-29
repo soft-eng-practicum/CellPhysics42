@@ -65,6 +65,8 @@ public class CustomizeViewControl extends BorderPane {
 	@FXML
 	private Button customizeBt;
 	@FXML
+	private Button threeDButton;
+	@FXML
 	private Button stopBt;
 	@FXML
 	private Button stepThruButton;
@@ -109,7 +111,6 @@ public class CustomizeViewControl extends BorderPane {
 	private int numRows;
 	private int numCols;
 	private double squareSize;
-	private ChangeListener<Scene> listenerScene;
 	
 	/**
 	 * Method name: initialize
@@ -117,6 +118,7 @@ public class CustomizeViewControl extends BorderPane {
 	@FXML
 	public void initialize(){
 		edgeColor = Color.BLACK;
+		stopBt.setText("Start");
 		//setRuleNum(90);
 		//squaresGrid.setVisible(true);
 		oneColor = Color.BLACK;
@@ -212,6 +214,14 @@ public class CustomizeViewControl extends BorderPane {
 		}
 		displayGrid.setAlignment(Pos.CENTER);
 	}
+	
+	@FXML
+	public void load3DScene(){
+		Stage currentStage = (Stage)threeDButton.getScene().getWindow();
+		View3DControl v3D = new View3DControl();
+		Scene scene = v3D.get3DScene(currentStage.getWidth(), currentStage.getHeight());
+		currentStage.setScene(scene);
+	}
 
 	public void runCustom(int width, int height, double rowDur, Color oneC, Color zeroC, int ruleNum, ArrayList<Integer> firstRow){
 		ControlClass controler = new ControlClass();
@@ -278,7 +288,14 @@ public class CustomizeViewControl extends BorderPane {
 	
 	@FXML
 	public void stopRunThru(){
-		timeline.stop();
+		if(stopBt.getText().equals("Stop")){
+			stopBt.setText("Start");
+			timeline.stop();
+		}
+		else{
+			stopBt.setText("Stop");
+			runCustom(37, 55, 1000.0, oneColor, zeroColor, 90, new ArrayList<Integer>());
+		}
 	}
 
 	/**
