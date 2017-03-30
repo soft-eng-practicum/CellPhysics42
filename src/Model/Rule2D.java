@@ -20,13 +20,13 @@ public class Rule2D {
 	private byte state0;
 	private int rule;
 	private int nextLayer;
-	private int factor, size;
+	private int factor, size, layers;
 	final public int[] rules = {451, 452, 453, 454, 457, 459, 460, 461, 462, 465, 467, 468, 469, 470, 473, 475, 476,
 			478, 481, 483, 484, 485, 486, 489, 491, 492, 493, 494, 497 };
 	private byte[][][] filledArray;
 
 	/**
-	 * 
+	 *
 	 */
 	public Rule2D() {
 		factor = 5;
@@ -39,10 +39,12 @@ public class Rule2D {
 	 * @throws NotValidRuleException
 	 */
 	public Rule2D(int ruleNumber, int layers) throws NotValidRuleException {
+		this.layers = layers;
 		setRule(ruleNumber);
 		filledArray = new byte[layers][(2 * layers) + 1][(2 * layers) + 1];
 		factor = 5;
 		size = 6;
+		nextLayer = 0;
 	}
 
 	/**
@@ -71,8 +73,7 @@ public class Rule2D {
 			state1 = Byte.parseByte(binary.substring(binary.length() - 2, binary.length() - 1));
 			state0 = Byte.parseByte(binary.substring(binary.length() - 1, binary.length()));
 			this.rule = rule;
-			System.out.println("" + state9 + state8 + state7 + state6 + state5 + state4+ state3 + state2+ state1+ state0);
-		} else {
+			} else {
 			throw new NotValidRuleException(rule + " is not a valid rule");
 		}
 
@@ -86,7 +87,6 @@ public class Rule2D {
 	 * @return String of 8 bits
 	 */
 	private String toBinary(int rule) {
-		System.out.println(String.format("%10s", Integer.toBinaryString(rule)).replace(' ', '0'));
 		return String.format("%10s", Integer.toBinaryString(rule)).replace(' ', '0');
 	}
 
@@ -124,7 +124,7 @@ public class Rule2D {
 			return state9;
 		else
 			throw new NotValidRuleException("Bad input for ison");
-		
+
 
 	}
 
@@ -134,18 +134,61 @@ public class Rule2D {
 	public void fillArray() throws NotValidRuleException {
 		int middle = filledArray[1].length / 2;
 		filledArray[0][middle][middle] = 1;
+		byte first, second, third, forth, fith;
+		File newFile = null;
+		FileWriter fr = null;
 
-		for (int z = 1; z < filledArray.length; z++) {
-			for (int x = 1; x < filledArray[1].length - 1; x++) {
-				for (int y = 1; y < filledArray[1][1].length - 1; y++) {
-					filledArray[z][x][y] = isOn((byte) filledArray[z - 1][x - 1][y],
-							(byte) filledArray[z - 1][x + 1][y], 
-							(byte) filledArray[z - 1][x][y - 1],
-							(byte) filledArray[z - 1][x][y + 1],
-							(byte) filledArray[z - 1][x][y]);
-				}
+			try {
+				newFile = new File("raw.txt");
+				fr = new FileWriter(newFile);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
 
+
+		for (int z = 1; z < filledArray.length; z++) {
+			for (int x = 0; x < filledArray[1].length; x++) {
+				for (int y = 0; y < filledArray[1][1].length; y++) {
+					try{
+					first = (byte) filledArray[z - 1][x - 1][y];
+					}catch (ArrayIndexOutOfBoundsException e)
+					{
+						first = (byte) filledArray[z - 1][x][y];
+					}
+
+					try {
+					second = (byte) filledArray[z - 1][x + 1][y];
+					}catch (ArrayIndexOutOfBoundsException e)
+					{
+						second = (byte) filledArray[z - 1][x][y];
+					}
+
+					try{
+					third = (byte) filledArray[z - 1][x][y - 1];
+					}catch (ArrayIndexOutOfBoundsException e)
+					{
+						third = (byte) filledArray[z - 1][x][y];
+					}
+
+					try{
+					forth = (byte) filledArray[z - 1][x][y + 1];
+					}catch (ArrayIndexOutOfBoundsException e)
+					{
+						forth = (byte) filledArray[z - 1][x][y];
+					}
+					fith = (byte) filledArray[z - 1][x][y];
+					filledArray[z][x][y] = isOn(first, second, third, forth, fith);
+
+				}
+			}
+		}
+
+		try {
+			fr.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
@@ -293,13 +336,6 @@ public class Rule2D {
 	}
 
 	/**
-	 * @param layers
-	 */
-	public void setLayers(int layers) {
-		filledArray = new byte[layers][(2 * layers) + 1][(2 * layers) + 1];
-	}
-
-	/**
 	 * @param fileName
 	 * @return
 	 */
@@ -315,6 +351,17 @@ public class Rule2D {
 		}
 
 		return fr;
+	}
+
+	/**
+	 * @param layers
+	 */
+	public void setLayers(int layers) {
+		filledArray = new byte[layers][(2 * layers) + 1][(2 * layers) + 1];
+	}
+
+	public int getLayers() {
+		return layers;
 	}
 
 }
