@@ -35,9 +35,7 @@ public class Cube3D extends Box {
 		int x = trans.nextInt();
 		int y = trans.nextInt();
 		int z = trans.nextInt();
-		super.setLayoutX(0);
 		super.setTranslateX(x);
-		super.setLayoutY(0);
 		super.setTranslateY(y	);
 		super.setTranslateZ(z);
 		trans.close();
