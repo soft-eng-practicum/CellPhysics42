@@ -52,8 +52,6 @@ public class StepThruViewControl extends AnchorPane {
 	private Label ruleNumLb;
 	@FXML
 	private Button exitBt;
-//	@FXML
-//	private Button backBt;
 	@FXML
 	private Button startBt;
 	@FXML
@@ -119,8 +117,11 @@ public class StepThruViewControl extends AnchorPane {
 	private double explanationStepSize;
 	private double explanationStartSize;
 
+	
 	/**
 	 * Method name: initialize
+	 * 
+	 * called when the fxml file is loaded to set the start values need for the view
 	 */
 	@FXML
 	public void initialize(){
@@ -143,90 +144,15 @@ public class StepThruViewControl extends AnchorPane {
 		setPaneNumbers();
 		numRows = 10;
 		numCols = 11;
-		//		explanationTextPane.getChildren().addListener(new ListChangeListener<Node>() {
-		//			@Override
-		//			public void onChanged(javafx.collections.ListChangeListener.Change<? extends Node> c) {
-		//				Scene scene = explanationTextPane.getScene();
-		//				Stage currentStage = (Stage)explanationTextPane.getScene().getWindow();
-		//				currentStage.setScene(scene);
-		//			}
-		//		});
-
-		//here be the problem
-
-		//squareSize = Math.floor(parentGrid.getWidth());
 		nextBt.setVisible(false);
-		//backBt.setVisible(false);
 		squareSize = 50;
 		hBoxBackground = Color.CORNFLOWERBLUE;
 		setGridSize(numRows, numCols);
 		setHBoxRims();
 	}
 
-	/**
-	 * Method name: setHBoxRims
-	 */
-	public void setHBoxRims(){
-		numberZero.setBackground(new Background(new BackgroundFill(hBoxBackground, null, null)));
-		numberOne.setBackground(new Background(new BackgroundFill(hBoxBackground, null, null)));
-		numberTwo.setBackground(new Background(new BackgroundFill(hBoxBackground, null, null)));
-		numberThree.setBackground(new Background(new BackgroundFill(hBoxBackground, null, null)));
-		numberFour.setBackground(new Background(new BackgroundFill(hBoxBackground, null, null)));
-		numberFive.setBackground(new Background(new BackgroundFill(hBoxBackground, null, null)));
-		numberSix.setBackground(new Background(new BackgroundFill(hBoxBackground, null, null)));
-		numberSeven.setBackground(new Background(new BackgroundFill(hBoxBackground, null, null)));
-	}
-
-	/**
-	 * Method name: setGridSize
-	 * @param rows
-	 * @param columns
-	 */
-	public void setGridSize(int rows, int columns){
-		displayGrid.getColumnConstraints().removeAll(displayGrid.getColumnConstraints());
-		displayGrid.getRowConstraints().removeAll(displayGrid.getRowConstraints());
-		for(int i = 0; i < columns; i++){
-			displayGrid.getColumnConstraints().add(new ColumnConstraints(squareSize + 1));
-		}
-		for(int i = 0; i < rows; i++){
-			displayGrid.getRowConstraints().add(new RowConstraints(squareSize + 1));
-		}
-		displayGrid.setAlignment(Pos.CENTER);
-	}
-
-	/**
-	 * Method name: setEdge
-	 */
-	public void setEdge(){
-		edgeColor = oneColor.invert();
-	}
-
-	/**
-	 * Method name: setRuleNum
-	 * @param i
-	 */
-	private void setRuleNum(int i) {
-		ruleNum = i;
-		ruleNumLb.setText("Rule " + i);
-	}
-
 	@FXML
-	public void stepBack(){
-		nextCol--;
-		if(nextCol < 0){
-			nextCol = 0;
-		}
-		removeOldHighlights();
-		removeOldText();
-		clearPreviousCell();
-	}
-	
-	private void clearPreviousCell(){
-		
-	}
-
-	@FXML
-	public void exitStepThru(){
+	public boolean exitStepThru(){
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(MainApp.class.getResource("view/CustomizeView.fxml"));
 		Stage currentStage = (Stage)exitBt.getScene().getWindow();
@@ -237,26 +163,32 @@ public class StepThruViewControl extends AnchorPane {
 		catch(Exception ex){
 			System.out.println(ex.getMessage());
 		}
+		return true;
 	}
 
 	/**
 	 * Method name: startStepThru
+	 * 
+	 * begins a step through explanation, sets the next button visible and updates the explanation
 	 */
 	@FXML
-	public void startStepThru(){
+	public boolean startStepThru(){
 		setRuleNum(ruleSelectChoiceBox.getValue());
 		updateExplanation("The on/off (bottom squares) are set be the binary of the rule number, " + ruleNum + ", which is " + Integer.toBinaryString(ruleNum) + 
 				".  Which makes the on/off squares... \n (click next to see on/off squares fill)", 0,explanationStartSize);
 		startBt.setVisible(false);
 		nextBt.setVisible(true);
 		//backBt.setVisible(true);
+		return true;
 	}
 
 	/**
 	 * Method name: nextST
+	 * 
+	 * preforms the next step in the walk through
 	 */
 	@FXML
-	public void nextST(){
+	public boolean nextST(){
 		if(nextRow == 0){
 			fillOnOffSquares();
 			nextRow++;
@@ -281,18 +213,85 @@ public class StepThruViewControl extends AnchorPane {
 			stepThruRule();
 			System.out.println("col index: " + nextCol);
 		}
+		return true;
 	}
 
-	private void removeOldText(){
+	/**
+	 * Method name: setHBoxRims
+	 * 
+	 * sets the edge color for the state numbers (3 digit binary)
+	 */
+	private boolean setHBoxRims(){
+		numberZero.setBackground(new Background(new BackgroundFill(hBoxBackground, null, null)));
+		numberOne.setBackground(new Background(new BackgroundFill(hBoxBackground, null, null)));
+		numberTwo.setBackground(new Background(new BackgroundFill(hBoxBackground, null, null)));
+		numberThree.setBackground(new Background(new BackgroundFill(hBoxBackground, null, null)));
+		numberFour.setBackground(new Background(new BackgroundFill(hBoxBackground, null, null)));
+		numberFive.setBackground(new Background(new BackgroundFill(hBoxBackground, null, null)));
+		numberSix.setBackground(new Background(new BackgroundFill(hBoxBackground, null, null)));
+		numberSeven.setBackground(new Background(new BackgroundFill(hBoxBackground, null, null)));
+		return true;
+	}
+
+	/**
+	 * Method name: setGridSize
+	 * @param rows - number of rows
+	 * @param columns - number of columns
+	 * 
+	 * places constraints on the column and row sizes to create the grid to be filled
+	 */
+	private boolean setGridSize(int rows, int columns){
+		displayGrid.getColumnConstraints().removeAll(displayGrid.getColumnConstraints());
+		displayGrid.getRowConstraints().removeAll(displayGrid.getRowConstraints());
+		for(int i = 0; i < columns; i++){
+			displayGrid.getColumnConstraints().add(new ColumnConstraints(squareSize + 1));
+		}
+		for(int i = 0; i < rows; i++){
+			displayGrid.getRowConstraints().add(new RowConstraints(squareSize + 1));
+		}
+		displayGrid.setAlignment(Pos.CENTER);
+		return true;
+	}
+
+	/**
+	 * Method name: setEdge
+	 * 
+	 * sets the edge of the block to the inverse color of the oneColor
+	 */
+	private boolean setEdge(){
+		edgeColor = oneColor.invert();
+		return true;
+	}
+
+	/**
+	 * Method name: setRuleNum
+	 * @param i - rule number
+	 * 
+	 * sets the rule number and changes the label to match
+	 */
+	private void setRuleNum(int i) {
+		ruleNum = i;
+		ruleNumLb.setText("Rule " + i);
+	}
+
+	/**
+	 * Method name: removeOldText
+	 * 
+	 * removes the previous step's explanation
+	 */
+	private boolean removeOldText(){
 		for(int i = explanationTextPane.getChildren().size() - 1; i > 1; i--){
 			explanationTextPane.getChildren().remove(i);
 		}
+		return true;
 	}
 
 	/**
 	 * Method name: removeOldHighlights
+	 * 
+	 * bundles the squares to remove their highlights 
 	 */
-	private void removeOldHighlights(){
+	private boolean removeOldHighlights(){
 		ObservableList<Node> rects = displayGrid.getChildren();
 		for(Node rect : rects){
 			((LabeledRectangle)rect).setOutline(null);
@@ -308,68 +307,28 @@ public class StepThruViewControl extends AnchorPane {
 		squares.add(squareSeven);
 		clearHighlights(squares);
 		setHBoxRims();
+		return true;
 	}
 
 	/**
 	 * Method name: clearHighlights
-	 * @param squares
+	 * @param squares - ArrayList<LabeledRectangle>
+	 * 
+	 * removes any highlights from the list of squares
 	 */
-	public void clearHighlights(ArrayList<LabeledRectangle> squares){
+	private boolean clearHighlights(ArrayList<LabeledRectangle> squares){
 		for(LabeledRectangle rect : squares){
 			rect.setOutline(null);
 		}
+		return true;
 	}
 
-	//	public void stepThruRule(){
-	//		cellToFillTimeline = new Timeline();
-	//		referenceCellTimeline = new Timeline();
-	//		stateCellTimeline = new Timeline();
-	//		fillCellTimeline = new Timeline();
-	//		while(rowInProgressArrary[0][nextCol] == 0 && rowInProgressArrary[0][nextCol + 1] == 0){
-	//			displayGrid.add(new LabeledRectangle(squareSize, squareSize, zeroColor), nextCol, nextRow);
-	//			nextCol++;
-	//		}
-	//		nextBt.setVisible(false);
-	//		backBt.setVisible(false);
-	//		stateUsedToFill = rowInProgressArrary[1][nextCol];
-	//		Duration exDur = new Duration(explanationTIme);
-	//		Duration cellDur = new Duration(cellHighlightTime);
-	//		KeyFrame ex1KF = new KeyFrame(exDur, e->{
-	//			updateExplanation("This is the cell to fill...", true);
-	//		});
-	//		KeyFrame fillCellHighKF = new KeyFrame(cellDur, e->{
-	//			highlightCellToFill();
-	//		});
-	//		KeyFrame refExKF = new KeyFrame(exDur, e->{
-	//			//getText(2).setVisible(true);
-	//			updateExplanation("... so we look at these 3 to decide the state");
-	//		});
-	//		KeyFrame refCellKF = new KeyFrame(cellDur, e->{
-	//			highlightReferenceCells();
-	//		});
-	//		Timeline timeline2 = new Timeline(refExKF, refCellKF);
-	//		KeyFrame stateExKF = new KeyFrame(exDur, e->{
-	//			updateExplanation("Since the cells are "  + getRefCells() + " we get that the state is...");
-	//		});
-	//		KeyFrame stateCellKF = new KeyFrame(cellDur, e->{
-	//			highlightStateNum();
-	//		});
-	//		KeyFrame fillEx = new KeyFrame(exDur, e->{
-	//			updateExplanation(getState() + ", so the cell becomes " + getFillColorSt() + ".");
-	//		});
-	//		KeyFrame fillCellKF = new KeyFrame(cellDur, e->{
-	//			fillCurentCell();
-	//		});
-	//		//		updateExplanation("This is the cell to fill...", false);
-	//		//		updateExplanation("... so we look at these 3 to decide the state", false);
-	//		//		updateExplanation("Since the cells are "  + getRefCells() + " we get that the state is...", false);
-	//		//		updateExplanation(getState() + ", so the cell becomes " + getFillColorSt() + ".", false);
-	//
-	//	}
 	/**
 	 * Method name: stepThruRule
+	 * 
+	 * creates and plays a timeline that steps through how one cell is filled
 	 */
-	public void stepThruRule(){
+	private boolean stepThruRule(){
 		cellToFillTimeline = new Timeline();
 		referenceCellTimeline = new Timeline();
 		stateCellTimeline = new Timeline();
@@ -382,7 +341,6 @@ public class StepThruViewControl extends AnchorPane {
 			}
 		}
 		nextBt.setVisible(false);
-		//backBt.setVisible(false);
 		stateUsedToFill = rowInProgressArrary[1][nextCol];
 		System.out.println("fill state: " + stateUsedToFill);
 
@@ -463,112 +421,15 @@ public class StepThruViewControl extends AnchorPane {
 		fillCellTimeline.setCycleCount(1);
 
 		cellToFillTimeline.play();
-		//		updateExplanation("This is the cell to fill...", false);
-		//		updateExplanation("... so we look at these 3 to decide the state", false);
-		//		updateExplanation("Since the cells are "  + getRefCells() + " we get that the state is...", false);
-		//		updateExplanation(getState() + ", so the cell becomes " + getFillColorSt() + ".", false);
-
-
-	}
-	//	public void stepThruRule(){
-	//		cellToFillTimeline = new Timeline();
-	//		referenceCellTimeline = new Timeline();
-	//		stateCellTimeline = new Timeline();
-	//		fillCellTimeline = new Timeline();
-	//		
-	//		while(rowInProgressArrary[0][nextCol] == 0 && rowInProgressArrary[0][nextCol + 1] == 0){
-	//			displayGrid.add(new LabeledRectangle(squareSize, squareSize, zeroColor), nextCol, nextRow);
-	//			nextCol++;
-	//		}
-	//		nextBt.setVisible(false);
-	//		backBt.setVisible(false);
-	//		stateUsedToFill = rowInProgressArrary[1][nextCol];
-	//
-	//		Duration exDur = new Duration(explanationTIme);
-	//		Duration cellDur = new Duration(cellHighlightTime);
-	//		KeyFrame ex1KF = new KeyFrame(exDur, e->{
-	//			updateExplanation("This is the cell to fill...", true);
-	//		});
-	//		KeyFrame fillCellHighKF = new KeyFrame(cellDur, e->{
-	//			highlightCellToFill();
-	//		});
-	//		cellToFillTimeline.getKeyFrames().addAll(ex1KF, fillCellHighKF);
-	//		cellToFillTimeline.setOnFinished(e->{
-	//			referenceCellTimeline.play();
-	//		});
-	//		cellToFillTimeline.setCycleCount(1);
-	//		
-	//		KeyFrame refExKF = new KeyFrame(exDur, e->{
-	//			//getText(2).setVisible(true);
-	//			updateExplanation("... so we look at these 3 to decide the state", true);
-	//		});
-	//		KeyFrame refCellKF = new KeyFrame(cellDur, e->{
-	//			highlightReferenceCells();
-	//		});
-	//		referenceCellTimeline.getKeyFrames().addAll(refExKF, refCellKF);
-	//		referenceCellTimeline.setOnFinished(e->{
-	//			stateCellTimeline.play();
-	//		});
-	//		referenceCellTimeline.setCycleCount(1);
-	//		
-	//		KeyFrame stateExKF = new KeyFrame(exDur, e->{
-	//			updateExplanation("Since the cells are "  + getRefCells() + " we get that the state is...", true);
-	//		});
-	//		KeyFrame stateCellKF = new KeyFrame(cellDur, e->{
-	//			highlightStateNum();
-	//		});
-	//		stateCellTimeline.getKeyFrames().addAll(stateExKF, stateCellKF);
-	//		stateCellTimeline.setOnFinished(e->{
-	//			fillCellTimeline.play();
-	//		});
-	//		stateCellTimeline.setCycleCount(1);
-	//		
-	//		KeyFrame fillEx = new KeyFrame(exDur, e->{
-	//			updateExplanation(getState() + ", so the cell becomes " + getFillColorSt() + ".", true);
-	//		});
-	//		KeyFrame fillCellKF = new KeyFrame(cellDur, e->{
-	//			fillCurentCell();
-	//		});
-	//		fillCellTimeline.getKeyFrames().addAll(fillEx, fillCellKF);
-	//		fillCellTimeline.setOnFinished(e->{
-	//			nextBt.setVisible(true);
-	//			backBt.setVisible(true);
-	//			nextCol++;
-	//			if(nextCol > numCols){
-	//				nextCol = 0;
-	//				nextRow++;
-	//			}
-	//		});
-	//		fillCellTimeline.setCycleCount(1);
-	//		
-	//		cellToFillTimeline.play();
-	//		//		updateExplanation("This is the cell to fill...", false);
-	//		//		updateExplanation("... so we look at these 3 to decide the state", false);
-	//		//		updateExplanation("Since the cells are "  + getRefCells() + " we get that the state is...", false);
-	//		//		updateExplanation(getState() + ", so the cell becomes " + getFillColorSt() + ".", false);
-	//
-	//		
-	//	}
-
-	/**
-	 * Method name: getText
-	 * @param rowIndex
-	 * @return
-	 */
-	private Text getText(int rowIndex){
-		ObservableList<Node> labels = explanationTextPane.getChildren();
-		for(Node label : labels){
-			if(GridPane.getRowIndex(label) == rowIndex){
-				return (Text)label;
-			}
-		}
-		return null;
+		return true;
 	}
 
 	/**
 	 * Method name: fillCurentCell
+	 * 
+	 * fills the target cell of the step
 	 */
-	private void fillCurentCell(){
+	private boolean fillCurentCell(){
 		LabeledRectangle rectangle = new LabeledRectangle(squareSize, squareSize, "");
 		if(rowInProgressArrary[0][nextCol] == 1){
 			rectangle.setFill(oneColor);
@@ -577,11 +438,14 @@ public class StepThruViewControl extends AnchorPane {
 			rectangle.setFill(zeroColor);
 		}
 		displayGrid.add(rectangle, nextCol, nextRow);
+		return true;
 	}
 
 	/**
 	 * Method name: getFillColorSt
-	 * @return
+	 * @return String - color
+	 * 
+	 * return a string represenation for the color of the cell being filled
 	 */
 	private String getFillColorSt(){
 		return (rowInProgressArrary[0][nextCol] == 1) ? oneColorSt : zeroColorSt;
@@ -589,7 +453,9 @@ public class StepThruViewControl extends AnchorPane {
 
 	/**
 	 * Method name: getRefCells
-	 * @return
+	 * @return String - three previous states
+	 * 
+	 * returns a string containing the 3 previous states being used
 	 */
 	private String getRefCells(){
 		String retString;
@@ -607,7 +473,9 @@ public class StepThruViewControl extends AnchorPane {
 
 	/**
 	 * Method name: getState
-	 * @return
+	 * @return String - state
+	 * 
+	 * returns an off/on string of the cell state
 	 */
 	private String getState(){
 		return (rowInProgressArrary[0][nextCol] == 0) ? "off (0)" : "on (1)";
@@ -615,42 +483,46 @@ public class StepThruViewControl extends AnchorPane {
 
 	/**
 	 * Method name: updateExplanation
-	 * @param explanation
-	 * @param canSee
+	 * @param explanation - String 
+	 * @param rowToPlace - int
+	 * @param fontSize - double
+	 * 
+	 * updates the explanationPane by setting the given string to the given font size and placing it in the given row of the 
+	 * explanationPane
 	 */
-	private void updateExplanation(String explanation, int rowToPlace, double fontSize) {
+	private boolean updateExplanation(String explanation, int rowToPlace, double fontSize) {
 		Font font = new Font(fontSize);
 		explanation  = explanation + "\n";
 		Text explanationTx = new Text(explanation);
 		explanationTx.setWrappingWidth(300);
 		explanationTx.setFont(font);
-		explanationTextPane.add(explanationTx, 0, rowToPlace);;
+		explanationTextPane.add(explanationTx, 0, rowToPlace);
+		return true;
 	}
 
 	/**
 	 * Method name: highlightReferenceCells
+	 * 
+	 * highlights the cells beinging referenced to fill the next cell
 	 */
-	private void highlightReferenceCells(){
+	private boolean highlightReferenceCells(){
 		setRectangleHighlight(nextRow - 1, nextCol - 1, referenceCellHightlight);
-		//		left.setStroke(referenceCellHightlight);
-		//		displayGrid.add(left, nextCol - 1, nextRow - 1);
 		setRectangleHighlight(nextRow - 1, nextCol, referenceCellHightlight);
-		//center.setStroke(referenceCellHightlight);
-		//		displayGrid.add(center, nextCol , nextRow - 1);
 		if(nextCol != numCols - 1){
 			setRectangleHighlight(nextRow - 1, nextCol + 1, referenceCellHightlight);
 		}
-		//right.setStroke(referenceCellHightlight);
-		//		displayGrid.add(right, nextCol  + 1, nextRow - 1);
+		return true;
 	}
 
 	/**
 	 * Method name: setRectangleHighlight
-	 * @param row
-	 * @param col
-	 * @param edgeColor
+	 * @param row - int
+	 * @param col - int
+	 * @param edgeColor - Color
+	 * 
+	 * sets the edge color of the rectangle in the given position of the grid
 	 */
-	private void setRectangleHighlight(int row, int col, Color edgeColor) {
+	private boolean setRectangleHighlight(int row, int col, Color edgeColor) {
 		ObservableList<Node> rects = displayGrid.getChildren();
 		LabeledRectangle retRec = null;
 		for(Node rect : rects){
@@ -659,11 +531,14 @@ public class StepThruViewControl extends AnchorPane {
 			}
 		}
 		retRec.setOutline(edgeColor);
+		return true;
 	}
 
 	/**
 	 * Method name: highlightCellToFill
-	 * @return
+	 * @return rectangle - LabeledRectangle
+	 * 
+	 * highlights the cell to fill in this step
 	 */
 	private LabeledRectangle highlightCellToFill(){
 		LabeledRectangle rectangle = new LabeledRectangle(squareSize, squareSize, cellToFillHightlight);
@@ -674,8 +549,10 @@ public class StepThruViewControl extends AnchorPane {
 
 	/**
 	 * Method name: highlightStateNum
+	 * 
+	 * highlights the state the cell is in
 	 */
-	private void highlightStateNum(){
+	private boolean highlightStateNum(){
 		switch(stateUsedToFill){
 		case 0: squareZero.setOutline(stateUsedHightlight);
 		numberZero.setBackground(new Background(new BackgroundFill(stateUsedHightlight, null, null)));
@@ -702,12 +579,15 @@ public class StepThruViewControl extends AnchorPane {
 		numberSeven.setBackground(new Background(new BackgroundFill(stateUsedHightlight, null, null)));
 		break;
 		}
+		return true;
 	}
 
 	/**
 	 * Method name: setFirstRow
+	 * 
+	 * sets the first row with a block in the center
 	 */
-	private void setFirstRow() {
+	private boolean setFirstRow() {
 		control = new ControlClass();
 		try{
 			control.setRule1D(ruleSelectChoiceBox.getValue(), 10	, 11);
@@ -717,12 +597,15 @@ public class StepThruViewControl extends AnchorPane {
 
 		}
 		fillFirstRow();
+		return true;
 	}
 
 	/**
 	 * Method name: fillFirstRow
+	 * 
+	 * fills the first row
 	 */
-	private void fillFirstRow() {
+	private boolean fillFirstRow() {
 		for(int i = 0; i < rowInProgressArrary[0] .length; i++){
 			if(rowInProgressArrary[0][i] == 0){
 				displayGrid.add(new LabeledRectangle(squareSize, squareSize, zeroColor), i	, 0);
@@ -731,24 +614,25 @@ public class StepThruViewControl extends AnchorPane {
 				displayGrid.add(new LabeledRectangle(squareSize, squareSize, oneColor), i	, 0);
 			}
 		}
+		return true;
 	}
 
 	/**
 	 * Method name: fillOnOffSquares
+	 * 
+	 * get a binary string of rule number and passes it to the set squares
 	 */
-	private void fillOnOffSquares() {
-		setSquareNums(Integer.toBinaryString(ruleNum));
+	private boolean fillOnOffSquares() {
+		return setSquareNums(Integer.toBinaryString(ruleNum));
 	}
 
 	/**
 	 * Method name: setSquareNums
-	 * @param binaryString
+	 * @param binaryString - String
+	 * 
+	 * takes the binary string and fill the state squares to the correct value
 	 */
-	/**
-	 * Method name: setSquareNums
-	 * @param binaryString
-	 */
-	private void setSquareNums(String binaryString) {
+	private boolean setSquareNums(String binaryString) {
 		while(binaryString.length() < 8){
 			binaryString = "0" + binaryString;
 		}
@@ -776,15 +660,15 @@ public class StepThruViewControl extends AnchorPane {
 		squareSeven.setLabel(binaryString.charAt(0));
 		squareSeven.setOutline(edgeColor);
 		squareSeven.setFill((binaryString.charAt(0) == '1') ? oneColor : zeroColor);
+		return true;
 	}
 
 	/**
 	 * Method name: setRuleChoices
+	 * 
+	 * sets the valid rules in the rule selection choice box
 	 */
-	/**
-	 * Method name: setRuleChoices
-	 */
-	public void setRuleChoices(){
+	private boolean setRuleChoices(){
 		ControlClass controlClass = new ControlClass();
 		ObservableList<Integer> rules = FXCollections.observableArrayList();
 		int[] rulesInt = controlClass.getValidRules();
@@ -792,15 +676,15 @@ public class StepThruViewControl extends AnchorPane {
 			rules.add(rulesInt[i]);
 		}
 		ruleSelectChoiceBox.setItems(rules);
+		return true;
 	}
 
 	/**
 	 * Method name: setPaneNumbers
+	 * 
+	 * sets the three digit binary in the 3 number states
 	 */
-	/**
-	 * Method name: setPaneNumbers
-	 */
-	public void setPaneNumbers(){
+	private boolean setPaneNumbers(){
 		setThreeDigBinaryNubmer(0, numberZero);
 		setThreeDigBinaryNubmer(1, numberOne);
 		setThreeDigBinaryNubmer(2, numberTwo);
@@ -809,19 +693,17 @@ public class StepThruViewControl extends AnchorPane {
 		setThreeDigBinaryNubmer(5, numberFive);
 		setThreeDigBinaryNubmer(6, numberSix);
 		setThreeDigBinaryNubmer(7, numberSeven);
+		return true;
 	}
 
 	/**
 	 * Method name: setThreeDigBinaryNubmer
 	 * @param num
 	 * @param numberHolder
+	 * 
+	 * creates a 3 bit string from the number and sets the blocks in the hBox to hold that bit string
 	 */
-	/**
-	 * Method name: setThreeDigBinaryNubmer
-	 * @param num
-	 * @param numberHolder
-	 */
-	public void setThreeDigBinaryNubmer(int num, HBox numberHolder){
+	private boolean setThreeDigBinaryNubmer(int num, HBox numberHolder){
 		ObservableList<Node> rects = numberHolder.getChildren();
 		String binNum = Integer.toBinaryString(num);
 		while(binNum.length() < 3){
@@ -833,5 +715,6 @@ public class StepThruViewControl extends AnchorPane {
 			Color fillColor = (binNum.charAt(index) == '1') ? oneColor : zeroColor;
 			((LabeledRectangle)rects.get(index)).setFill(fillColor);
 		}
+		return true;
 	}
 }
