@@ -156,7 +156,7 @@
                      <font>
                         <Font size="18.0" />
                      </font></Button>
-                  <Button fx:id="threeDButton" layoutX="369.0" layoutY="8.0" mnemonicParsing="false" onAction="#load3DScene" text="3-D View" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <Button fx:id="threeDButton" layoutX="369.0" layoutY="8.0" mnemonicParsing="false" onAction="#run3DView" text="3-D View" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <font>
                         <Font size="18.0" />
                      </font>

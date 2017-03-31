@@ -12,6 +12,7 @@ public class ControlClass {
 
 	public ControlClass(){
 		rule1d = new Rule1D();
+		rule2d = new Rule2D();
 	}
 
 	public byte[][] getNextLine1D() throws NotValidRuleException{
@@ -54,5 +55,14 @@ public class ControlClass {
 			ex.printStackTrace();
 		}
 		return rule2d.getCubeTranslations();
+	}
+	
+	public ArrayList<Integer> get2DRules(){
+		int[] rules = rule2d.getRules();
+		ArrayList<Integer> rulesAL = new ArrayList<>();
+		for(int i = 0; i < rules.length; i++){
+			rulesAL.add(rules[i]);
+		}
+		return rulesAL;
 	}
 }

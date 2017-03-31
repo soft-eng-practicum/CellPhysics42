@@ -1,5 +1,7 @@
 package cellPhysics42.view;
 
+import javafx.scene.Camera;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -14,6 +16,7 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -29,6 +32,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Point3D;
 import javafx.geometry.Pos;
 
 /**Class: CustomizeViewControl.java 
@@ -211,11 +215,46 @@ public class CustomizeViewControl extends BorderPane {
 	}
 	
 	@FXML
-	public void load3DScene(){
-		Stage currentStage = (Stage)threeDButton.getScene().getWindow();
-		View3DControl v3D = new View3DControl();
-		Scene scene = v3D.get3DScene(currentStage.getWidth(), currentStage.getHeight());
-		currentStage.setScene(scene);
+	public void run3DView(){
+//		Stage currentStage = (Stage)threeDButton.getScene().getWindow();
+//		View3DControl v3D = new View3DControl();
+//		Scene scene = v3D.get3DScene(currentStage.getWidth(), currentStage.getHeight());
+//		currentStage.setScene(scene);
+//		rotateTimeline(scene);
+		try{
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainApp.class.getResource("view/View3D.fxml"));
+			System.out.println(loader.getLocation());
+			AnchorPane pane = (AnchorPane)loader.load();
+			Scene scene = new Scene(pane);
+			Stage newStage = (Stage) threeDButton.getScene().getWindow();
+			newStage.setScene(scene);
+		}
+		catch(Exception ex){
+			System.out.println(ex.getMessage());
+		}
+	}
+	
+	public void rotateTimeline(Scene scene){
+		Timeline rotateTimeline = new Timeline();
+		rotateTimeline.getKeyFrames().add(new KeyFrame(new Duration(1000), e->{
+			rotate(scene);
+		}));
+		rotateTimeline.setCycleCount(30);
+		rotateTimeline.play();
+	}
+	
+//	public void rotate(Scene scene){
+//		Camera camera = scene.getCamera();
+//		camera.
+//	}
+	
+	public void rotate(Scene scene){
+		Group root = (Group)scene.getRoot();
+		root.getTransforms().add(new Rotate(10, new Point3D(0, 10, 0)));
+//		for(int i = 0; i < 360; i++){
+//			root.getTransforms().add(new Rotate(angle, axis));
+//			}
 	}
 
 	public void runCustom(int width, int height, double rowDur, Color oneC, Color zeroC, int ruleNum, ArrayList<Integer> firstRow){
