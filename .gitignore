@@ -7,3 +7,4 @@
 /testreport/
 *.class
 *.xml
+/testreport/*.xml
