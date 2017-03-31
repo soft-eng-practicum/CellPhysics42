@@ -10,7 +10,8 @@
 
 **Team Members**
 ------------
-1. **Robert Jory Alexander**, *Testing*,
-2. **Jose Tenorio**, *Documentation Lead*
+1. **Robert Jory Alexander**, *Testing*
 3. **Michael Holtmann**, *Project Manager*, *Client liaison*
 4. **Bess Burnett**, *UX design*, *Architect* 
+
+**Survey:** [Cellular Automation Program Survey](https://www.surveymonkey.com/r/WG7JTP2)
