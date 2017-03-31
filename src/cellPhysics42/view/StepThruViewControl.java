@@ -152,6 +152,11 @@ public class StepThruViewControl extends AnchorPane {
 		setHBoxRims();
 	}
 
+	/**
+	 * Method name: exitStepThru
+	 * 
+	 * exits the step thru and return to the cusomize view
+	 */
 	@FXML
 	public boolean exitStepThru(){
 		FXMLLoader loader = new FXMLLoader();

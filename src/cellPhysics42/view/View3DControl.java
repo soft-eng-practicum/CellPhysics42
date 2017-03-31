@@ -27,6 +27,16 @@ import javafx.scene.paint.Color;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 
+/**Class: View3DControl.java 
+   * @author Bess Burnett 
+   * @version 1.0 
+   * Course : ITEC  Spring 2017
+   * Written: Mar 31, 2017 
+  	   * 
+   * This class –  controls the View3D
+   * 
+   * Purpose: –  allows the user to build a 3D model for a given rule and then manipulate it on the screen
+   */
 public class View3DControl extends AnchorPane{
 	@FXML
 	private Group cubeGroup;
@@ -257,19 +267,4 @@ public class View3DControl extends AnchorPane{
 		scene.setCamera(getCamara());
 		return scene;
 	}
-
-	//create a Group to hold the cubes
-
-	//create cubes and set position base on file
-	//create cube
-	//set material
-
-	//create light (ambient) and add cubes to its scope
-	//add lights to the group
-
-	//add cubes to group
-
-	//create a scene with the group
-
-	//create a camara and set it to the Scene
 }
