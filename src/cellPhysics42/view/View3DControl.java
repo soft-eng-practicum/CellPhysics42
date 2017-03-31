@@ -8,7 +8,6 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.AmbientLight;
@@ -56,7 +55,7 @@ public class View3DControl extends AnchorPane{
 		control = new ControlClass();
 		setLayerNumbers();
 		setRuleChoices();
-		factor = 7;
+		factor = 10;
 		rotateX = new Rotate(0, Rotate.X_AXIS);
 		rotateY = new Rotate(0, Rotate.Y_AXIS);
 		rotateZ = new Rotate(0, Rotate.Z_AXIS);
