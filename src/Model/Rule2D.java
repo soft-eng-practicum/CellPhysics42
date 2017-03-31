@@ -376,6 +376,7 @@ public class Rule2D {
 	 */
 	public void setLayers(int layers) {
 		filledArray = new byte[layers][(2 * layers) + 1][(2 * layers) + 1];
+		this.layers = layers;
 	}
 
 	public int getLayers() {
