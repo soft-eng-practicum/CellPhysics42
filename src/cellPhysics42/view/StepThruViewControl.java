@@ -35,9 +35,10 @@ import javafx.util.Duration;
  * Course : ITEC  Spring 2017
  * Written: Mar 23, 2017 
  * 
- * This class –  
+ * This class –  Controls the StepThruView.fxml
  * 
- * Purpose: –  
+ * Purpose: –  Allows the user to step through each rule as it fills one cell at at time and gives an explanation of
+ * what is happening at each step and why the cell is filled the way it is.
  */
 public class StepThruViewControl extends AnchorPane {
 	@FXML
