@@ -223,14 +223,31 @@ public class Rule1D {
 			for (lengthCount = 1; lengthCount < this.length; lengthCount++) {
 				for (widthCount = 0; widthCount < this.width; widthCount++) {
 					if (widthCount == 0) {
-						filledArray[lengthCount][widthCount] = isOn((byte) 0, filledArray[lengthCount - 1][widthCount],
+						filledArray[lengthCount][widthCount] = isOn((byte) 0,
+								filledArray[lengthCount - 1][widthCount],
+								filledArray[lengthCount - 1][widthCount + 1]);
+
+						setFillArray((byte) 0,
+								filledArray[lengthCount - 1][widthCount],
 								filledArray[lengthCount - 1][widthCount + 1]);
 					} else if (widthCount + 1 == width) {
-						filledArray[lengthCount][widthCount] = isOn(filledArray[lengthCount - 1][widthCount - 1],
-								filledArray[lengthCount - 1][widthCount], (byte) 0);
+						filledArray[lengthCount][widthCount] = isOn(filledArray[lengthCount - 1]
+								[widthCount - 1],
+								filledArray[lengthCount - 1][widthCount],
+								(byte) 0);
+
+						setFillArray(filledArray[lengthCount - 1][widthCount - 1],
+								filledArray[lengthCount - 1][widthCount],
+								(byte) 0);
 					} else {
-						filledArray[lengthCount][widthCount] = isOn(filledArray[lengthCount - 1][widthCount - 1],
-								filledArray[lengthCount - 1][widthCount], filledArray[lengthCount - 1][widthCount + 1]);
+						filledArray[lengthCount][widthCount] = isOn(filledArray[lengthCount - 1]
+								[widthCount - 1],
+								filledArray[lengthCount - 1][widthCount],
+								filledArray[lengthCount - 1][widthCount + 1]);
+
+						setFillArray(filledArray[lengthCount - 1][widthCount - 1],
+								filledArray[lengthCount - 1][widthCount],
+								filledArray[lengthCount - 1][widthCount + 1]);
 					}
 				}
 			}
