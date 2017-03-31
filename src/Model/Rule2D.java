@@ -47,6 +47,7 @@ public class Rule2D {
 		size = 6;
 		nextLayer = 0;
 	}
+	
 
 	/**
 	 * @param rule
@@ -224,20 +225,32 @@ public class Rule2D {
 		return rules;
 	}
 
-	public ArrayList<String> getCubeTranslations(){
+	public ArrayList<String> getCubeTranslations(int startLayer, int endLayer){
 		ArrayList<String> translations = new ArrayList<>(200);
-		for (int z = 0; z < filledArray.length; z++) {
+		for (int z = startLayer; z < endLayer; z++) {
 			for (int y = 0; y < filledArray[1].length; y++) {
 				for (int x = 0; x < filledArray[1][1].length; x++) {
 					if (filledArray[z][x][y] == 1) {
 						int level = (z - filledArray.length + 1) * -1;
-						String translation =  "" + factor * x + "," + factor * y + "," + factor * level;
+						String translation =  translateToCenter(factor * x , factor * y , factor * level);
 						translations.add(translation);
 					}
 				}
 			}
 		}
 		return translations;
+	}
+	
+	private String translateToCenter(int x, int y, int z){
+		x = x - (factor * (layers *2)+ 1)/2;
+		y = y -(factor * (layers * 2) +1)/2;
+		z = z -(factor * layers + 1)/2;
+		return "" + x + "," + y + "," + z;	
+	}
+	
+	public void setFactor(int factor){
+		this.factor = factor;
+		size = factor - 1;
 	}
 
 	/**
@@ -340,8 +353,8 @@ public class Rule2D {
 			}
 		}
 
-		int finTran = (((filledArray.length * 2 + 1) * 5) / 2) + 1;
-		int finZ = (filledArray.length - end) * 5;
+		int finTran = (((filledArray.length * 2 + 1) * factor) / 2) + 1;
+		int finZ = (filledArray.length - end) * factor;
 		file.write("}\r\n");
 
 		if (diff) {

@@ -8,7 +8,7 @@ import javafx.scene.shape.Box;
 
 public class Cube3D extends Box {
 	private static final double defaultSize = 5.0;
-	private static final Color defaultDiffuseColor = Color.TEAL;
+	private static final Color defaultDiffuseColor = Color.CADETBLUE;
 	private static final Color defaultSpecularColor = Color.AQUA;
 	private PhongMaterial material;
 	
@@ -18,7 +18,7 @@ public class Cube3D extends Box {
 	
 	public Cube3D(double size, Color diffuseColor, Color specularColor){
 		material = new PhongMaterial(diffuseColor);
-		material.setSpecularColor(specularColor);
+		//material.setSpecularColor(specularColor);
 		super.setWidth(size);
 		super.setHeight(size);
 		super.setDepth(size);

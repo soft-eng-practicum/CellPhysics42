@@ -112,7 +112,6 @@ public class StepThruViewControl extends AnchorPane {
 	private int numRows;
 	private int numCols;
 	private double explanationTIme;
-	private double cellHighlightTime;
 	private Timeline cellToFillTimeline;
 	private Timeline referenceCellTimeline;
 	private Timeline stateCellTimeline;

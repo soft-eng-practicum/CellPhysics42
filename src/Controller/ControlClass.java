@@ -47,14 +47,15 @@ public class ControlClass {
 		return rule1d.getRules();
 	}
 	
-	public ArrayList<String> getCubeTranslations(int ruleNum){
+	
+	public ArrayList<String> getCubeTranslations(int ruleNum, int numLayers, int startLayer, int endLayer, int factor){
 		try {
-			rule2d = new Rule2D(ruleNum, 10);
+			rule2d = new Rule2D(ruleNum, numLayers);
 			rule2d.fillArray();
 		} catch (NotValidRuleException ex) {
 			ex.printStackTrace();
 		}
-		return rule2d.getCubeTranslations();
+		return rule2d.getCubeTranslations(startLayer - 1, endLayer - 1);
 	}
 	
 	public ArrayList<Integer> get2DRules(){
