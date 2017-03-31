@@ -67,9 +67,7 @@ public class ControlTest {
 		byte[][] line9 = {{1,0,1,0,0,0,0,0,1,0,1,},{1,2,4,0,0,0,0,0,1,2,4}};
 
 		Assert.assertArrayEquals(line0, con.getNextLine1D());
-		
-		byte[][] test = con.getNextLine1D();
-		Assert.assertArrayEquals(line1, test);
+		Assert.assertArrayEquals(line1, con.getNextLine1D());
 		Assert.assertArrayEquals(line2, con.getNextLine1D());
 		Assert.assertArrayEquals(line3, con.getNextLine1D());
 		Assert.assertArrayEquals(line4, con.getNextLine1D());
