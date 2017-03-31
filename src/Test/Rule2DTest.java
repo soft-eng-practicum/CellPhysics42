@@ -286,28 +286,27 @@ public class Rule2DTest {
 		ArrayList<String> trans = new ArrayList<String>();
 		ArrayList<String> correct = new ArrayList<String>();
 
-		correct.add("10,10,5");
-		correct.add("0,0,0");
-		correct.add("5,0,0");
-		correct.add("10,0,0");
-		correct.add("15,0,0");
-		correct.add("20,0,0");
-		correct.add("0,5,0");
-		correct.add("5,5,0");
-		correct.add("15,5,0");
-		correct.add("20,5,0");
-		correct.add("0,10,0");
-		correct.add("10,10,0");
-		correct.add("20,10,0");
-		correct.add("0,15,0");
-		correct.add("5,15,0");
-		correct.add("15,15,0");
-		correct.add("20,15,0");
-		correct.add("0,20,0");
-		correct.add("5,20,0");
-		correct.add("10,20,0");
-		correct.add("15,20,0");
-		correct.add("20,20,0");
+		correct.add("-10,-10,-5");
+		correct.add("-5,-10,-5");
+		correct.add("0,-10,-5");
+		correct.add("5,-10,-5");
+		correct.add("10,-10,-5");
+		correct.add("-10,-5,-5");
+		correct.add("-5,-5,-5");
+		correct.add("5,-5,-5");
+		correct.add("10,-5,-5");
+		correct.add("-10,0,-5");
+		correct.add("0,0,-5");
+		correct.add("10,0,-5");
+		correct.add("-10,5,-5");
+		correct.add("-5,5,-5");
+		correct.add("5,5,-5");
+		correct.add("10,5,-5");
+		correct.add("-10,10,-5");
+		correct.add("-5,10,-5");
+		correct.add("0,10,-5");
+		correct.add("5,10,-5");
+		correct.add("10,10,-5");
 
 
 		Rule2D rule = null;
@@ -322,12 +321,12 @@ public class Rule2DTest {
 		printAray(rule.layer(0));
 		printAray(rule.layer(1));
 
-		trans = rule.getCubeTranslations();
+		trans = rule.getCubeTranslations(1,2);
 
-			System.out.println(trans.toString());
-			System.out.println(correct.toString());
-	
-			Assert.assertEquals(trans.toString(), correct.toString());
+		System.out.println(trans.toString());
+		System.out.println(correct.toString());
+
+		Assert.assertEquals(trans.toString(), correct.toString());
 
 
 	}
