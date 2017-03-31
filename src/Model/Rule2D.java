@@ -240,10 +240,7 @@ public class Rule2D {
 		return translations;
 	}
 
-	/**
-	 * @param fileName
-	 * @throws IOException
-	 */
+
 	/**
 	 * @param fileName
 	 * @throws IOException
@@ -287,12 +284,12 @@ public class Rule2D {
 			newFileName = fileName + "Layers1-3.scad";
 			save3DFileLayers(getFile(newFileName), 0, 3);
 			for (int i = 3; i < filledArray.length; i += 2) {
-				newFileName = fileName + "Layers" + (i + 1) + "-" + (i + 2) + " .scad";
+				newFileName = fileName + "Layers" + (i + 1) + "-" + (i + 2) + ".scad";
 				save3DFileLayers(getFile(newFileName), i, i + 2);
 			}
 		} else {
 			for (int i = 0; i < filledArray.length; i += 2) {
-				newFileName = fileName + "Layers" + (i) + "-" + (i + 1) + " .scad";
+				newFileName = fileName + "Layers" + (i) + "-" + (i + 1) + ".scad";
 				save3DFileLayers(getFile(newFileName), i, i + 2);
 			}
 		}

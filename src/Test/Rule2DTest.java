@@ -1,5 +1,8 @@
 package Test;
 
+import java.io.File;
+import java.io.IOException;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -156,7 +159,107 @@ public class Rule2DTest {
 
 	@Test
 	public void save3DTest(){
-		//I have not figured out how to test this just yet....probably read the text file
+		boolean fileFound = false;
+		Rule2D rule;
+		
+		try {
+			rule = new Rule2D(451, 4);
+			rule.fillArray();
+			rule.save3DFile("Rule451");
+		} catch (NotValidRuleException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		File file = new File("Rule451.scad");
+		
+		if(file.exists())
+		{
+			fileFound = true;
+		}
+		
+		file.delete();
+		Assert.assertTrue(fileFound);
+	}
+	
+	@Test
+	public void save3DTestByLayerEven(){
+		boolean fileFoundL1 = false;
+		boolean fileFoundL2 = false;
+		Rule2D rule;
+		
+		try {
+			rule = new Rule2D(451, 4);
+			rule.fillArray();
+			rule.save3DFileByLayers("Rule451");
+		} catch (NotValidRuleException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		File fileL1 = new File("Rule451Layers0-1.scad");
+		File fileL2 = new File("Rule451Layers2-3.scad");
+		
+		if(fileL1.exists())
+		{
+			fileFoundL1 = true;
+		}
+		
+		if(fileL2.exists())
+		{
+			fileFoundL2 = true;
+		}
+		
+		fileL1.delete();
+		fileL2.delete();
+		Assert.assertTrue(fileFoundL1);
+		Assert.assertTrue(fileFoundL2);
+	}
+	
+	@Test
+	public void save3DTestByLayerOdd(){
+		boolean fileFoundL1 = false;
+		boolean fileFoundL2 = false;
+		Rule2D rule;
+		
+		try {
+			rule = new Rule2D(451, 5);
+			rule.fillArray();
+			rule.save3DFileByLayers("Rule451");
+		} catch (NotValidRuleException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		File fileL1 = new File("Rule451Layers1-3.scad");
+		File fileL2 = new File("Rule451Layers4-5.scad");
+		
+		if(fileL1.exists())
+		{
+			fileFoundL1 = true;
+		}
+		
+		if(fileL2.exists())
+		{
+			fileFoundL2 = true;
+		}
+		
+		fileL1.delete();
+		fileL2.delete();
+		Assert.assertTrue(fileFoundL1);
+		Assert.assertTrue(fileFoundL2);
 	}
 
 	private void printAray(byte[][] layer) {
