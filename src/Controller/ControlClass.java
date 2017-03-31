@@ -43,7 +43,7 @@ public class ControlClass {
 		}
 	}
 
-	public int[] getValidRules(){
+	public int[] getValidRules1D(){
 		return rule1d.getRules();
 	}
 	

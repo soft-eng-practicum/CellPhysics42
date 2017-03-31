@@ -672,7 +672,7 @@ public class StepThruViewControl extends AnchorPane {
 	private boolean setRuleChoices(){
 		ControlClass controlClass = new ControlClass();
 		ObservableList<Integer> rules = FXCollections.observableArrayList();
-		int[] rulesInt = controlClass.getValidRules();
+		int[] rulesInt = controlClass.getValidRules1D();
 		for(int i = 0; i < rulesInt.length; i++){
 			rules.add(rulesInt[i]);
 		}

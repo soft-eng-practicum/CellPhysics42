@@ -48,13 +48,14 @@ public class CustomizeOptionsControl {
 	private Slider speedSlidBar;
 
 	private int gridWidthSquares;
-	private int gridHeightSquares;
 	private Color oneColor;
 	private Color zeroColor;
 	private ArrayList<Integer> startSquares;
 
 	/**
 	 * Method name: initialize
+	 * 
+	 * called when the fxml document is loaded
 	 */
 	@FXML
 	public void initialize(){
@@ -71,74 +72,76 @@ public class CustomizeOptionsControl {
 	}
 
 	/**
-	 * Method name: setRuleChoices
-	 */
-	public void setRuleChoices(){
-		ControlClass controlClass = new ControlClass();
-		ObservableList<Integer> rules = FXCollections.observableArrayList();
-		int[] rulesInt = controlClass.getValidRules();
-		for(int i = 0; i < rulesInt.length; i++){
-			rules.add(rulesInt[i]);
-		}
-		ruleSelectChoiceBox.setItems(rules);
-	}
-
-	/**
-	 * Method name: setWidthValues
-	 */
-	public void setWidthValues(){
-		ObservableList<Integer> widths = FXCollections.observableArrayList();
-		for(int i = 35; i < 99; i += 2){
-			widths.add(i);
-		}
-		gridWidthCB.setItems(widths);
-	}
-
-	/**
 	 * Method name: startCustom
+	 * 
+	 * reads in the values selected, then loads the customize view and starts the rule
 	 */
 	@FXML
-	public void startCustom(){
+	public boolean startCustom(){
 		int numSquaresWidth = gridWidthCB.getValue();
 		int numSquaresHeight = Integer.parseInt(gridHeightTF.getText());
 		double rowDuration = (speedSlidBar.getValue() < 1) ? 1 : speedSlidBar.getValue();
 		oneColor = onesColorPicker.getValue();
 		zeroColor = zeroColorPicker.getValue();
-		int ruleNumber = ruleSelectChoiceBox.getValue();
-		//Scene currentScene = startButton.getScene();
-		
-//		BorderPane cvPane = (BorderPane)mainPane.getParent();
-//		cvPane.setP
-		
+		int ruleNumber = ruleSelectChoiceBox.getValue();	
 		try{
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainApp.class.getResource("view/CustomizeView.fxml"));
 			AnchorPane pane = (AnchorPane) loader.load();
 			Scene scene = new Scene(pane);
 			Stage newStage = (Stage) startButton.getScene().getWindow();
-
 			ChangeListener<Scene> listener = new ChangeListener<Scene>() {
 				@Override
 				public void changed(ObservableValue<? extends Scene> observable, Scene oldValue, Scene newValue) {
 					CustomizeViewControl cvc = loader.getController();
-					//set custom options before running?
 					cvc.runCustom(numSquaresWidth, numSquaresHeight, rowDuration, oneColor, zeroColor, ruleNumber, startSquares);
 				}
 			};
-
 			newStage.sceneProperty().addListener(listener);
 			newStage.setScene(scene);
 		}
-
 		catch(IOException ex){
 			System.out.println("error" + ex.getMessage());
 		}
+		return true;
+	}
+
+	/**
+	 * Method name: setRuleChoices
+	 * 
+	 * fills the rule choice selection with all the valid 1D rules
+	 */
+	private boolean setRuleChoices(){
+		ControlClass controlClass = new ControlClass();
+		ObservableList<Integer> rules = FXCollections.observableArrayList();
+		int[] rulesInt = controlClass.getValidRules1D();
+		for(int i = 0; i < rulesInt.length; i++){
+			rules.add(rulesInt[i]);
+		}
+		ruleSelectChoiceBox.setItems(rules);
+		return true;
+	}
+
+	/**
+	 * Method name: setWidthValues
+	 * 
+	 * sets the possible grid widths
+	 */
+	private boolean setWidthValues(){
+		ObservableList<Integer> widths = FXCollections.observableArrayList();
+		for(int i = 35; i < 99; i += 2){
+			widths.add(i);
+		}
+		gridWidthCB.setItems(widths);
+		return true;
 	}
 
 	/**
 	 * Method name: clearFirstRow
+	 * 
+	 * clears any inputs the user has placed in the first row
 	 */
-	public void clearFirstRow(){
+	private boolean clearFirstRow(){
 		ObservableList<Node> rectangles = firstRowInput.getChildren();
 		for(Node rectangle : rectangles){
 			((Rectangle)rectangle).setFill(zeroColor);
@@ -146,13 +149,16 @@ public class CustomizeOptionsControl {
 				startSquares.remove((Integer)Integer.parseInt(rectangle.getId()));
 			}
 		}
+		return true;
 	}
 
 	/**
 	 * Method name: showFirstRow
+	 * 
+	 * shows a row so the user can select start states
 	 */
 	@FXML
-	public void showFirstRow(){
+	private boolean showFirstRow(){
 		setStartState.setText("Reset Start State");
 		gridWidthSquares = gridWidthCB.getValue();
 		double gridWidth = mainPane.getWidth();
@@ -176,5 +182,6 @@ public class CustomizeOptionsControl {
 			});
 			firstRowInput.add(rectangle, i, 0);
 		}
+		return true;
 	}
 }
