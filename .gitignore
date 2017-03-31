@@ -6,3 +6,4 @@
 /testreport/**
 /testreport/
 *.class
+*.xml
