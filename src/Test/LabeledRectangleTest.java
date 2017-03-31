@@ -7,8 +7,14 @@ import cellPhysics42.view.LabeledRectangle;
 import javafx.scene.paint.Color;
 
 public class LabeledRectangleTest {
+	
+	  
+	  JavaFXThreadingRule jfxRule = new JavaFXThreadingRule();
+	 
+	
 	@Test
 	public void setFillTest(){
+		
 		LabeledRectangle lr = new LabeledRectangle();
 		lr.setFill(Color.CORNSILK);
 		Color actual = lr.getFill();
