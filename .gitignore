@@ -5,3 +5,6 @@
 /out/
 /testreport/**
 /testreport/
+*.class
+*.xml
+/testreport/*.xml
