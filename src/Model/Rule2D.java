@@ -137,17 +137,6 @@ public class Rule2D {
 		int middle = filledArray[1].length / 2;
 		filledArray[0][middle][middle] = 1;
 		byte first, second, third, forth, fith;
-		File newFile = null;
-		FileWriter fr = null;
-
-			try {
-				newFile = new File("raw.txt");
-				fr = new FileWriter(newFile);
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-
 
 		for (int z = 1; z < filledArray.length; z++) {
 			for (int x = 0; x < filledArray[1].length; x++) {
@@ -186,12 +175,6 @@ public class Rule2D {
 			}
 		}
 
-		try {
-			fr.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	/**
@@ -389,6 +372,7 @@ public class Rule2D {
 	 */
 	public void setLayers(int layers) {
 		filledArray = new byte[layers][(2 * layers) + 1][(2 * layers) + 1];
+		this.layers = layers;
 	}
 
 	public int getLayers() {
