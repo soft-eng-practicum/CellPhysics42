@@ -32,7 +32,7 @@ import javafx.util.Duration;
  * Course : ITEC 3870 Spring 2017
  * Written: Feb 8, 2017 
  * 
- * This class –  controls the demo view
+ * This class –  controls the DemoView.fxml
  * 
  * Purpose: –  cycle through all the valid rules and displays their output in a GUI
  */
@@ -43,17 +43,15 @@ public class DemoViewControl {
 	private Button exitBt;
 	@FXML
 	private GridPane displayGrid;
-	private int nextRow;
-	private int numRows;
-	private int numCols;
-	private Rectangle rectangle;
-	@FXML
-	private Button runDemoBt;
-	String[] strings;
 	@FXML
 	private Pane rootPane;
 	@FXML
 	private GridPane mainDemoGrid;
+	private int nextRow;
+	private int numRows;
+	private int numCols;
+	private Rectangle rectangle;
+	private String[] strings;
 	private int nextRule;
 	private long rowDuration;
 	private int[] validRules;
@@ -61,16 +59,12 @@ public class DemoViewControl {
 	private Color oneColor;
 	private Color zeroColor;
 	private Color edgeColor;
-	private ControlClass controler;
 	private Timeline timeline;
 
 	/**
 	 * Method name: initialize
 	 * 
 	 * FX method called when associated fxml file is built
-	 */
-	/**
-	 * Method name: initialize
 	 */
 	@FXML
 	public void initialize(){
@@ -91,32 +85,56 @@ public class DemoViewControl {
 	/**
 	 * Method name: runDemo
 	 * 
-	 * button on action to run the demo
+	 * starts the demo cycle
 	 */
-	/**
-	 * Method name: runDemo
-	 */
-	public void runDemo(){
-		controler = new ControlClass();
+	public boolean runDemo(){
 		ruleName.setText("Rule " + nextRule);
 		clearGrid();
-		//displayGrid.setGridLinesVisible(true);
 		fillGrid();
-		System.out.println("Demo running");
+		return true;
 	}
 	
 	/**
 	 * Method name: runDemo
 	 * @param oneColor
 	 * @param zeroColor
+	 * 
+	 * starts the demo with the given one and zero color
 	 */
-	public void runDemo(Color oneColor, Color zeroColor){
+	public boolean runDemo(Color oneColor, Color zeroColor){
 		this.oneColor = oneColor;
 		this.zeroColor = zeroColor;
 		edgeColor = oneColor.invert();
 		ruleName.setTextFill(zeroColor.invert());
 		rootPane.setBackground(new Background(new BackgroundFill(zeroColor, null, null)));
 		runDemo();
+		return true;
+	}
+
+	/**
+	 * Method name: exitDemo
+	 * 
+	 * exits the demo and returns to the CustomizeView
+	 */
+	@FXML
+	public void exitDemo(){
+		try{
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(MainApp.class.getResource("view/CustomizeView.fxml"));
+		System.out.println(loader.getLocation());
+		AnchorPane pane = (AnchorPane)loader.load();
+		Scene scene = new Scene(pane);
+		Stage newStage = (Stage) exitBt.getScene().getWindow();
+		timeline.stop();
+		CustomizeViewControl cvc = loader.getController();
+		cvc.setColors(oneColor, zeroColor);
+		//newStage.sceneProperty().removeListener(.getListener());
+		newStage.setScene(scene);
+		}
+		
+		catch(IOException ex){
+			System.out.println("error" + ex.getMessage());
+		}
 	}
 
 	/**
@@ -124,10 +142,7 @@ public class DemoViewControl {
 	 * 
 	 * sets the correct number and size of columns and rows
 	 */
-	/**
-	 * Method name: setGridSize
-	 */
-	public void setGridSize(){
+	private void setGridSize(){
 		displayGrid.getColumnConstraints().removeAll(displayGrid.getColumnConstraints());
 		displayGrid.getRowConstraints().removeAll(displayGrid.getRowConstraints());
 		for(int i = 0; i < numCols; i++){
@@ -144,10 +159,7 @@ public class DemoViewControl {
 	 * 
 	 * fills in the grid based on what the next rule is
 	 */
-	/**
-	 * Method name: fillGrid
-	 */
-	public void fillGrid(){
+	private boolean fillGrid(){
 			ControlClass controler = new ControlClass();
 			try {
 				controler.setRule1D(nextRule, numRows, numCols);
@@ -172,6 +184,7 @@ public class DemoViewControl {
 				runDemo();
 			});
 			timeline.play();
+			return true;
 	}
 	
 	/**
@@ -179,12 +192,10 @@ public class DemoViewControl {
 	 * 
 	 * resets the grid to blank so a new rule can be started
 	 */
-	/**
-	 * Method name: clearGrid
-	 */
-	public void clearGrid(){
+	private boolean clearGrid(){
 		displayGrid.getChildren().removeAll(displayGrid.getChildren());
 		setGridSize();
+		return true;
 	}
 
 
@@ -192,19 +203,16 @@ public class DemoViewControl {
 	 * Method name: fillNextLine
 	 * @param controler
 	 * 
-	 * helper method so the to use the controler to get the string to build the next line
+	 * helper method used to get the next line from the control class and pass it to the fillNextLine method
 	 */
-	/**
-	 * Method name: fillNextLine
-	 * @param controler
-	 */
-	public void fillNextLine(ControlClass controler){
+	private boolean fillNextLine(ControlClass controler){
 		try {
 			byte[][] toFill = controler.getNextLine1D();
 			fillNextLine(getStringRow(toFill));
 		} catch (NotValidRuleException ex) {
 			ex.printStackTrace();
 		}
+		return true;
 	}
 
 	/**
@@ -213,11 +221,7 @@ public class DemoViewControl {
 	 * 
 	 * takes a bit string and fills the row accordingly 
 	 */
-	/**
-	 * Method name: fillNextLine
-	 * @param nextLine
-	 */
-	public synchronized void fillNextLine(String nextLine){
+	private boolean fillNextLine(String nextLine){
 		for(int i = 0; i < nextLine.length(); i++){
 			if(nextLine.charAt(i) == '1'){
 				rectangle = new Rectangle(Math.floor(displayGrid.getWidth()/numCols) -1 , Math.floor(displayGrid.getHeight()/numRows) -1 , 
@@ -229,55 +233,11 @@ public class DemoViewControl {
 			else{
 				rectangle = new Rectangle(Math.floor(displayGrid.getWidth()/numCols) - 1, Math.floor(displayGrid.getHeight()/numRows) -1 , 
 						zeroColor);
-				//rectangle.setStroke(edgeColor);
-				//rectangle.setStrokeWidth(0.75);
 				displayGrid.add(rectangle, i, nextRow);
 			}
 		}
+		return true;
 	}
-	
-	/**
-	 * Method name: exitDemo
-	 */
-	/**
-	 * Method name: exitDemo
-	 */
-	@FXML
-	public void exitDemo(){
-		try{
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(MainApp.class.getResource("view/CustomizeView.fxml"));
-		System.out.println(loader.getLocation());
-		AnchorPane pane = (AnchorPane)loader.load();
-		Scene scene = new Scene(pane);
-		Stage newStage = (Stage) exitBt.getScene().getWindow();
-		timeline.stop();
-		CustomizeViewControl cvc = loader.getController();
-		cvc.setColors(oneColor, zeroColor);
-		//newStage.sceneProperty().removeListener(.getListener());
-		newStage.setScene(scene);
-		}
-		
-		catch(IOException ex){
-			System.out.println("error" + ex.getMessage());
-		}
-	}
-//	public synchronized void fillNextLine(String nextLine){
-//		for(int i = 0; i < nextLine.length(); i++){
-//			if(nextLine.charAt(i) == '1'){
-//				triangle = new Triangle(Math.floor(displayGrid.getWidth()/numCols), Math.floor(displayGrid.getHeight()/numRows));
-//				triangle.setFill(oneColor);
-//				//triangle.setStroke(edgeColor);
-//				displayGrid.add(triangle, i, nextRow);
-//			}
-//			else{
-//				triangle = new Triangle(Math.floor(displayGrid.getWidth()/numCols), Math.floor(displayGrid.getHeight()/numRows));
-//				//rectangle.setStroke(edgeColor);
-//				triangle.setFill(zeroColor);
-//				displayGrid.add(triangle, i, nextRow);
-//			}
-//		}
-//	}
 
 	/**
 	 * Method name: getStringRow
@@ -287,7 +247,7 @@ public class DemoViewControl {
 	 * takes a 2d arrary that contains the information for the next line and returns the bit string 
 	 * needed to fill the row
 	 */
-	public String getStringRow(byte[][] nextLineArray){
+	private String getStringRow(byte[][] nextLineArray){
 		StringBuilder nextLine = new StringBuilder();
 		for(int i = 0; i < nextLineArray[0].length; i++){
 			nextLine.append(nextLineArray[0][i]);

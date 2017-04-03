@@ -35,9 +35,10 @@ import javafx.util.Duration;
  * Course : ITEC  Spring 2017
  * Written: Mar 23, 2017 
  * 
- * This class –  
+ * This class –  Controls the StepThruView.fxml
  * 
- * Purpose: –  
+ * Purpose: –  Allows the user to step through each rule as it fills one cell at at time and gives an explanation of
+ * what is happening at each step and why the cell is filled the way it is.
  */
 public class StepThruViewControl extends AnchorPane {
 	@FXML
@@ -151,6 +152,11 @@ public class StepThruViewControl extends AnchorPane {
 		setHBoxRims();
 	}
 
+	/**
+	 * Method name: exitStepThru
+	 * 
+	 * exits the step thru and return to the cusomize view
+	 */
 	@FXML
 	public boolean exitStepThru(){
 		FXMLLoader loader = new FXMLLoader();
@@ -671,7 +677,7 @@ public class StepThruViewControl extends AnchorPane {
 	private boolean setRuleChoices(){
 		ControlClass controlClass = new ControlClass();
 		ObservableList<Integer> rules = FXCollections.observableArrayList();
-		int[] rulesInt = controlClass.getValidRules();
+		int[] rulesInt = controlClass.getValidRules1D();
 		for(int i = 0; i < rulesInt.length; i++){
 			rules.add(rulesInt[i]);
 		}

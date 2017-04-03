@@ -8,6 +8,16 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+/**Class: MainApp.java 
+   * @author Bess Burnett 
+   * @version 1.0 
+   * Course : ITEC  Spring 2017
+   * Written: Mar 31, 2017 
+  	   * 
+   * This class –  runs the program
+   * 
+   * Purpose: –  gives a starting point for the cellular automation program
+   */
 public class MainApp extends Application {
 
 	@Override

@@ -11,9 +11,9 @@ import javafx.scene.shape.Rectangle;
    * Course : ITEC  Spring 2017
    * Written: Mar 2, 2017 
   	   * 
-   * This class –  
+   * This class –  provides a rectangle with a centered label
    * 
-   * Purpose: –  
+   * Purpose: –  to have a square with an on/off state in it to demonstrate the link between 1, 0 and on/off
    */
 public class LabeledRectangle extends StackPane {
 	private Rectangle rectangle;
@@ -23,7 +23,7 @@ public class LabeledRectangle extends StackPane {
 	 * 
 	 * no agr constructor
 	 *
-	 * creates a LabeledRectangle object with 
+	 * creates a LabeledRectangle object with default values
 	 */
 	public LabeledRectangle(){
 		this(25.0,25.0, "1");
@@ -35,7 +35,7 @@ public class LabeledRectangle extends StackPane {
 	 * @param lString
 	 * 3 agr constructor
 	 *
-	 * creates a LabeledRectangle object with 
+	 * creates a LabeledRectangle object with the given values
 	 */
 	public LabeledRectangle(double width, double height, String lString){
 		rectangle = new Rectangle(width, height);
@@ -45,6 +45,14 @@ public class LabeledRectangle extends StackPane {
 		super.setHeight(height + 2.0);
 	}
 	
+	/**LabeledRectangle
+	 * @param width
+	 * @param height
+	 * @param fillColor
+	 * 3-agr constructor
+	 *
+	 * creates a LabeledRectangle object with the given values
+	 */
 	public LabeledRectangle(double width, double height, Color fillColor){
 		rectangle = new Rectangle(width, height);
 		number = new Label("");
@@ -53,6 +61,7 @@ public class LabeledRectangle extends StackPane {
 		super.setHeight(height + 2.0);
 		setFill(fillColor);
 	}
+	
 	/**
 	 * Method name: setFill
 	 * @param color
@@ -63,6 +72,14 @@ public class LabeledRectangle extends StackPane {
 	}
 	
 	/**
+	 * Method name: getFill
+	 * @return
+	 */
+	public Color getFill(){
+		return (Color)rectangle.getFill();
+	}
+	
+	/**
 	 * Method name: setLabel
 	 * @param text
 	 */
@@ -70,9 +87,29 @@ public class LabeledRectangle extends StackPane {
 		number.setText(text);
 	}
 	
+	/**
+	 * Method name: getLabel
+	 * @return
+	 */
+	public String getLabel(){
+		return number.getText();
+	}
+	
+	/**
+	 * Method name: setOutline
+	 * @param color
+	 */
 	public void setOutline(Color color){
 		rectangle.setStroke(color);
 		rectangle.setStrokeWidth(2.0);
+	}
+	
+	/**
+	 * Method name: getOutline
+	 * @return
+	 */
+	public Color getOutline(){
+		return (Color)rectangle.getStroke();
 	}
 	
 	/**
