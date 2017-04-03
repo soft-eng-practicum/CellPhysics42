@@ -47,7 +47,7 @@ public class Rule2D {
 		size = 6;
 		nextLayer = 0;
 	}
-	
+
 
 	/**
 	 * @param rule
@@ -223,14 +223,14 @@ public class Rule2D {
 		}
 		return translations;
 	}
-	
+
 	private String translateToCenter(int x, int y, int z){
 		x = x - (factor * (layers *2)+ 1)/2;
 		y = y -(factor * (layers * 2) +1)/2;
 		z = z -(factor * layers + 1)/2;
-		return "" + x + "," + y + "," + z;	
+		return "" + x + "," + y + "," + z;
 	}
-	
+
 	public void setFactor(int factor){
 		this.factor = factor;
 		size = factor - 1;
@@ -278,18 +278,23 @@ public class Rule2D {
 		String newFileName = "";
 		if (filledArray.length % 2 != 0 && filledArray.length > 2) {
 			newFileName = fileName + "Layers1-3.scad";
-			save3DFileLayers(getFile(newFileName), 0, 3);
+			save3DFileLayers(getFile(newFileName), 0, 3, true);
 			for (int i = 3; i < filledArray.length; i += 2) {
 				newFileName = fileName + "Layers" + (i + 1) + "-" + (i + 2) + ".scad";
-				save3DFileLayers(getFile(newFileName), i, i + 2);
+				save3DFileLayers(getFile(newFileName), i, i + 2, true);
 			}
 		} else {
 			for (int i = 0; i < filledArray.length; i += 2) {
 				newFileName = fileName + "Layers" + (i) + "-" + (i + 1) + ".scad";
-				save3DFileLayers(getFile(newFileName), i, i + 2);
+				save3DFileLayers(getFile(newFileName), i, i + 2, true);
 			}
 		}
 
+	}
+
+	public void save3DFileByLayers(String fileName, int start, int end) throws IOException {
+		String newFileName = fileName + "Layers" + start + "-" + end + ".scad";
+		save3DFileLayers(getFile(newFileName), start, end, false);
 	}
 
 	/**
@@ -298,12 +303,13 @@ public class Rule2D {
 	 * @param end
 	 * @throws IOException
 	 */
-	private void save3DFileLayers(FileWriter file, int start, int end) throws IOException {
+	private void save3DFileLayers(FileWriter file, int start, int end, boolean subtract) throws IOException {
 		int level;
-		boolean diff = start > 0;
+		boolean diff = (start > 0 && subtract);
+		level = ((start - 1) - filledArray.length + 1) * -1;
 
 		if (diff) {
-			level = ((start - 1) - filledArray.length + 1) * -1;
+
 			file.write("//Layer " + level + "\r\n");
 			file.write("module diff(){\r\n");
 
@@ -317,8 +323,28 @@ public class Rule2D {
 			}
 			file.write("}\r\n");
 		}
+		else if(start != 0)
+		{
+			file.write("//Layer " + level + "\r\n");
+			file.write("module whole(){\r\n");
+			for (int y = 0; y < filledArray[1].length; y++) {
+				for (int x = 0; x < filledArray[1][1].length; x++) {
+					if (filledArray[start - 1][x][y] == 1) {
+						file.write("translate([" + (factor * x) + "," + (factor * y) + "," + factor * level + "]){\r\n");
+						file.write("cube(" + (size) + ");}\r\n");
+					}
+				}
+			}
+		}
+		else
+		{
+			diff = true;
+		}
 
-		file.write("module whole(){\r\n");
+		if(diff)
+		{
+			file.write("module whole(){\r\n");
+		}
 		for (; start < end; start++) {
 			level = (start - filledArray.length + 1) * -1;
 			file.write("//Layer " + level + "\r\n");
