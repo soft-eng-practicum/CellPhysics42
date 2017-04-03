@@ -141,6 +141,14 @@ public class ControlClass {
 		return rulesAL;
 	}
 
+	/**
+	 * Method name: save2D
+	 * @param path
+	 * @param start
+	 * @param end
+	 * 
+	 * saves the 2D model to the given file path starting and ending at the given layers
+	 */
 	public void save2D(String path, int start, int end) {
 		try {
 			rule2d.save3DFileByLayers(path, start, end);

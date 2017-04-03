@@ -58,16 +58,15 @@ public class View3DControl extends AnchorPane{
 	private ChoiceBox<Integer> endLayerCB;
 	private ArrayList<String> cubeTranslations;
 	private ControlClass control;
-	private int maxLayer
-	, ruleNum, startLayer, endLayer, factor;
-	private Scene mainScene;
-	private double mousePosX, mousePosY, mouseOldX, mouseOldY, mouseDeltaX, mouseDeltaY;
-	private Rotate rotateX, rotateY, rotateZ;
-
+	private int maxLayer, ruleNum, startLayer, endLayer, factor;
+	private double mousePosX, mousePosY, mouseDeltaX, mouseDeltaY;
+	private Rotate rotateX, rotateY, rotateZ;	
 	
-	//dont need select num layers, just set end layer to have max
-	
-	
+	/**
+	 * Method name: initialize
+	 * 
+	 * method called by the FXML Loader when the file is loaded
+	 */
 	public void initialize(){
 		control = new ControlClass();
 		maxLayer = 30;
@@ -83,9 +82,13 @@ public class View3DControl extends AnchorPane{
 		saveBt.setVisible(false);
 		cubeGroup = new Group();
 		setRuleChoices();
-		//cubeTranslations = new ArrayList<String>();
 	}
 
+	/**
+	 * Method name: exit3D
+	 * 
+	 * exits the 3D view and returns to the customize view
+	 */
 	@FXML
 	public void exit3D(){
 		try{
@@ -102,6 +105,11 @@ public class View3DControl extends AnchorPane{
 		}
 	}
 
+	/**
+	 * Method name: show3DObject
+	 * 
+	 * creates and displays the 3D model created by the selected rule
+	 */
 	@FXML
 	public void show3DObject(){
 		showBt.setVisible(false);
@@ -117,6 +125,11 @@ public class View3DControl extends AnchorPane{
 		mainGridPane.add(subScene, 0, 0);
 	}
 	
+	/**
+	 * Method name: saveModel
+	 * 
+	 * saves the model as a .scad file in the selected location
+	 */
 	@FXML
 	public void saveModel(){
 		FileChooser saveFile = new FileChooser();
@@ -126,16 +139,32 @@ public class View3DControl extends AnchorPane{
 		control.save2D(path, startLayer, endLayer);
 	}
 	
+	/**
+	 * Method name: setObservableList
+	 * 
+	 * initializes all the choice box lists
+	 */
 	private void setObservableList(){
 		ruleSelectionCB.setItems(FXCollections.observableArrayList());
 		startLayerCB.setItems(FXCollections.observableArrayList());
 		endLayerCB.setItems(FXCollections.observableArrayList());
 	}
 	
+	/**
+	 * Method name: clearGroup
+	 * 
+	 * removes all the cubes in the group to create a new model
+	 */
 	private void clearGroup(){
 		cubeGroup.getChildren().removeAll(cubeGroup.getChildren());
 	}
 	
+	/**
+	 * Method name: handleKeyEvents
+	 * @param subScene
+	 * 
+	 * adds key press actions to the given subscene
+	 */
 	private void handleKeyEvents(SubScene subScene){
 		subScene.setOnKeyPressed(ke->{
 			if(ke.getCode() == KeyCode.A){
@@ -165,7 +194,12 @@ public class View3DControl extends AnchorPane{
 		});
 	}
 	
-	// dy/ num and dx/num need to be changed to be the height, width of the 3d object
+	/**
+	 * Method name: handleMouseEvents
+	 * @param scene
+	 * 
+	 * adds the mouse events to the given scene, rotates the scene on drag
+	 */
 	private void handleMouseEvents(SubScene scene){
 		scene.setOnMousePressed((MouseEvent me) -> {
 			mousePosX = me.getSceneX();
@@ -191,6 +225,11 @@ public class View3DControl extends AnchorPane{
 		});
 	}
 
+	/**
+	 * Method name: setStartChoices
+	 * 
+	 * fills the startLayer choice box and displays it
+	 */
 	private void setStartChoices(){
 		ObservableList<Integer> starts = startLayerCB.getItems();
 		starts.removeAll(starts);
@@ -203,12 +242,23 @@ public class View3DControl extends AnchorPane{
 			@Override
 			public void changed(ObservableValue<? extends Integer> observable, Integer oldValue, Integer newValue) {
 				setEndChoices(startLayerCB.getValue());
+				try{
 				startLayer = startLayerCB.getValue();
+				}
+				catch(NullPointerException ex){
+					
+				}
 				endLayerCB.setVisible(true);
 			}
 		});
 	}
 
+	/**
+	 * Method name: setEndChoices
+	 * @param firstLayer
+	 * 
+	 * fills the endLayer choice box starting with the given number
+	 */
 	private void setEndChoices(Integer firstLayer){
 		
 		ObservableList<Integer> ends = endLayerCB.getItems();
@@ -223,11 +273,21 @@ public class View3DControl extends AnchorPane{
 			public void changed(ObservableValue<? extends Integer> observable, Integer oldValue, Integer newValue) {
 				showBt.setVisible(true);
 				saveBt.setVisible(true);
+				try{
 				endLayer = endLayerCB.getValue();
+				}
+				catch(NullPointerException ex){
+					
+				}
 			}
 		});
 	}
 
+	/**
+	 * Method name: setRuleChoices
+	 * 
+	 * sets the ruleSelection choice box with all the valid 2D rules
+	 */
 	private void setRuleChoices(){
 		ObservableList<Integer> rules = ruleSelectionCB.getItems();
 		rules.addAll(control.get2DRules());
@@ -236,6 +296,11 @@ public class View3DControl extends AnchorPane{
 		setStartChoices();
 	}
 
+	/**
+	 * Method name: buildCubes
+	 * 
+	 * builds and places cubes in the group at the location specified by the translation strings
+	 */
 	private void buildCubes(){
 		cubeTranslations = control.getCubeTranslations(ruleNum, maxLayer, startLayer, endLayer, factor);
 		for(String translation : cubeTranslations){
@@ -245,14 +310,30 @@ public class View3DControl extends AnchorPane{
 		}
 	}
 
+	/**
+	 * Method name: setLights
+	 * 
+	 * creates and adds lights to the cube group for visibility
+	 */
 	private void setLights(){
 		AmbientLight amLight1 = new AmbientLight(Color.WHITE);
 		amLight1.setTranslateX(200);
 		amLight1.setTranslateY(200);
 		amLight1.setTranslateZ(200);
 		amLight1.getScope().addAll(cubeGroup.getChildren());
+		AmbientLight amLight2 = new AmbientLight(Color.WHITE);
+		amLight2.setTranslateX(-200);
+		amLight2.setTranslateY(-200);
+		amLight2.setTranslateZ(200);
+		amLight2.getScope().addAll(cubeGroup.getChildren());
 	}
 
+	/**
+	 * Method name: getCamara
+	 * @return
+	 * 
+	 * creates and returns a prespective camera
+	 */
 	private PerspectiveCamera getCamara(){
 		PerspectiveCamera camera = new PerspectiveCamera(true);
 		camera.setNearClip(0.1);
