@@ -292,8 +292,10 @@ public class Rule2D {
 
 	}
 
-	public void save3DFileByLayers(String fileName, int start, int end) throws IOException {
+	public void save3DFileByLayers(String fileName, int start, int end) throws IOException, NotValidRuleException{
 		String newFileName = fileName + "Layers" + start + "-" + end + ".scad";
+		if (end > layers)
+			throw new NotValidRuleException("End is greatern then the model size");
 		save3DFileLayers(getFile(newFileName), start, end, false);
 	}
 
