@@ -1,5 +1,6 @@
 package Controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import Model.Rule1D;
@@ -138,5 +139,13 @@ public class ControlClass {
 			rulesAL.add(rules[i]);
 		}
 		return rulesAL;
+	}
+
+	public void save2D(String path, int start, int end) {
+		try {
+			rule2d.save3DFileByLayers(path, start, end);
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
 	}
 }

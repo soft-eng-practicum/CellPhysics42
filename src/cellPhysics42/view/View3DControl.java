@@ -1,5 +1,6 @@
 package cellPhysics42.view;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import Controller.ControlClass;
@@ -25,6 +26,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Rotate;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 /**Class: View3DControl.java 
@@ -47,33 +49,40 @@ public class View3DControl extends AnchorPane{
 	@FXML
 	private Button showBt;
 	@FXML
+	private Button saveBt;
+	@FXML
 	private ChoiceBox<Integer> ruleSelectionCB;
 	@FXML
 	private ChoiceBox<Integer> startLayerCB;
 	@FXML
 	private ChoiceBox<Integer> endLayerCB;
-	@FXML
-	private ChoiceBox<Integer> layerNumCB;
 	private ArrayList<String> cubeTranslations;
 	private ControlClass control;
-	private int numLayers, ruleNum, startLayer, endLayer, factor;
+	private int maxLayer
+	, ruleNum, startLayer, endLayer, factor;
 	private Scene mainScene;
 	private double mousePosX, mousePosY, mouseOldX, mouseOldY, mouseDeltaX, mouseDeltaY;
 	private Rotate rotateX, rotateY, rotateZ;
 
+	
+	//dont need select num layers, just set end layer to have max
+	
+	
 	public void initialize(){
 		control = new ControlClass();
-		setLayerNumbers();
-		setRuleChoices();
+		maxLayer = 30;
 		factor = 10;
 		rotateX = new Rotate(0, Rotate.X_AXIS);
 		rotateY = new Rotate(0, Rotate.Y_AXIS);
 		rotateZ = new Rotate(0, Rotate.Z_AXIS);
+		setObservableList();
 		ruleSelectionCB.setValue(451);
 		startLayerCB.setVisible(false);
 		endLayerCB.setVisible(false);
 		showBt.setVisible(false);
+		saveBt.setVisible(false);
 		cubeGroup = new Group();
+		setRuleChoices();
 		//cubeTranslations = new ArrayList<String>();
 	}
 
@@ -96,26 +105,35 @@ public class View3DControl extends AnchorPane{
 	@FXML
 	public void show3DObject(){
 		showBt.setVisible(false);
-		//				Button exitModelButton = new Button("Exit Model");
+		clearGroup();
 		ruleNum = ruleSelectionCB.getValue();
 		buildCubes();
 		setLights();
 		Stage currentStage = (Stage) showBt.getScene().getWindow();
-		//				exitModelButton.setOnAction(e->{
-		//					currentStage.setScene(mainScene);
-		//				});
-		//				exitModelButton.setLayoutX(0);
-		//				exitModelButton.setLayoutY(-100);
-		//				cubeGroup.getChildren().add(exitModelButton);
 		SubScene subScene= new SubScene(cubeGroup, currentStage.getWidth(), currentStage.getHeight(), true, SceneAntialiasing.DISABLED);
 		subScene.setCamera(getCamara());
 		handleMouseEvents(subScene);
 		handleKeyEvents(subScene);
 		mainGridPane.add(subScene, 0, 0);
-		//		newStage.setScene(scene);
-		//		newStage.setTitle("3D Model");
-		//		newStage.show();
-		//		currentStage.setScene(scene);
+	}
+	
+	@FXML
+	public void saveModel(){
+		FileChooser saveFile = new FileChooser();
+		Stage currentStage = (Stage)saveBt.getScene().getWindow();
+		File file = saveFile.showSaveDialog(currentStage);
+		String path = file.getAbsolutePath();
+		control.save2D(path, startLayer, endLayer);
+	}
+	
+	private void setObservableList(){
+		ruleSelectionCB.setItems(FXCollections.observableArrayList());
+		startLayerCB.setItems(FXCollections.observableArrayList());
+		endLayerCB.setItems(FXCollections.observableArrayList());
+	}
+	
+	private void clearGroup(){
+		cubeGroup.getChildren().removeAll(cubeGroup.getChildren());
 	}
 	
 	private void handleKeyEvents(SubScene subScene){
@@ -155,11 +173,6 @@ public class View3DControl extends AnchorPane{
 		});
 
 		scene.setOnMouseDragged((MouseEvent me) -> {
-			//center object first
-			//superimpose xyz axis over view and do rotations based on movement in the direction of the axis
-			//use epsilon for bounds and offer option to turn off(radio button)
-			//get linear velocity from mouse and convert to omega base on radius at start click
-			//use omega for rotation about correct axis
 			mouseDeltaX = (mousePosX - me.getSceneX()) ;
 			mouseDeltaY = (mousePosY - me.getSceneY());
 			if (me.isPrimaryButtonDown()) {
@@ -178,9 +191,10 @@ public class View3DControl extends AnchorPane{
 		});
 	}
 
-	private void setStartChoices(Integer lastLayer){
-		ObservableList<Integer> starts = FXCollections.observableArrayList();
-		for(int i = 1; i < lastLayer; i++){
+	private void setStartChoices(){
+		ObservableList<Integer> starts = startLayerCB.getItems();
+		starts.removeAll(starts);
+		for(int i = 1; i < maxLayer; i++){
 			starts.add(i);
 		}
 		startLayerCB.setItems(starts);
@@ -196,8 +210,10 @@ public class View3DControl extends AnchorPane{
 	}
 
 	private void setEndChoices(Integer firstLayer){
-		ObservableList<Integer> ends = FXCollections.observableArrayList();
-		for(int i = firstLayer; i < numLayers; i++) {
+		
+		ObservableList<Integer> ends = endLayerCB.getItems();
+		ends.removeAll(ends);
+		for(int i = firstLayer; i <= maxLayer; i++) {
 			ends.add(i);
 		}
 		endLayerCB.setItems(ends);
@@ -206,35 +222,22 @@ public class View3DControl extends AnchorPane{
 			@Override
 			public void changed(ObservableValue<? extends Integer> observable, Integer oldValue, Integer newValue) {
 				showBt.setVisible(true);
+				saveBt.setVisible(true);
 				endLayer = endLayerCB.getValue();
 			}
 		});
 	}
 
-	private void setLayerNumbers(){
-		ObservableList<Integer> layers = FXCollections.observableArrayList();
-		for(int i = 2; i < 45; i++){
-			layers.add(i);
-		}
-		layerNumCB.setItems(layers);
-		layerNumCB.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Integer>() {
-
-			@Override
-			public void changed(ObservableValue<? extends Integer> observable, Integer oldValue, Integer newValue) {
-				setStartChoices(layerNumCB.getValue());
-				startLayerCB.setVisible(true);
-				numLayers = layerNumCB.getValue();
-			}
-		});
-	}
-
 	private void setRuleChoices(){
-		ObservableList<Integer> rules = FXCollections.observableArrayList(control.get2DRules());
+		ObservableList<Integer> rules = ruleSelectionCB.getItems();
+		rules.addAll(control.get2DRules());
 		ruleSelectionCB.setItems(rules);
+		startLayerCB.setVisible(true);
+		setStartChoices();
 	}
 
 	private void buildCubes(){
-		cubeTranslations = control.getCubeTranslations(ruleNum, numLayers, startLayer, endLayer, factor);
+		cubeTranslations = control.getCubeTranslations(ruleNum, maxLayer, startLayer, endLayer, factor);
 		for(String translation : cubeTranslations){
 			Cube3D cube = new Cube3D();
 			cube.translateCube(translation);
@@ -247,7 +250,6 @@ public class View3DControl extends AnchorPane{
 		amLight1.setTranslateX(200);
 		amLight1.setTranslateY(200);
 		amLight1.setTranslateZ(200);
-		//cubeGroup.getChildren().add(amLight1);
 		amLight1.getScope().addAll(cubeGroup.getChildren());
 	}
 
@@ -257,14 +259,5 @@ public class View3DControl extends AnchorPane{
 		camera.setFarClip(1000.0);
 		camera.setTranslateZ(-500);
 		return camera;
-	}
-
-	public Scene get3DScene(double width, double height){
-		initialize();
-		buildCubes();
-		setLights();
-		Scene scene = new Scene(cubeGroup, width, height);
-		scene.setCamera(getCamara());
-		return scene;
 	}
 }

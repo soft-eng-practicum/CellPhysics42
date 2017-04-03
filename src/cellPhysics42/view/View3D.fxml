@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
@@ -32,16 +33,18 @@
               </rowConstraints>
                <children>
                   <Button fx:id="exitBt" mnemonicParsing="false" onAction="#exit3D" text="Exit 3D View" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                  <Button fx:id="showBt" mnemonicParsing="false" onAction="#show3DObject" text="Button" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                  <Button fx:id="showBt" mnemonicParsing="false" onAction="#show3DObject" text="Show Model" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                   <ChoiceBox fx:id="ruleSelectionCB" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <ChoiceBox fx:id="layerNumCB" prefWidth="150.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                  <ChoiceBox fx:id="startLayerCB" layoutX="10.0" layoutY="12.0" prefWidth="150.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                  <ChoiceBox fx:id="endLayerCB" layoutX="10.0" layoutY="12.0" prefWidth="150.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                  <ChoiceBox fx:id="startLayerCB" layoutX="10.0" layoutY="12.0" prefWidth="150.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                  <ChoiceBox fx:id="endLayerCB" layoutX="10.0" layoutY="12.0" prefWidth="150.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                   <Label text="Select Rule" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                  <Label layoutX="190.0" layoutY="17.0" text="Select Number of Layers" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                  <Label layoutX="10.0" layoutY="17.0" text="Select Start Layer" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                  <Label layoutX="10.0" layoutY="17.0" text="Select End Layer" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                  <Label layoutX="10.0" layoutY="17.0" text="Select Start Layer" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                  <Label layoutX="10.0" layoutY="17.0" text="Select End Layer" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                  <Button fx:id="saveBt" layoutX="782.0" layoutY="68.0" mnemonicParsing="false" onAction="#saveModel" text="Save Model" GridPane.columnIndex="5" GridPane.rowIndex="1" />
                </children>
+               <padding>
+                  <Insets bottom="5.0" />
+               </padding>
             </GridPane>
             <Group fx:id="cubeGroup" />
          </children>
