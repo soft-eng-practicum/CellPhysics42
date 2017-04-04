@@ -61,6 +61,7 @@ public class View3DControl extends AnchorPane{
 	private int maxLayer, ruleNum, startLayer, endLayer, factor;
 	private double mousePosX, mousePosY, mouseDeltaX, mouseDeltaY;
 	private Rotate rotateX, rotateY, rotateZ;	
+	private SubScene subScene;
 	
 	/**
 	 * Method name: initialize
@@ -81,6 +82,7 @@ public class View3DControl extends AnchorPane{
 		showBt.setVisible(false);
 		saveBt.setVisible(false);
 		cubeGroup = new Group();
+		subScene = new SubScene(cubeGroup, 100, 100, true, SceneAntialiasing.DISABLED);
 		setRuleChoices();
 	}
 
@@ -118,10 +120,12 @@ public class View3DControl extends AnchorPane{
 		buildCubes();
 		setLights();
 		Stage currentStage = (Stage) showBt.getScene().getWindow();
-		SubScene subScene= new SubScene(cubeGroup, currentStage.getWidth(), currentStage.getHeight(), true, SceneAntialiasing.DISABLED);
+		subScene.setHeight(currentStage.getHeight());
+		subScene.setWidth(currentStage.getWidth());
 		subScene.setCamera(getCamara());
 		handleMouseEvents(subScene);
 		handleKeyEvents(subScene);
+		mainGridPane.getChildren().remove(subScene);
 		mainGridPane.add(subScene, 0, 0);
 	}
 	

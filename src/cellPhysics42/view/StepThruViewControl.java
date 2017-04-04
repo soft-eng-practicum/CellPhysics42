@@ -130,7 +130,7 @@ public class StepThruViewControl extends AnchorPane {
 		nextCol = 0;
 		explanationStepSize = 18;
 		explanationStartSize = 13;
-		explanationTIme = 1000;
+		explanationTIme = 2000;
 		oneColor = Color.BLACK;
 		oneColorSt = "black";
 		zeroColor = Color.WHITE;
@@ -388,7 +388,7 @@ public class StepThruViewControl extends AnchorPane {
 			});
 		}
 		else{
-			stateExKF = new KeyFrame(exDur, e->{
+			stateExKF = new KeyFrame(new Duration(explanationTIme + 2000), e->{
 				updateExplanation("Since the cells are "  + getRefCells() + " we get that the state is...", 4, explanationStepSize);
 				highlightStateNum();
 			});
