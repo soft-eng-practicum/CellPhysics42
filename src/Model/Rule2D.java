@@ -26,7 +26,7 @@ public class Rule2D {
 			478, 481, 483, 484, 485, 486, 489, 491, 492, 493, 494, 497 };
 	private byte[][][] filledArray;
 
-	/**
+	/** No argument constructor
 	 *
 	 */
 	public Rule2D() {
@@ -34,7 +34,8 @@ public class Rule2D {
 		size = 6;
 	}
 
-	/**
+	/**Constructor That sets the rule number and layers
+	 *
 	 * @param ruleNumber
 	 * @param layers
 	 * @throws NotValidRuleException
@@ -49,7 +50,8 @@ public class Rule2D {
 	}
 
 
-	/**
+	/** Takes a int rule and checks if it is a valid rule and then sets it
+	 *
 	 * @param rule
 	 * @throws NotValidRuleException
 	 */
@@ -92,7 +94,8 @@ public class Rule2D {
 		return String.format("%10s", Integer.toBinaryString(rule)).replace(' ', '0');
 	}
 
-	/**
+	/** Accepts the 4 cell neighborhood and the previous state to find the current state is on
+	 *
 	 * @param one
 	 * @param two
 	 * @param three
@@ -130,7 +133,8 @@ public class Rule2D {
 
 	}
 
-	/**
+	/** Fills the array with correct on of states of each cell
+	 *
 	 * @throws NotValidRuleException
 	 */
 	public void fillArray() throws NotValidRuleException {
@@ -177,7 +181,8 @@ public class Rule2D {
 
 	}
 
-	/**
+	/** Returns the next layer
+	 *
 	 * @return
 	 */
 	public byte[][] nextLayer() {
@@ -186,7 +191,8 @@ public class Rule2D {
 		return filledArray[current];
 	}
 
-	/**
+	/** return the specific layer
+	 *
 	 * @param layer
 	 * @return
 	 */
@@ -194,20 +200,28 @@ public class Rule2D {
 		return filledArray[layer];
 	}
 
-	/**
+	/** Returns the last layer
+	 *
 	 * @return
 	 */
 	public byte[][] lastLayer() {
 		return filledArray[filledArray.length - 1];
 	}
 
-	/**
+	/** returns the current int rule
+	 *
 	 * @return
 	 */
 	public int[] getRules() {
 		return rules;
 	}
 
+	/** builds and ArrayList of strings containing all the translations for the 3D view
+	 *
+	 * @param startLayer
+	 * @param endLayer
+	 * @return
+	 */
 	public ArrayList<String> getCubeTranslations(int startLayer, int endLayer){
 		ArrayList<String> translations = new ArrayList<>(200);
 		for (int z = startLayer; z < endLayer; z++) {
@@ -224,6 +238,13 @@ public class Rule2D {
 		return translations;
 	}
 
+	/** Returns the string with the translation of the cells
+	 *
+	 * @param x
+	 * @param y
+	 * @param z
+	 * @return
+	 */
 	private String translateToCenter(int x, int y, int z){
 		x = x - (factor * (layers *2)+ 1)/2;
 		y = y -(factor * (layers * 2) +1)/2;
@@ -231,13 +252,18 @@ public class Rule2D {
 		return "" + x + "," + y + "," + z;
 	}
 
+	/** sets the factor for the spacing of the cells
+	 *
+	 * @param factor
+	 */
 	public void setFactor(int factor){
 		this.factor = factor;
 		size = factor - 1;
 	}
 
 
-	/**
+	/** Saves the whole 3D file
+	 *
 	 * @param fileName
 	 * @throws IOException
 	 */
@@ -270,7 +296,8 @@ public class Rule2D {
 
 	}
 
-	/**
+	/** Saves the whole 3D file by layers
+	 *
 	 * @param fileName
 	 * @throws IOException
 	 */
@@ -292,14 +319,23 @@ public class Rule2D {
 
 	}
 
+	/**save s specific number of layers to a 3D file
+	 *
+	 * @param fileName
+	 * @param start
+	 * @param end
+	 * @throws IOException
+	 * @throws NotValidRuleException
+	 */
 	public void save3DFileByLayers(String fileName, int start, int end) throws IOException, NotValidRuleException{
 		String newFileName = fileName + "Layers" + start + "-" + end + ".scad";
 		if (end > layers)
-			throw new NotValidRuleException("End is greatern then the model size");
+			throw new NotValidRuleException("End is greater then the model size");
 		save3DFileLayers(getFile(newFileName), start, end, false);
 	}
 
-	/**
+	/** save the layers for the 3D file
+	 *
 	 * @param file
 	 * @param start
 	 * @param end
@@ -377,7 +413,8 @@ public class Rule2D {
 		file.close();
 	}
 
-	/**
+	/** returns a working file writer
+	 *
 	 * @param fileName
 	 * @return
 	 */
@@ -395,7 +432,8 @@ public class Rule2D {
 		return fr;
 	}
 
-	/**
+	/**sets the layers
+	 *
 	 * @param layers
 	 */
 	public void setLayers(int layers) {
@@ -403,6 +441,10 @@ public class Rule2D {
 		this.layers = layers;
 	}
 
+	/**
+	 * returns the number of layers
+	 * @return
+	 */
 	public int getLayers() {
 		return layers;
 	}
