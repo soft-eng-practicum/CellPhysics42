@@ -1,7 +1,9 @@
 package Model;
 
 import exception.NotValidRuleException;
-
+/*
+ * Class that details the creation of a one dimensional cellular automata rule. 
+ */
 public class Rule1D {
 	private byte state7;
 	private byte state6;
@@ -281,6 +283,12 @@ public class Rule1D {
 			throw new NotValidRuleException("line out of bounds");
 		return stateArray[line];
 	}
+	
+	/** Returns the next Line to be evaluated
+	 * 
+	 * @return
+	 * @throws NotValidRuleException
+	 */
 
 	public byte[][] getNextLine() throws NotValidRuleException{
 		if (nextLine >= length)
@@ -343,6 +351,10 @@ public class Rule1D {
 	}
 
 
+	/**Returns the width of the grid being used
+	 * 
+	 * @return the width of the grid used
+	 */
 	public int getWidth() {
 		return width;
 	}
