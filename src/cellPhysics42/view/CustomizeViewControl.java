@@ -215,7 +215,9 @@ public class CustomizeViewControl extends BorderPane {
 		}
 		else{
 			stopBt.setText("Stop");
-			runCustom(37, 55, 1000.0, oneColor, zeroColor, 90, new ArrayList<Integer>());
+			ArrayList<Integer> starts = new ArrayList<>();
+			starts.add(37/2);
+			runCustom(37, 55, 5.0, oneColor, zeroColor, 90, starts);
 		}
 		return true;
 	}
