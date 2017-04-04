@@ -35,10 +35,6 @@ public class SteThruControlTest {
 		}
 	}
 	
-	public static void main(String[] args) {
-		//launch(args);
-	}
-	
 	@Test
 	public void testStartStepThru() throws IOException {
 		
