@@ -16,6 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -57,6 +58,8 @@ public class StepThruViewControl extends AnchorPane {
 	private Button startBt;
 	@FXML
 	private Button nextBt;
+	@FXML
+	private Button helpBt;
 	@FXML
 	private HBox numberZero;
 	@FXML
@@ -126,6 +129,10 @@ public class StepThruViewControl extends AnchorPane {
 	 */
 	@FXML
 	public void initialize(){
+		ImageView image = new ImageView("questionMark.jpg");
+		image.setFitWidth(20);
+		image.setFitHeight(20);
+		helpBt.setGraphic(image);
 		nextRow = 0;
 		nextCol = 0;
 		explanationStepSize = 18;
@@ -151,6 +158,19 @@ public class StepThruViewControl extends AnchorPane {
 		setGridSize(numRows, numCols);
 		setHBoxRims();
 	}
+
+	/**
+	 * Method name: loadHelp
+	 * @return
+	 * 
+	 * loads the user help screen in the default browser
+	 */
+	@FXML
+	public boolean loadHelp(){
+		ControlClass.loadHelpPage();
+		return true;
+	}
+
 
 	/**
 	 * Method name: exitStepThru

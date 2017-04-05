@@ -47,6 +47,7 @@
                </padding>
             </GridPane>
             <Group fx:id="cubeGroup" />
+            <Button fx:id="helpBt" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onAction="#loadHelp" text="Button" GridPane.halignment="LEFT" GridPane.valignment="TOP" />
          </children>
       </GridPane>
    </children>

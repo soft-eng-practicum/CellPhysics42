@@ -281,6 +281,7 @@
                   <Insets bottom="100.0" top="80.0" />
                </GridPane.margin>
             </GridPane>
+            <Button fx:id="helpBt" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onAction="#loadHelp" text="Button" GridPane.halignment="LEFT" GridPane.valignment="TOP" />
          </children>
       </GridPane>
    </children>

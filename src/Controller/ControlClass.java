@@ -1,11 +1,18 @@
 package Controller;
 
+import java.awt.Desktop;
+import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.util.ArrayList;
+
+import com.sun.javafx.application.HostServicesDelegate;
 
 import Model.Rule1D;
 import Model.Rule2D;
 import exception.NotValidRuleException;
+import javafx.application.HostServices;
+import javafx.scene.control.Button;
 
 /**Class: ControlClass.java 
    * @author Bess Burnett 
@@ -155,6 +162,20 @@ public class ControlClass {
 			rule2d.save3DFileByLayers(path, start, end);
 		} catch (IOException ex) {
 			ex.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Method name: loadHelpPage
+	 * 
+	 * opens the computers default browser and loads the user help page
+	 */
+	public static void loadHelpPage(){
+		try{
+		Desktop.getDesktop().browse(new URI("http://wiki.ggc.edu/wiki/CellPhysics42_UserDocumentation"));
+		}
+		catch (Exception ex) {
+			System.out.println(ex.getMessage());
 		}
 	}
 }

@@ -20,6 +20,7 @@ import javafx.scene.SceneAntialiasing;
 import javafx.scene.SubScene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -52,6 +53,8 @@ public class View3DControl extends AnchorPane{
 	@FXML
 	private Button saveBt;
 	@FXML
+	private Button helpBt;
+	@FXML
 	private ChoiceBox<Integer> ruleSelectionCB;
 	@FXML
 	private ChoiceBox<Integer> startLayerCB;
@@ -70,6 +73,10 @@ public class View3DControl extends AnchorPane{
 	 * method called by the FXML Loader when the file is loaded
 	 */
 	public void initialize(){
+		ImageView image = new ImageView("questionMark.jpg");
+		image.setFitWidth(20);
+		image.setFitHeight(20);
+		helpBt.setGraphic(image);
 		control = new ControlClass();
 		maxLayer = 30;
 		factor = 10;
@@ -145,6 +152,18 @@ public class View3DControl extends AnchorPane{
 	}
 	
 	/**
+	 * Method name: loadHelp
+	 * @return
+	 * 
+	 * loads the user help screen in the default browser
+	 */
+	@FXML
+	public boolean loadHelp(){
+		ControlClass.loadHelpPage();
+		return true;
+	}
+	
+	/**
 	 * Method name: setObservableList
 	 * 
 	 * initializes all the choice box lists
@@ -198,10 +217,10 @@ public class View3DControl extends AnchorPane{
 				cubeGroup.getTransforms().add(rotateZ);
 			}
 			else if(ke.getText().equalsIgnoreCase("g")){
-				subScene.getCamera().setTranslateZ(zPos+ 2);
+				subScene.getCamera().setTranslateZ(zPos+ 10);
 			}
 			else if(ke.getText().equalsIgnoreCase("f")){
-				subScene.getCamera().setTranslateZ(zPos - 2);
+				subScene.getCamera().setTranslateZ(zPos - 10);
 			}
 		});
 	}
@@ -338,7 +357,7 @@ public class View3DControl extends AnchorPane{
 //		amLight2.setTranslateY(-200);
 //		amLight2.setTranslateZ(200);
 //		amLight2.getScope().addAll(cubeGroup.getChildren());
-		PointLight pLight1 = new PointLight(Color.BLUE);
+		PointLight pLight1 = new PointLight(Color.WHITE);
 		pLight1.setTranslateX(200);
 		pLight1.setTranslateZ(200);
 		pLight1.setTranslateZ(-200);

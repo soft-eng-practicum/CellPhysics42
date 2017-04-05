@@ -18,6 +18,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -46,6 +47,9 @@ public class CustomizeOptionsControl {
 	private Button setStartState;
 	@FXML
 	private Slider speedSlidBar;
+	
+	@FXML
+	private Button helpBt;
 
 	private int gridWidthSquares;
 	private Color oneColor;
@@ -59,6 +63,10 @@ public class CustomizeOptionsControl {
 	 */
 	@FXML
 	public void initialize(){
+		ImageView image = new ImageView("questionMark.jpg");
+		image.setFitWidth(20);
+		image.setFitHeight(20);
+		helpBt.setGraphic(image);
 		gridWidthCB.setValue(43);
 		setWidthValues();
 		setRuleChoices();
@@ -105,6 +113,19 @@ public class CustomizeOptionsControl {
 		}
 		return true;
 	}
+	
+	/**
+	 * Method name: loadHelp
+	 * @return
+	 * 
+	 * loads the user help screen in the default browser
+	 */
+	@FXML
+	public boolean loadHelp(){
+		ControlClass.loadHelpPage();
+		return true;
+	}
+
 
 	/**
 	 * Method name: setRuleChoices

@@ -5,6 +5,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
@@ -62,6 +64,10 @@ public class CustomizeViewControl extends BorderPane {
 	private Button stopBt;
 	@FXML
 	private Button stepThruButton;
+	
+	@FXML
+	private Button helpBt;
+	
 	@FXML
 	private HBox numberZero;
 	@FXML
@@ -111,6 +117,10 @@ public class CustomizeViewControl extends BorderPane {
 	 */
 	@FXML
 	public void initialize(){
+		ImageView image = new ImageView("questionMark.jpg");
+		image.setFitWidth(20);
+		image.setFitHeight(20);
+		helpBt.setGraphic(image);
 		edgeColor = Color.BLACK;
 		stopBt.setText("Start");
 		oneColor = Color.BLACK;
@@ -238,7 +248,6 @@ public class CustomizeViewControl extends BorderPane {
 			//pane.setBackground(new Background(new BackgroundFill(Color.CADETBLUE, null, null)));
 			Stage currentStage = (Stage) customizeBt.getScene().getWindow();
 			currentStage.setScene(new Scene(pane));
-	
 			System.out.println(loader.getLocation());
 		}
 		catch (Exception ex) {
@@ -265,6 +274,18 @@ public class CustomizeViewControl extends BorderPane {
 		catch (Exception ex) {
 			System.out.println(ex.getMessage());
 		}
+		return true;
+	}
+	
+	/**
+	 * Method name: loadHelp
+	 * @return
+	 * 
+	 * loads the user help screen in the default browser
+	 */
+	@FXML
+	public boolean loadHelp(){
+		ControlClass.loadHelpPage();
 		return true;
 	}
 

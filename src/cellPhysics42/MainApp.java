@@ -29,6 +29,7 @@ public class MainApp extends Application {
 		AnchorPane pane = (AnchorPane)loader.load();
 		Scene scene = new Scene(pane);
 		primaryStage.setScene(scene);
+		primaryStage.setTitle("Cellular Automation");
 		primaryStage.show();
 		}
 

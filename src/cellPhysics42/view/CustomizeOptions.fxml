@@ -7,7 +7,6 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
 <StackPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cellPhysics42.view.CustomizeOptionsControl">
    <children>
       <BorderPane fx:id="mainPane" maxHeight="350.0" maxWidth="450.0">
@@ -108,5 +107,6 @@
             </Button>
          </center>
       </BorderPane>
+      <Button fx:id="helpBt" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onAction="#loadHelp" text="Button" StackPane.alignment="TOP_LEFT" />
    </children>
 </StackPane>
