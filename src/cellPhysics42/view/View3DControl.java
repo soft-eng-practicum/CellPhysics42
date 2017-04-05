@@ -14,6 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.AmbientLight;
 import javafx.scene.Group;
 import javafx.scene.PerspectiveCamera;
+import javafx.scene.PointLight;
 import javafx.scene.Scene;
 import javafx.scene.SceneAntialiasing;
 import javafx.scene.SubScene;
@@ -116,6 +117,7 @@ public class View3DControl extends AnchorPane{
 	public void show3DObject(){
 		showBt.setVisible(false);
 		clearGroup();
+		mainGridPane.getChildren().remove(subScene);
 		ruleNum = ruleSelectionCB.getValue();
 		buildCubes();
 		setLights();
@@ -124,8 +126,7 @@ public class View3DControl extends AnchorPane{
 		subScene.setWidth(currentStage.getWidth());
 		subScene.setCamera(getCamara());
 		handleMouseEvents(subScene);
-		handleKeyEvents(subScene);
-		mainGridPane.getChildren().remove(subScene);
+		handleKeyEvents(subScene, currentStage);
 		mainGridPane.add(subScene, 0, 0);
 	}
 	
@@ -169,8 +170,9 @@ public class View3DControl extends AnchorPane{
 	 * 
 	 * adds key press actions to the given subscene
 	 */
-	private void handleKeyEvents(SubScene subScene){
-		subScene.setOnKeyPressed(ke->{
+	private void handleKeyEvents(SubScene subScene, Stage stage){
+		stage.getScene().setOnKeyPressed((KeyEvent ke) -> {
+			double zPos = subScene.getCamera().getTranslateZ();
 			if(ke.getCode() == KeyCode.A){
 				rotateZ.setAngle(2.0);
 				cubeGroup.getTransforms().add(rotateZ);
@@ -191,9 +193,15 @@ public class View3DControl extends AnchorPane{
 				rotateY.setAngle(2.0);
 				cubeGroup.getTransforms().add(rotateZ);
 			}
-			else{
+			else if(ke.getText().equalsIgnoreCase("h")){
 				rotateY.setAngle(-2.0);
 				cubeGroup.getTransforms().add(rotateZ);
+			}
+			else if(ke.getText().equalsIgnoreCase("g")){
+				subScene.getCamera().setTranslateZ(zPos+ 2);
+			}
+			else if(ke.getText().equalsIgnoreCase("f")){
+				subScene.getCamera().setTranslateZ(zPos - 2);
 			}
 		});
 	}
@@ -205,7 +213,7 @@ public class View3DControl extends AnchorPane{
 	 * adds the mouse events to the given scene, rotates the scene on drag
 	 */
 	private void handleMouseEvents(SubScene scene){
-		scene.setOnMousePressed((MouseEvent me) -> {
+		scene.addEventFilter(MouseEvent.DRAG_DETECTED, (MouseEvent me) -> {
 			mousePosX = me.getSceneX();
 			mousePosY = me.getSceneY();
 		});
@@ -306,9 +314,9 @@ public class View3DControl extends AnchorPane{
 	 * builds and places cubes in the group at the location specified by the translation strings
 	 */
 	private void buildCubes(){
-		cubeTranslations = control.getCubeTranslations(ruleNum, maxLayer, startLayer, endLayer, factor);
+		cubeTranslations = control.getCubeTranslations(ruleNum, endLayer, startLayer, endLayer, factor);
 		for(String translation : cubeTranslations){
-			Cube3D cube = new Cube3D();
+			Cube3D cube = new Cube3D(factor);
 			cube.translateCube(translation);
 			cubeGroup.getChildren().add(cube);
 		}
@@ -320,16 +328,21 @@ public class View3DControl extends AnchorPane{
 	 * creates and adds lights to the cube group for visibility
 	 */
 	private void setLights(){
-		AmbientLight amLight1 = new AmbientLight(Color.WHITE);
-		amLight1.setTranslateX(200);
-		amLight1.setTranslateY(200);
-		amLight1.setTranslateZ(200);
-		amLight1.getScope().addAll(cubeGroup.getChildren());
-		AmbientLight amLight2 = new AmbientLight(Color.WHITE);
-		amLight2.setTranslateX(-200);
-		amLight2.setTranslateY(-200);
-		amLight2.setTranslateZ(200);
-		amLight2.getScope().addAll(cubeGroup.getChildren());
+//		AmbientLight amLight1 = new AmbientLight(Color.WHITE);
+//		amLight1.setTranslateX(200);
+//		amLight1.setTranslateY(200);
+//		amLight1.setTranslateZ(200);
+//		amLight1.getScope().addAll(cubeGroup.getChildren());
+//		AmbientLight amLight2 = new AmbientLight(Color.WHITE);
+//		amLight2.setTranslateX(-200);
+//		amLight2.setTranslateY(-200);
+//		amLight2.setTranslateZ(200);
+//		amLight2.getScope().addAll(cubeGroup.getChildren());
+		PointLight pLight1 = new PointLight(Color.BLUE);
+		pLight1.setTranslateX(200);
+		pLight1.setTranslateZ(200);
+		pLight1.setTranslateZ(-200);
+		pLight1.getScope().addAll(cubeGroup.getChildren());
 	}
 
 	/**
@@ -342,7 +355,12 @@ public class View3DControl extends AnchorPane{
 		PerspectiveCamera camera = new PerspectiveCamera(true);
 		camera.setNearClip(0.1);
 		camera.setFarClip(1000.0);
-		camera.setTranslateZ(-500);
+		camera.setTranslateZ(-700);
+//		camera.setOnKeyTyped(e->{
+//			if(e.getCode() == KeyCode.Q){
+//				camera.setTranslateZ(camera.getTranslateZ() - 50);
+//			}
+//		});
 		return camera;
 	}
 }

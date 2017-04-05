@@ -119,6 +119,7 @@ public class ControlClass {
 	public ArrayList<String> getCubeTranslations(int ruleNum, int numLayers, int startLayer, int endLayer, int factor){
 		try {
 			rule2d = new Rule2D(ruleNum, numLayers);
+			rule2d.setFactor(factor);
 			rule2d.fillArray();
 		} catch (NotValidRuleException ex) {
 			ex.printStackTrace();
