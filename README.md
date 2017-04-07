@@ -16,4 +16,4 @@
 
 **Survey:** [Cellular Automation Program Survey](https://www.surveymonkey.com/r/WG7JTP2)
 
-**Wiki** http://wiki.ggc.edu/wiki/CellPhysics42
+**View the github wiki for the user and developer documentation**
