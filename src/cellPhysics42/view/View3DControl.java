@@ -11,7 +11,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.AmbientLight;
 import javafx.scene.Group;
 import javafx.scene.PerspectiveCamera;
 import javafx.scene.PointLight;
@@ -21,7 +20,6 @@ import javafx.scene.SubScene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -65,9 +63,9 @@ public class View3DControl extends AnchorPane{
 	private ArrayList<String> cubeTranslations;
 	private ControlClass control;
 	private int maxLayer, ruleNum, startLayer, endLayer, factor;
-	private double mousePosX, mousePosY, mouseDeltaX, mouseDeltaY, oldMouseX, oldMouseY;
+	private double mousePosX, mousePosY, mouseDeltaX, mouseDeltaY;
 	private Rotate rotateX, rotateY, rotateZ;
-	final Translate t = new Translate(0.0, 0.0, 0.0);
+	private final Translate t = new Translate(0.0, 0.0, 0.0);
 	private SubScene subScene;
 	private PerspectiveCamera camera;
 
@@ -197,31 +195,31 @@ public class View3DControl extends AnchorPane{
 	private void handleKeyEvents(SubScene subScene, Stage stage){
 		stage.getScene().setOnKeyPressed((KeyEvent ke) -> {
 			double zPos = subScene.getCamera().getTranslateZ();
-			if(ke.getCode() == KeyCode.A){
-				rotateZ.setAngle(2.0);
-				cubeGroup.getTransforms().add(rotateZ);
-			}
-			else if(ke.getText().equalsIgnoreCase("z")){
-				rotateZ.setAngle(rotateZ.getAngle()-0.10);
-				cubeGroup.getTransforms().add(rotateZ);
-			}
-			else if(ke.getText().equalsIgnoreCase("s")){
-				rotateX.setAngle(2.0);
-				cubeGroup.getTransforms().add(rotateZ);
-			}
-			else if(ke.getText().equalsIgnoreCase("x")){
-				rotateX.setAngle(rotateX.getAngle()-0.10);
-				cubeGroup.getTransforms().add(rotateX);
-			}
-			else if(ke.getText().equalsIgnoreCase("y")){
-				rotateY.setAngle(rotateY.getAngle() + 0.1);
-				cubeGroup.getTransforms().add(rotateY);
-			}
-			else if(ke.getText().equalsIgnoreCase("h")){
-				rotateY.setAngle(-2.0);
-				cubeGroup.getTransforms().add(rotateZ);
-			}
-			else if(ke.getText().equalsIgnoreCase("g")){
+//			if(ke.getCode() == KeyCode.A){
+//				rotateZ.setAngle(2.0);
+//				cubeGroup.getTransforms().add(rotateZ);
+//			}
+//			else if(ke.getText().equalsIgnoreCase("z")){
+//				rotateZ.setAngle(rotateZ.getAngle()-0.10);
+//				cubeGroup.getTransforms().add(rotateZ);
+//			}
+//			else if(ke.getText().equalsIgnoreCase("s")){
+//				rotateX.setAngle(2.0);
+//				cubeGroup.getTransforms().add(rotateZ);
+//			}
+//			else if(ke.getText().equalsIgnoreCase("x")){
+//				rotateX.setAngle(rotateX.getAngle()-0.10);
+//				cubeGroup.getTransforms().add(rotateX);
+//			}
+//			else if(ke.getText().equalsIgnoreCase("y")){
+//				rotateY.setAngle(rotateY.getAngle() + 0.1);
+//				cubeGroup.getTransforms().add(rotateY);
+//			}
+//			else if(ke.getText().equalsIgnoreCase("h")){
+//				rotateY.setAngle(-2.0);
+//				cubeGroup.getTransforms().add(rotateZ);
+//			}
+			if(ke.getText().equalsIgnoreCase("g")){
 				subScene.getCamera().setTranslateZ(zPos+ 10);
 			}
 			else if(ke.getText().equalsIgnoreCase("f")){
