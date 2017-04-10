@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cellPhysics42.view.CustomizeOptionsControl">
+   <children>
+      <BorderPane fx:id="mainPane" maxHeight="350.0" maxWidth="450.0">
+         <top>
+            <Label text="Customize" BorderPane.alignment="CENTER">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </top>
+         <left>
+            <GridPane alignment="BOTTOM_CENTER" prefHeight="243.0" prefWidth="154.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label text="X" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" text="Grid Size" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label text="Display Speed" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                  <Slider fx:id="speedSlidBar" majorTickUnit="1.0" max="10.0" minorTickCount="1" nodeOrientation="LEFT_TO_RIGHT" prefHeight="38.0" prefWidth="146.0" showTickLabels="true" showTickMarks="true" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                  <Label text="Seconds" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="TOP" />
+                  <ChoiceBox fx:id="gridWidthCB" prefWidth="150.0" GridPane.rowIndex="1" />
+                  <Label alignment="TOP_CENTER" text="Width" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+                  <Label alignment="TOP_CENTER" layoutX="17.0" layoutY="56.0" text="Height" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+                  <TextField fx:id="gridHeightTF" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+               </children>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="112.0" minHeight="10.0" prefHeight="110.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="57.0" minHeight="10.0" prefHeight="13.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="63.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="89.0" minHeight="10.0" prefHeight="89.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+         </left>
+         <right>
+            <GridPane prefHeight="222.0" prefWidth="197.0" BorderPane.alignment="CENTER">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints maxHeight="188.6530532836914" minHeight="10.0" prefHeight="82.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="188.6530532836914" minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="188.6530532836914" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="178.71047973632812" minHeight="10.0" prefHeight="126.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="107.1483154296875" minHeight="10.0" prefHeight="45.289520263671875" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="0 Color" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label text="1 Color" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <ColorPicker fx:id="zeroColorPicker" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP" />
+                  <ColorPicker fx:id="onesColorPicker" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP" />
+                  <Button fx:id="setStartState" mnemonicParsing="false" onAction="#showFirstRow" text="Set Top Row" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+                  <Label alignment="TOP_CENTER" text="Select Rule" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <ChoiceBox fx:id="ruleSelectChoiceBox" prefHeight="0.0" prefWidth="143.0" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+               </children>
+            </GridPane>
+         </right>
+         <bottom>
+            <GridPane fx:id="firstRowInput" prefHeight="30.0" BorderPane.alignment="CENTER">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+         </bottom>
+         <center>
+            <Button fx:id="startButton" mnemonicParsing="false" onAction="#startCustom" text="Start" BorderPane.alignment="CENTER">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+         </center>
+      </BorderPane>
+      <Button fx:id="helpBt" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onAction="#loadHelp" text="Button" StackPane.alignment="TOP_LEFT" />
+   </children>
+</StackPane>

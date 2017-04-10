@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="900.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cellPhysics42.view.View3DControl">
+   <children>
+      <GridPane fx:id="mainGridPane" layoutX="283.0" layoutY="306.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints maxHeight="795.0269165039062" minHeight="10.0" prefHeight="795.0269165039062" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="433.4859313964844" minHeight="10.0" prefHeight="94.97308349609375" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <GridPane GridPane.rowIndex="1">
+              <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Button fx:id="exitBt" mnemonicParsing="false" onAction="#exit3D" text="Exit 3D View" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                  <Button fx:id="showBt" mnemonicParsing="false" onAction="#show3DObject" text="Show Model" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                  <ChoiceBox fx:id="ruleSelectionCB" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <ChoiceBox fx:id="startLayerCB" layoutX="10.0" layoutY="12.0" prefWidth="150.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                  <ChoiceBox fx:id="endLayerCB" layoutX="10.0" layoutY="12.0" prefWidth="150.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                  <Label text="Select Rule" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                  <Label layoutX="10.0" layoutY="17.0" text="Select Start Layer" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                  <Label layoutX="10.0" layoutY="17.0" text="Select End Layer" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                  <Button fx:id="saveBt" layoutX="782.0" layoutY="68.0" mnemonicParsing="false" onAction="#saveModel" text="Save Model" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+               </children>
+               <padding>
+                  <Insets bottom="5.0" />
+               </padding>
+            </GridPane>
+            <Group fx:id="cubeGroup" />
+            <Button fx:id="helpBt" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onAction="#loadHelp" text="Button" GridPane.halignment="LEFT" GridPane.valignment="TOP" />
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>

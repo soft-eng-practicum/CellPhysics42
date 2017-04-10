@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="CellPhysics42.jnlp">
+  <information>
+    <title>CellPhysics42</title>
+    <vendor>Team42</vendor>
+    <description>Sample JavaFX 2.0 application.</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="CellPhysics42.jar" size="94585" download="eager" />
+    <jar href="libs/junit.jar" size="314932" download="eager" />
+    <jar href="libs/org.hamcrest.core_1.3.0.v201303031735.jar" size="55198" download="eager" />
+  </resources>
+  <jfx:javafx-desc  width="0" height="0" main-class="cellPhysics42.MainApp"  name="CellularAutomation" />
+  <update check="background"/>
+</jnlp>
