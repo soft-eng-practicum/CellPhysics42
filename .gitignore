@@ -8,3 +8,5 @@
 *.class
 *.xml
 /testreport/*.xml
+*.DS_Store
+/*.DS_Store
