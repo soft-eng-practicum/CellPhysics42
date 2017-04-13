@@ -2,7 +2,6 @@ package cellPhysics42.view;
 
 import java.io.File;
 import java.util.ArrayList;
-
 import Controller.ControlClass;
 import cellPhysics42.MainApp;
 import javafx.beans.value.ChangeListener;
@@ -389,17 +388,21 @@ public class View3DControl extends AnchorPane{
 		pLight2.setTranslateZ(500);
 		
 		PointLight pLight3 = new PointLight(Color.WHITE);
-		pLight2.setTranslateX(-400);
-		pLight2.setTranslateY(-200);
-		pLight2.setTranslateZ(100);
+		pLight3.setTranslateX(-400);
+		pLight3.setTranslateY(-200);
+		pLight3.setTranslateZ(100);
 		
 		PointLight pLight4 = new PointLight(Color.WHITE);
-		pLight2.setTranslateX(400);
-		pLight2.setTranslateY(-200);
-		pLight2.setTranslateZ(100);
+		pLight4.setTranslateX(400);
+		pLight4.setTranslateY(-200);
+		pLight4.setTranslateZ(100);
 
-		cubeGroup.getChildren().addAll(pLight1, pLight2);
-		//pLight1.getScope().addAll(cubeGroup.getChildren());
+		//cubeGroup.getChildren().addAll(pLight1, pLight2, pLight3, pLight4);
+		pLight1.getScope().addAll(cubeGroup.getChildren());
+		pLight2.getScope().addAll(cubeGroup.getChildren());
+		pLight3.getScope().addAll(cubeGroup.getChildren());
+		pLight4.getScope().addAll(cubeGroup.getChildren());
+
 	}
 
 	/**
