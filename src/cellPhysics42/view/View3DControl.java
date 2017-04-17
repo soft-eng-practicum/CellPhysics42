@@ -206,7 +206,7 @@ public class View3DControl extends AnchorPane{
 				cubeGroup.getTransforms().add(rotateZ);
 			}
 			else if(ke.getText().equalsIgnoreCase("s")){
-				rotateX.setAngle(2.0);
+				rotateX.setAngle(.10);
 				cubeGroup.getTransforms().add(rotateZ);
 			}
 			else if(ke.getText().equalsIgnoreCase("x")){
@@ -218,14 +218,14 @@ public class View3DControl extends AnchorPane{
 				cubeGroup.getTransforms().add(rotateY);
 			}
 			else if(ke.getText().equalsIgnoreCase("h")){
-				rotateY.setAngle(-2.0);
+				rotateY.setAngle(-.1);
 				cubeGroup.getTransforms().add(rotateZ);
 			}
 			else if(ke.getText().equalsIgnoreCase("g")){
-				subScene.getCamera().setTranslateZ(zPos+ 10);
+				subScene.getCamera().setTranslateZ(zPos+ .10);
 			}
 			else if(ke.getText().equalsIgnoreCase("f")){
-				subScene.getCamera().setTranslateZ(zPos - 10);
+				subScene.getCamera().setTranslateZ(zPos - .10);
 			}
 		});
 	}
@@ -389,12 +389,12 @@ public class View3DControl extends AnchorPane{
 		pLight2.setTranslateX(-300);
 		pLight2.setTranslateY(-200);
 		pLight2.setTranslateZ(500);
-		
+
 		PointLight pLight3 = new PointLight(Color.WHITE);
 		pLight2.setTranslateX(-400);
 		pLight2.setTranslateY(-200);
 		pLight2.setTranslateZ(100);
-		
+
 		PointLight pLight4 = new PointLight(Color.WHITE);
 		pLight2.setTranslateX(400);
 		pLight2.setTranslateY(-200);
