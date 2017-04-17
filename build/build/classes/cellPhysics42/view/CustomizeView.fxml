@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import cellPhysics42.view.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cellPhysics42.view.CustomizeViewControl">
+   <children>
+      <BorderPane fx:id="mainPane" prefHeight="900.0" prefWidth="1100.0" styleClass="pane" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+         <top>
+            <GridPane fx:id="ruleGrid">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <GridPane GridPane.rowIndex="1">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <GridPane fx:id="squaresGrid" BorderPane.alignment="CENTER" GridPane.columnIndex="1">
+                          <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="12.5" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="12.5" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="12.5" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="12.5" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="12.5" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="12.5" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="12.5" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="12.5" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <LabeledRectangle fx:id="squareSeven" GridPane.rowIndex="1" />
+                              <LabeledRectangle fx:id="squareSix" layoutX="10.0" layoutY="40.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <LabeledRectangle fx:id="squareFive" layoutX="10.0" layoutY="10.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                              <LabeledRectangle fx:id="squareFour" layoutX="10.0" layoutY="10.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                              <LabeledRectangle fx:id="squareZero" layoutX="10.0" layoutY="10.0" GridPane.columnIndex="7" GridPane.rowIndex="1" />
+                              <LabeledRectangle fx:id="squareOne" layoutX="10.0" layoutY="10.0" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+                              <LabeledRectangle fx:id="squareTwo" layoutX="10.0" layoutY="10.0" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+                              <LabeledRectangle fx:id="squareThree" layoutX="10.0" layoutY="10.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                              <HBox fx:id="numberSeven" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <LabeledRectangle />
+                                    <LabeledRectangle layoutX="10.0" layoutY="10.0" />
+                                    <LabeledRectangle layoutX="20.0" layoutY="10.0" />
+                                 </children>
+                              </HBox>
+                              <HBox fx:id="numberSix" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
+                                 <children>
+                                    <LabeledRectangle />
+                                    <LabeledRectangle layoutX="10.0" layoutY="10.0" />
+                                    <LabeledRectangle layoutX="20.0" layoutY="10.0" />
+                                 </children>
+                              </HBox>
+                              <HBox fx:id="numberFive" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2">
+                                 <children>
+                                    <LabeledRectangle />
+                                    <LabeledRectangle layoutX="10.0" layoutY="10.0" />
+                                    <LabeledRectangle layoutX="20.0" layoutY="10.0" />
+                                 </children>
+                              </HBox>
+                              <HBox fx:id="numberFour" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3">
+                                 <children>
+                                    <LabeledRectangle />
+                                    <LabeledRectangle layoutX="10.0" layoutY="10.0" />
+                                    <LabeledRectangle layoutX="20.0" layoutY="10.0" />
+                                 </children>
+                              </HBox>
+                              <HBox fx:id="numberThree" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="4">
+                                 <children>
+                                    <LabeledRectangle />
+                                    <LabeledRectangle layoutX="10.0" layoutY="10.0" />
+                                    <LabeledRectangle layoutX="20.0" layoutY="10.0" />
+                                 </children>
+                              </HBox>
+                              <HBox fx:id="numberTwo" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="5">
+                                 <children>
+                                    <LabeledRectangle />
+                                    <LabeledRectangle layoutX="10.0" layoutY="10.0" />
+                                    <LabeledRectangle layoutX="20.0" layoutY="10.0" />
+                                 </children>
+                              </HBox>
+                              <HBox fx:id="numberOne" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="6">
+                                 <children>
+                                    <LabeledRectangle />
+                                    <LabeledRectangle layoutX="10.0" layoutY="10.0" />
+                                    <LabeledRectangle layoutX="20.0" layoutY="10.0" />
+                                 </children>
+                              </HBox>
+                              <HBox fx:id="numberZero" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="7">
+                                 <children>
+                                    <LabeledRectangle />
+                                    <LabeledRectangle layoutX="10.0" layoutY="10.0" />
+                                    <LabeledRectangle layoutX="20.0" layoutY="10.0" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </GridPane>
+                     </children>
+                  </GridPane>
+                  <Label fx:id="ruleNameLabel" text="rule" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="helpBt" contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" mnemonicParsing="false" onAction="#loadHelp" text="Button" />
+               </children>
+            </GridPane>
+         </top>
+         <bottom>
+            <GridPane BorderPane.alignment="CENTER">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Button fx:id="demoButton" mnemonicParsing="false" onAction="#runDemo" text="Demo" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="stopBt" layoutX="560.0" layoutY="8.0" mnemonicParsing="false" onAction="#stopRunThru" text="Stop" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="customizeBt" layoutX="10.0" layoutY="8.0" mnemonicParsing="false" onAction="#showCustomOptions" text="Customize" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="stepThruButton" mnemonicParsing="false" onAction="#runStepThru" text="Step-thru" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
+                  <Button fx:id="threeDButton" layoutX="369.0" layoutY="8.0" mnemonicParsing="false" onAction="#run3DView" text="3-D View" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+            </GridPane>
+         </bottom>
+         <center>
+            <ScrollPane fx:id="gridScroll" prefViewportHeight="780.0" prefViewportWidth="1100.0">
+               <content>
+                  <GridPane fx:id="displayGrid" BorderPane.alignment="CENTER">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                  </GridPane>
+               </content>
+            </ScrollPane>
+         </center>
+      </BorderPane>
+      <Group fx:id="oneBoxGroup" />
+   </children>
+</AnchorPane>
