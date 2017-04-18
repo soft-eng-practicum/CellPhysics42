@@ -19,6 +19,7 @@ import javafx.scene.SubScene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -194,34 +195,6 @@ public class View3DControl extends AnchorPane{
 	private void handleKeyEvents(SubScene subScene, Stage stage){
 		stage.getScene().setOnKeyPressed((KeyEvent ke) -> {
 			double zPos = subScene.getCamera().getTranslateZ();
-<<<<<<< HEAD
-			if(ke.getCode() == KeyCode.A){
-				rotateZ.setAngle(2.0);
-				cubeGroup.getTransforms().add(rotateZ);
-			}
-			else if(ke.getText().equalsIgnoreCase("z")){
-				rotateZ.setAngle(rotateZ.getAngle()-0.10);
-				cubeGroup.getTransforms().add(rotateZ);
-			}
-			else if(ke.getText().equalsIgnoreCase("s")){
-				rotateX.setAngle(.10);
-				cubeGroup.getTransforms().add(rotateZ);
-			}
-			else if(ke.getText().equalsIgnoreCase("x")){
-				rotateX.setAngle(rotateX.getAngle()-0.10);
-				cubeGroup.getTransforms().add(rotateX);
-			}
-			else if(ke.getText().equalsIgnoreCase("y")){
-				rotateY.setAngle(rotateY.getAngle() + 0.1);
-				cubeGroup.getTransforms().add(rotateY);
-			}
-			else if(ke.getText().equalsIgnoreCase("h")){
-				rotateY.setAngle(-.1);
-				cubeGroup.getTransforms().add(rotateZ);
-			}
-			else if(ke.getText().equalsIgnoreCase("g")){
-				subScene.getCamera().setTranslateZ(zPos+ .10);
-=======
 //			if(ke.getCode() == KeyCode.A){
 //				rotateZ.setAngle(2.0);
 //				cubeGroup.getTransforms().add(rotateZ);
@@ -231,7 +204,7 @@ public class View3DControl extends AnchorPane{
 //				cubeGroup.getTransforms().add(rotateZ);
 //			}
 //			else if(ke.getText().equalsIgnoreCase("s")){
-//				rotateX.setAngle(2.0);
+//				rotateX.setAngle(.10);
 //				cubeGroup.getTransforms().add(rotateZ);
 //			}
 //			else if(ke.getText().equalsIgnoreCase("x")){
@@ -243,12 +216,14 @@ public class View3DControl extends AnchorPane{
 //				cubeGroup.getTransforms().add(rotateY);
 //			}
 //			else if(ke.getText().equalsIgnoreCase("h")){
-//				rotateY.setAngle(-2.0);
+//				rotateY.setAngle(-.1);
 //				cubeGroup.getTransforms().add(rotateZ);
 //			}
+//			else if(ke.getText().equalsIgnoreCase("g")){
+//				subScene.getCamera().setTranslateZ(zPos+ .10);
+			
 			if(ke.getText().equalsIgnoreCase("g")){
 				subScene.getCamera().setTranslateZ(zPos+ 10);
->>>>>>> 7684c5f6800fd10d1e319210afbb4221d3a859a7
 			}
 			else if(ke.getText().equalsIgnoreCase("f")){
 				subScene.getCamera().setTranslateZ(zPos - .10);
@@ -417,17 +392,14 @@ public class View3DControl extends AnchorPane{
 		pLight2.setTranslateZ(500);
 
 		PointLight pLight3 = new PointLight(Color.WHITE);
-<<<<<<< HEAD
 		pLight2.setTranslateX(-400);
 		pLight2.setTranslateY(-200);
 		pLight2.setTranslateZ(100);
 
-=======
 		pLight3.setTranslateX(-400);
 		pLight3.setTranslateY(-200);
 		pLight3.setTranslateZ(100);
 		
->>>>>>> 7684c5f6800fd10d1e319210afbb4221d3a859a7
 		PointLight pLight4 = new PointLight(Color.WHITE);
 		pLight4.setTranslateX(400);
 		pLight4.setTranslateY(-200);
