@@ -392,10 +392,6 @@ public class View3DControl extends AnchorPane{
 		pLight2.setTranslateZ(500);
 
 		PointLight pLight3 = new PointLight(Color.WHITE);
-		pLight2.setTranslateX(-400);
-		pLight2.setTranslateY(-200);
-		pLight2.setTranslateZ(100);
-
 		pLight3.setTranslateX(-400);
 		pLight3.setTranslateY(-200);
 		pLight3.setTranslateZ(100);
