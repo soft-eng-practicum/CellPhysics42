@@ -3,6 +3,7 @@ package cellPhysics42.view;
 import java.io.File;
 import java.util.ArrayList;
 import Controller.ControlClass;
+import Model.Rule1D;
 import cellPhysics42.MainApp;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -406,7 +407,7 @@ public class View3DControl extends AnchorPane{
 		pLight2.getScope().addAll(cubeGroup.getChildren());
 		pLight3.getScope().addAll(cubeGroup.getChildren());
 		pLight4.getScope().addAll(cubeGroup.getChildren());
-
+		
 	}
 
 	/**
