@@ -10,3 +10,5 @@
 /testreport/*.xml
 *.DS_Store
 /*.DS_Store
+*.tif
+/*.tif
