@@ -172,7 +172,7 @@ public class ControlClass {
 	 */
 	public static void loadHelpPage(){
 		try{
-		Desktop.getDesktop().browse(new URI("http://wiki.ggc.edu/wiki/CellPhysics42_UserDocumentation"));
+		Desktop.getDesktop().browse(new URI("https://github.com/soft-eng-practicum/CellPhysics42/wiki/UserDocumentation"));
 		}
 		catch (Exception ex) {
 			System.out.println(ex.getMessage());

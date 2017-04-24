@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="CellPhysics42.jar" size="94585" download="eager" />
+    <jar href="CellPhysics42.jar" size="92161" download="eager" />
     <jar href="libs/junit.jar" size="314932" download="eager" />
     <jar href="libs/org.hamcrest.core_1.3.0.v201303031735.jar" size="55198" download="eager" />
   </resources>
