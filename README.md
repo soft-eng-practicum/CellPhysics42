@@ -16,6 +16,8 @@
 
 **Survey:** [Cellular Automation Program Survey](https://www.surveymonkey.com/r/WG7JTP2)
 
-**Download:** [JAR download](https://github.com/soft-eng-practicum/CellPhysics42/releases) 
+**Download:** [JAR download](https://github.com/soft-eng-practicum/CellPhysics42/releases)
+
+**Product Demo:** [Demo Video](https://www.youtube.com/watch?v=HGxIZMmUeGA) 
 
 **View the github wiki for the user and developer documentation**
